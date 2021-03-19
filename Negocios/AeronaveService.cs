@@ -34,7 +34,6 @@ namespace Negocios
         #endregion
 
         #region READ
-        //pregunta: porque solo lista y no es void? el browser interpreta la lista y lo formatea como json?
         public List<Aeronave> LeerAeronaves()
         {
             return accesoDatos.LeerAeronaves();
@@ -86,15 +85,15 @@ namespace Negocios
         #endregion
 
         #region UPDATE
-
+        void ActualizarAeronaves(Aeronave aeronave);
         #endregion
 
         #region DELETE
-
+        void EliminarAeronaves(string Codigo);
         #endregion
 
         #region SEARCH
-
+        Aeronave BuscarAeronaves(string Codigo);
         #endregion
 
     }

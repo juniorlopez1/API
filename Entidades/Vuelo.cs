@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Entidades
 {
-    public class Entidad
+    public class Vuelo
     {
         #region Propiedades
         //Primero instalar nuggets de mongoDB Driver

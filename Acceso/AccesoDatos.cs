@@ -91,8 +91,6 @@ namespace Acceso
             {
                 throw ex;
             }
-
-            return true;
         }
         #endregion
 

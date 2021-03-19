@@ -20,36 +20,32 @@ namespace API.Controllers
     public class AeronaveController : ControllerBase
     {
         #region Implementación de Servicios
-        private readonly IAeronaveService aeronaveService;
+        private readonly IAeronaveService aeronavesvc;
 
         #endregion
 
         #region Constructor
         public AeronaveController (IAeronaveService aeronaveService)
         {
-            this.aeronaveService = aeronaveService;
+            this.aeronavesvc = aeronaveService;
         }
         #endregion
 
-
-
-        //----------------------Aeronave
 
         #region CREATE
         [HttpPost]
         public IActionResult CrearAeronaves (Aeronave aeronave)
         {
-            aeronaveService.CrearAeronaves(aeronave);
-            return CreatedAtRoute("CrearAeronaves", new { id = aeronave.Id }, aeronave);
+            aeronavesvc.CrearAeronaves(aeronave);
+            return CreatedAtRoute(nameof(CrearAeronaves), new { id = aeronave.Id }, aeronave);
         }
         #endregion
 
         #region READ
-        //pregunta: falta implementacion de interfaces
-        [HttpGet(Name = "ListarAeronaves")]
-        public IActionResult ListaUsuario()
+        [HttpGet(Name = "LeerAeronaves")]
+        public IActionResult LeerAeronaves ()
         {
-            var usuarios = IAeronaveService.ListarAeronaves();
+            var usuarios = aeronavesvc.LeerAeronaves();
             return Ok(usuarios);
         }
         #endregion
@@ -58,16 +54,16 @@ namespace API.Controllers
         [HttpPut(Name = "ActualizarAeronaves")]
         public IActionResult ActualizarAeronaves (Aeronave aeronave)
         {
-            aeronaveService.ActulizarAeronaves (aeronave);
-            return CreatedAtRoute("ActualizarAeronaves", new { id = aeronave.Id }, aeronave);
+            aeronavesvc.ActualizarAeronaves (aeronave);
+            return CreatedAtRoute(nameof(ActualizarAeronaves), new { id = aeronave.Id }, aeronave);
         }
         #endregion
 
         #region DELETE
         [HttpDelete("{id}", Name = "EliminarAeronaves")]
-        public IActionResult ElimiinarAeronaves (string Codigo)
+        public IActionResult EliminarAeronaves (string id)
         {
-            aeronaveService.EliminarAeronaves (Codigo);
+            aeronavesvc.EliminarAeronaves (id);
             return NoContent();
         }
         #endregion
@@ -76,7 +72,7 @@ namespace API.Controllers
         [HttpGet("{id}", Name = "BuscarAeronaves")]
         public IActionResult BuscarAeronaves (string Codigo)
         {
-            var aeronave = aeronaveService.BuscarAeronaves(Codigo);
+            var aeronave = aeronavesvc.BuscarAeronaves(Codigo);
 
             if (aeronave == null)
             {
