@@ -34,16 +34,16 @@ namespace API.Controllers
 
         #region CREATE
         [HttpPost]
-        public IActionResult CrearAeronaves (Aeronave aeronave)
+        public IActionResult Create (Aeronave aeronave)
         {
             aeronavesvc.CrearAeronaves(aeronave);
-            return CreatedAtRoute(nameof(CrearAeronaves), new { id = aeronave.Id }, aeronave);
+            return CreatedAtRoute(nameof(Create), new { codigo = aeronave.Codigo }, aeronave);
         }
         #endregion
 
         #region READ
         [HttpGet(Name = "LeerAeronaves")]
-        public IActionResult LeerAeronaves ()
+        public IActionResult Read ()
         {
             var usuarios = aeronavesvc.LeerAeronaves();
             return Ok(usuarios);
@@ -52,25 +52,25 @@ namespace API.Controllers
 
         #region UPDATE
         [HttpPut(Name = "ActualizarAeronaves")]
-        public IActionResult ActualizarAeronaves (Aeronave aeronave)
+        public IActionResult Update (Aeronave aeronave)
         {
             aeronavesvc.ActualizarAeronaves (aeronave);
-            return CreatedAtRoute(nameof(ActualizarAeronaves), new { id = aeronave.Id }, aeronave);
+            return CreatedAtRoute(nameof(Update), new { Codigo = aeronave.Codigo }, aeronave);
         }
         #endregion
 
         #region DELETE
         [HttpDelete("{id}", Name = "EliminarAeronaves")]
-        public IActionResult EliminarAeronaves (string id)
+        public IActionResult Delete (string Codigo)
         {
-            aeronavesvc.EliminarAeronaves (id);
+            aeronavesvc.EliminarAeronaves (Codigo);
             return NoContent();
         }
         #endregion
 
         #region SEARCH
-        [HttpGet("{id}", Name = "BuscarAeronaves")]
-        public IActionResult BuscarAeronaves (string Codigo)
+        [HttpGet("{Codigo}", Name = "BuscarAeronaves")]
+        public IActionResult search (string Codigo)
         {
             var aeronave = aeronavesvc.BuscarAeronaves(Codigo);
 

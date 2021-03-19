@@ -31,7 +31,7 @@ namespace Entidades
         #region Constructor
         public Aeronave ()
         {
-            //Id lo inicializa mongodb
+            Id = string.Empty;
             Codigo = string.Empty;
             Capacidad = 0;
             Estado = string.Empty;
