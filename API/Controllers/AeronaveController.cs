@@ -33,17 +33,17 @@ namespace API.Controllers
 
 
         #region CREATE
-        [HttpPost(Name = "CrearAeronaves")]
-        public IActionResult CrearAeronaves (Aeronave aeronave)
+        [HttpPost(Name = "Create")]
+        public IActionResult Create (Aeronave aeronave)
         {
             aeronavesvc.CrearAeronaves(aeronave);
-            return CreatedAtRoute(nameof(BuscarAeronaves), new { Codigo = aeronave.Codigo }, aeronave);
+            return CreatedAtRoute(nameof(Search), new { codigo = aeronave.Codigo }, aeronave);
         }
         #endregion
 
         #region READ
-        [HttpGet(Name = "LeerAeronaves")]
-        public IActionResult LeerAeronaves ()
+        [HttpGet(Name = "Read")]
+        public IActionResult Read ()
         {
             var usuarios = aeronavesvc.LeerAeronaves();
             return Ok(usuarios);
@@ -51,26 +51,26 @@ namespace API.Controllers
         #endregion
 
         #region UPDATE
-        [HttpPut(Name = "ActualizarAeronaves")]
-        public IActionResult ActualizarAeronaves (Aeronave aeronave)
+        [HttpPut(Name = "Update")]
+        public IActionResult Update (Aeronave aeronave)
         {
             aeronavesvc.ActualizarAeronaves (aeronave);
-            return CreatedAtRoute(nameof(ActualizarAeronaves), new { id = aeronave.Id }, aeronave);
+            return CreatedAtRoute(nameof(Search), new { codigo = aeronave.Codigo }, aeronave);
         }
         #endregion
 
         #region DELETE
-        [HttpDelete("{id}", Name = "EliminarAeronaves")]
-        public IActionResult EliminarAeronaves (string id)
+        [HttpDelete("{codigo}", Name = "Delete")]
+        public IActionResult Delete (string codigo)
         {
-            aeronavesvc.EliminarAeronaves (id);
+            aeronavesvc.EliminarAeronaves (codigo);
             return NoContent();
         }
         #endregion
 
         #region SEARCH
-        [HttpGet("{codigo}", Name = "BuscarAeronaves")]
-        public IActionResult BuscarAeronaves (string codigo)
+        [HttpGet("{codigo}", Name = "Search")]
+        public IActionResult Search (string codigo)
         {
             var aeronave = aeronavesvc.BuscarAeronaves(codigo);
 
