@@ -2,14 +2,11 @@
 using Entidades;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Negocios
 {
-    //Consta del servicio e interfaz
-
-
-    //-------------------------Servicio -------------------------
-    public class AeronaveService : IAeronaveService
+    public class PerfilService : IPerfilService
     {
         #region Members
         //Establece propiedades para acceso a datos
@@ -18,7 +15,7 @@ namespace Negocios
 
         #region Constructor
         //Inicializa el servicio
-        public AeronaveService (AccesoDatos accesoDatos)
+        public PerfilService(AccesoDatos accesoDatos)
         {
             this.accesoDatos = accesoDatos;
         }
@@ -27,37 +24,37 @@ namespace Negocios
 
 
         #region CREATE
-        public void CrearAeronaves (Aeronave aeronave)
+        public void CrearPerfiles (Perfil perfil)
         {
-            accesoDatos.CrearAeronaves(aeronave);
+            accesoDatos.CrearPerfiles (perfil);
         }
         #endregion
 
         #region READ
-        public List<Aeronave> LeerAeronaves()
+        public List<Perfil> LeerPerfiles ()
         {
-            return accesoDatos.LeerAeronaves();
+            return accesoDatos.LeerPerfiles();
         }
         #endregion
 
         #region UPDATE
-        public void ActualizarAeronaves (Aeronave aeronave)
+        public void ActualizarPerfiles (Perfil perfil)
         {
-            accesoDatos.ActualizarAeronaves(aeronave);
+            accesoDatos.ActualizarPerfiles(perfil);
         }
         #endregion
 
         #region DELETE
-        public void EliminarAeronaves (string Codigo)
+        public void EliminarPerfiles (string Codigo)
         {
-            accesoDatos.EliminarAeronaves(Codigo);
+            accesoDatos.EliminarPerfiles(Codigo);
         }
         #endregion
 
         #region SEARCH
-        public Aeronave BuscarAeronaves (string Codigo)
+        public Perfil BuscarPerfiles (string Codigo)
         {
-            return accesoDatos.BuscarAeronaves(Codigo);
+            return accesoDatos.BuscarPerfiles(Codigo);
         }
         #endregion
     }
@@ -71,29 +68,30 @@ namespace Negocios
 
 
     //-------------------------Interfaz -------------------------
-    public interface IAeronaveService
+    public interface IPerfilService
     {
         //Metodos exponen el servicio atraves de la interfaz
 
         #region CREATE
-        void CrearAeronaves (Aeronave aeronave);
+        void CrearPerfiles (Perfil perfil);
         #endregion
 
         #region READ
-        List<Aeronave> LeerAeronaves();
+        List<Perfil> LeerPerfiles ();
         #endregion
 
         #region UPDATE
-        void ActualizarAeronaves(Aeronave aeronave);
+        void ActualizarPerfiles (Perfil perfil);
         #endregion
 
         #region DELETE
-        void EliminarAeronaves(string Codigo);
+        void EliminarPerfiles (string Codigo);
         #endregion
 
         #region SEARCH
-        Aeronave BuscarAeronaves(string Codigo);
+        Perfil BuscarPerfiles (string Codigo);
         #endregion
 
     }
 }
+

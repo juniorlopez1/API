@@ -167,5 +167,101 @@ namespace Acceso
             return resultado;
         }
         #endregion
+
+
+
+        //---------------------- Perfil ----------------------
+
+        #region CREATE
+        public void CrearPerfiles (Perfil perfil)
+        {
+            try
+            {
+                GetConexion(nombreBD);
+                var coleccion = basedatos.GetCollection<Perfil>("Perfil");
+                coleccion.InsertOne(perfil);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
+
+        #region READ
+        public List<Perfil> LeerPerfiles()
+        {
+            var resultado = new List<Perfil>();
+
+            try
+            {
+                GetConexion(this.nombreBD);
+                var coleccion = basedatos.GetCollection<Perfil>("Perfil");
+                resultado = coleccion.Find(d => true).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return resultado;
+        }
+        #endregion
+
+        #region UPDATE
+        public void ActualizarPerfiles (Perfil perfil)
+        {
+            var resultado = new List<Perfil>();
+
+            try
+            {
+                GetConexion(this.nombreBD);
+                var coleccion = basedatos.GetCollection<Perfil>("Perfil");
+                basedatos.GetCollection<Perfil>("Perfil").ReplaceOne(u => u.Codigo == perfil.Codigo, perfil);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
+
+        #region DELETE
+        public void EliminarPerfiles (string Codigo)
+        {
+
+            try
+            {
+                GetConexion(this.nombreBD);
+                basedatos.GetCollection<Aeronave>("Perfil").DeleteOne(u => u.Codigo == Codigo);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
+
+        #region SEARCH
+        public Perfil BuscarPerfiles (string Codigo)
+        {
+            var resultado = default(Perfil);
+
+            try
+            {
+                GetConexion(this.nombreBD);
+                var coleccion = basedatos.GetCollection<Perfil>("Perfil");
+                resultado = coleccion.Find(u => u.Codigo == Codigo).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return resultado;
+        }
+        #endregion
+
+
     }
 }

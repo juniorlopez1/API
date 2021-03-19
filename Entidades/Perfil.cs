@@ -16,16 +16,27 @@ namespace Entidades
         //nameof busca fields en C# que coincida con mongoDB
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
 
         [BsonElement(nameof(Codigo))]
         public string Codigo { get; set; }
 
         [BsonElement(nameof(Descripcion))]
-        public int Descripcion { get; set; }
+        public string Descripcion { get; set; }
 
         [BsonElement(nameof(Estado))]
         public string Estado { get; set; }
 
+        #endregion
+
+        #region Constructor 
+        public Perfil ()
+        {
+            Id = String.Empty;
+            Codigo = string.Empty;
+            Descripcion = string.Empty;
+            Estado = string.Empty;
+        }
         #endregion
     }
 }
