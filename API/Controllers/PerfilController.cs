@@ -12,12 +12,12 @@ namespace API.Controllers
     [ApiController]
     [Route("api/perfil")]
 
-    //ControllerBase en lugar de Controller
+    //ControllerBase en lugar de Controller porque no se ocupan vistas aca
     //No se necesita interfaz en el API, 
     //Solo es necesario consumir servicios
 
 
-    public class PerfilController : Controller
+    public class PerfilController : ControllerBase
     {
         #region Implementación de Servicios
         private readonly IPerfilService perfilsvc;
@@ -34,7 +34,7 @@ namespace API.Controllers
 
         #region CREATE
         [HttpPost(Name = "CreatePerfil")]
-        public IActionResult Create (Perfil perfil)
+        public IActionResult Create (Pista perfil)
         {
             perfilsvc.CrearPerfiles(perfil);
             return CreatedAtRoute(nameof(Search), new { codigo = perfil.Codigo }, perfil);
@@ -52,7 +52,7 @@ namespace API.Controllers
 
         #region UPDATE
         [HttpPut(Name = "UpdatePerfil")]
-        public IActionResult Update (Perfil perfil)
+        public IActionResult Update (Pista perfil)
         {
             perfilsvc.ActualizarPerfiles(perfil);
             return CreatedAtRoute(nameof(Search), new { codigo = perfil.Codigo }, perfil);

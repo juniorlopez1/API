@@ -173,12 +173,12 @@ namespace Acceso
         //---------------------- Perfil ----------------------
 
         #region CREATE
-        public void CrearPerfiles (Perfil perfil)
+        public void CrearPerfiles (Pista perfil)
         {
             try
             {
                 GetConexion(nombreBD);
-                var coleccion = basedatos.GetCollection<Perfil>("Perfil");
+                var coleccion = basedatos.GetCollection<Pista>("Perfil");
                 coleccion.InsertOne(perfil);
             }
             catch (Exception ex)
@@ -189,14 +189,14 @@ namespace Acceso
         #endregion
 
         #region READ
-        public List<Perfil> LeerPerfiles()
+        public List<Pista> LeerPerfiles()
         {
-            var resultado = new List<Perfil>();
+            var resultado = new List<Pista>();
 
             try
             {
                 GetConexion(this.nombreBD);
-                var coleccion = basedatos.GetCollection<Perfil>("Perfil");
+                var coleccion = basedatos.GetCollection<Pista>("Perfil");
                 resultado = coleccion.Find(d => true).ToList();
             }
             catch (Exception ex)
@@ -209,15 +209,15 @@ namespace Acceso
         #endregion
 
         #region UPDATE
-        public void ActualizarPerfiles (Perfil perfil)
+        public void ActualizarPerfiles (Pista perfil)
         {
-            var resultado = new List<Perfil>();
+            var resultado = new List<Pista>();
 
             try
             {
                 GetConexion(this.nombreBD);
-                var coleccion = basedatos.GetCollection<Perfil>("Perfil");
-                basedatos.GetCollection<Perfil>("Perfil").ReplaceOne(u => u.Codigo == perfil.Codigo, perfil);
+                var coleccion = basedatos.GetCollection<Pista>("Perfil");
+                basedatos.GetCollection<Pista>("Perfil").ReplaceOne(u => u.Codigo == perfil.Codigo, perfil);
             }
             catch (Exception ex)
             {
@@ -243,14 +243,110 @@ namespace Acceso
         #endregion
 
         #region SEARCH
-        public Perfil BuscarPerfiles (string Codigo)
+        public Pista BuscarPerfiles (string Codigo)
         {
-            var resultado = default(Perfil);
+            var resultado = default(Pista);
 
             try
             {
                 GetConexion(this.nombreBD);
-                var coleccion = basedatos.GetCollection<Perfil>("Perfil");
+                var coleccion = basedatos.GetCollection<Pista>("Perfil");
+                resultado = coleccion.Find(u => u.Codigo == Codigo).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return resultado;
+        }
+        #endregion
+
+
+
+
+
+        //---------------------- Pista ----------------------
+
+        #region CREATE
+        public void CrearPistas (Pista pista)
+        {
+            try
+            {
+                GetConexion(nombreBD);
+                var coleccion = basedatos.GetCollection<Pista>("Pista");
+                coleccion.InsertOne(pista);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
+
+        #region READ
+        public List<Pista> LeerPistas ()
+        {
+            var resultado = new List<Pista>();
+
+            try
+            {
+                GetConexion(this.nombreBD);
+                var coleccion = basedatos.GetCollection<Pista>("Pista");
+                resultado = coleccion.Find(d => true).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return resultado;
+        }
+        #endregion
+
+        #region UPDATE
+        public void ActualizarPistas (Pista pista)
+        {
+            var resultado = new List<Pista>();
+
+            try
+            {
+                GetConexion(this.nombreBD);
+                var coleccion = basedatos.GetCollection<Pista>("Pista");
+                basedatos.GetCollection<Pista>("Pista").ReplaceOne(u => u.Codigo == pista.Codigo,  pista);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
+
+        #region DELETE
+        public void EliminarPistas (string Codigo)
+        {
+
+            try
+            {
+                GetConexion(this.nombreBD);
+                basedatos.GetCollection<Aeronave>("Pista").DeleteOne(u => u.Codigo == Codigo);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
+
+        #region SEARCH
+        public Pista BuscarPistas (string Codigo)
+        {
+            var resultado = default(Pista);
+
+            try
+            {
+                GetConexion(this.nombreBD);
+                var coleccion = basedatos.GetCollection<Pista>("Pista");
                 resultado = coleccion.Find(u => u.Codigo == Codigo).FirstOrDefault();
             }
             catch (Exception ex)

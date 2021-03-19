@@ -12,7 +12,7 @@ namespace API.Controllers
     [ApiController]
     [Route("api/aeronave")]
 
-    //ControllerBase en lugar de Controller
+    //ControllerBase en lugar de Controller porque no se ocupan vistas aca
     //No se necesita interfaz en el API, 
     //Solo es necesario consumir servicios
 

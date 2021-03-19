@@ -2,6 +2,7 @@
 using Entidades;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Negocios
 {
@@ -9,7 +10,7 @@ namespace Negocios
 
 
     //-------------------------Servicio -------------------------
-    public class AeronaveService : IAeronaveService
+    public class PistaService : IPistaService
     {
         #region Members
         //Establece propiedades para acceso a datos
@@ -18,7 +19,7 @@ namespace Negocios
 
         #region Constructor
         //Inicializa el servicio
-        public AeronaveService(AccesoDatos accesoDatos)
+        public PistaService(AccesoDatos accesoDatos)
         {
             this.accesoDatos = accesoDatos;
         }
@@ -27,37 +28,37 @@ namespace Negocios
 
 
         #region CREATE
-        public void CrearAeronaves (Aeronave aeronave)
+        public void CrearPistas (Pista pista)
         {
-            accesoDatos.CrearAeronaves(aeronave);
+            accesoDatos.CrearPistas(pista);
         }
         #endregion
 
         #region READ
-        public List<Aeronave> LeerAeronaves()
+        public List<Pista> LeerPistas ()
         {
-            return accesoDatos.LeerAeronaves();
+            return accesoDatos.LeerPistas();
         }
         #endregion
 
         #region UPDATE
-        public void ActualizarAeronaves (Aeronave aeronave)
+        public void ActualizarPistas (Pista pista)
         {
-            accesoDatos.ActualizarAeronaves(aeronave);
+            accesoDatos.ActualizarPistas(pista);
         }
         #endregion
 
         #region DELETE
-        public void EliminarAeronaves (string Codigo)
+        public void EliminarPistas (string Codigo)
         {
-            accesoDatos.EliminarAeronaves(Codigo);
+            accesoDatos.EliminarPistas(Codigo);
         }
         #endregion
 
         #region SEARCH
-        public Aeronave BuscarAeronaves (string Codigo)
+        public Pista BuscarPistas (string Codigo)
         {
-            return accesoDatos.BuscarAeronaves(Codigo);
+            return accesoDatos.BuscarPistas(Codigo);
         }
         #endregion
     }
@@ -71,28 +72,28 @@ namespace Negocios
 
 
     //-------------------------Interfaz -------------------------
-    public interface IAeronaveService
+    public interface IPistaService
     {
         //Metodos exponen el servicio atraves de la interfaz
 
         #region CREATE
-        void CrearAeronaves (Aeronave aeronave);
+        void CrearPistas (Pista pista);
         #endregion
 
         #region READ
-        List<Aeronave> LeerAeronaves();
+        List<Pista> LeerPistas ();
         #endregion
 
         #region UPDATE
-        void ActualizarAeronaves(Aeronave aeronave);
+        void ActualizarPistas (Pista pista);
         #endregion
 
         #region DELETE
-        void EliminarAeronaves(string Codigo);
+        void EliminarPistas (string Codigo);
         #endregion
 
         #region SEARCH
-        Aeronave BuscarAeronaves(string Codigo);
+        Pista BuscarPistas (string Codigo);
         #endregion
 
     }

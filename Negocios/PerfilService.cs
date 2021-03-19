@@ -24,21 +24,21 @@ namespace Negocios
 
 
         #region CREATE
-        public void CrearPerfiles (Perfil perfil)
+        public void CrearPerfiles (Pista perfil)
         {
             accesoDatos.CrearPerfiles (perfil);
         }
         #endregion
 
         #region READ
-        public List<Perfil> LeerPerfiles ()
+        public List<Pista> LeerPerfiles ()
         {
             return accesoDatos.LeerPerfiles();
         }
         #endregion
 
         #region UPDATE
-        public void ActualizarPerfiles (Perfil perfil)
+        public void ActualizarPerfiles (Pista perfil)
         {
             accesoDatos.ActualizarPerfiles(perfil);
         }
@@ -52,7 +52,7 @@ namespace Negocios
         #endregion
 
         #region SEARCH
-        public Perfil BuscarPerfiles (string Codigo)
+        public Pista BuscarPerfiles (string Codigo)
         {
             return accesoDatos.BuscarPerfiles(Codigo);
         }
@@ -73,15 +73,15 @@ namespace Negocios
         //Metodos exponen el servicio atraves de la interfaz
 
         #region CREATE
-        void CrearPerfiles (Perfil perfil);
+        void CrearPerfiles (Pista perfil);
         #endregion
 
         #region READ
-        List<Perfil> LeerPerfiles ();
+        List<Pista> LeerPerfiles ();
         #endregion
 
         #region UPDATE
-        void ActualizarPerfiles (Perfil perfil);
+        void ActualizarPerfiles (Pista perfil);
         #endregion
 
         #region DELETE
@@ -89,7 +89,7 @@ namespace Negocios
         #endregion
 
         #region SEARCH
-        Perfil BuscarPerfiles (string Codigo);
+        Pista BuscarPerfiles (string Codigo);
         #endregion
 
     }

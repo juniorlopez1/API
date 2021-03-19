@@ -26,5 +26,14 @@ namespace Entidades
         //[BsonElement(nameof(PistaEstado))]
         //public PistaEstado PistaEstado { get; set; }
         #endregion
+
+        #region Constructor
+        public Pista()
+        {
+            //Id = string.Empty; !necesario el ID?
+            Codigo = string.Empty;
+            Observaciones = new List<string> ();
+        }
+        #endregion
     }
 }
