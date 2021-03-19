@@ -157,7 +157,7 @@ namespace Acceso
             {
                 GetConexion(this.nombreBD);
                 var coleccion = basedatos.GetCollection<Aeronave>("Aeronave");
-                resultado = coleccion.Find(u => u.Id == Codigo).FirstOrDefault();
+                resultado = coleccion.Find(u => u.Codigo == Codigo).FirstOrDefault();
             }
             catch (Exception ex)
             {

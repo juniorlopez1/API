@@ -33,11 +33,11 @@ namespace API.Controllers
 
 
         #region CREATE
-        [HttpPost]
+        [HttpPost(Name = "CrearAeronaves")]
         public IActionResult CrearAeronaves (Aeronave aeronave)
         {
             aeronavesvc.CrearAeronaves(aeronave);
-            return CreatedAtRoute(nameof(CrearAeronaves), new { id = aeronave.Id }, aeronave);
+            return CreatedAtRoute(nameof(BuscarAeronaves), new { Codigo = aeronave.Codigo }, aeronave);
         }
         #endregion
 
@@ -69,10 +69,10 @@ namespace API.Controllers
         #endregion
 
         #region SEARCH
-        [HttpGet("{id}", Name = "BuscarAeronaves")]
-        public IActionResult BuscarAeronaves (string Codigo)
+        [HttpGet("{codigo}", Name = "BuscarAeronaves")]
+        public IActionResult BuscarAeronaves (string codigo)
         {
-            var aeronave = aeronavesvc.BuscarAeronaves(Codigo);
+            var aeronave = aeronavesvc.BuscarAeronaves(codigo);
 
             if (aeronave == null)
             {
