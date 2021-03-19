@@ -34,7 +34,7 @@ namespace API.Controllers
 
         #region CREATE
         [HttpPost(Name = "CreatePerfil")]
-        public IActionResult Create (Pista perfil)
+        public IActionResult Create (Perfil perfil)
         {
             perfilsvc.CrearPerfiles(perfil);
             return CreatedAtRoute(nameof(Search), new { codigo = perfil.Codigo }, perfil);
@@ -52,7 +52,7 @@ namespace API.Controllers
 
         #region UPDATE
         [HttpPut(Name = "UpdatePerfil")]
-        public IActionResult Update (Pista perfil)
+        public IActionResult Update (Perfil perfil)
         {
             perfilsvc.ActualizarPerfiles(perfil);
             return CreatedAtRoute(nameof(Search), new { codigo = perfil.Codigo }, perfil);

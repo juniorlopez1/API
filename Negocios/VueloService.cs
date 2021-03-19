@@ -1,12 +1,15 @@
 ﻿using Acceso;
 using Entidades;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Negocios
 {
-    public class PerfilService : IPerfilService
+
+    //Consta del servicio e interfaz
+
+
+    //-------------------------Servicio -------------------------
+    public class VueloService : IVueloService
     {
         #region Members
         //Establece propiedades para acceso a datos
@@ -15,7 +18,7 @@ namespace Negocios
 
         #region Constructor
         //Inicializa el servicio
-        public PerfilService(AccesoDatos accesoDatos)
+        public VueloService(AccesoDatos accesoDatos)
         {
             this.accesoDatos = accesoDatos;
         }
@@ -24,37 +27,37 @@ namespace Negocios
 
 
         #region CREATE
-        public void CrearPerfiles (Perfil perfil)
+        public void CrearVuelos (Vuelo vuelo)
         {
-            accesoDatos.CrearPerfiles (perfil);
+            accesoDatos.CrearVuelos(vuelo);
         }
         #endregion
 
         #region READ
-        public List<Perfil> LeerPerfiles ()
+        public List<Vuelo> LeerVuelos ()
         {
-            return accesoDatos.LeerPerfiles();
+            return accesoDatos.LeerVuelos();
         }
         #endregion
 
         #region UPDATE
-        public void ActualizarPerfiles (Perfil perfil)
+        public void ActualizarVuelos (Vuelo vuelo)
         {
-            accesoDatos.ActualizarPerfiles(perfil);
+            accesoDatos.ActualizarVuelos(vuelo);
         }
         #endregion
 
         #region DELETE
-        public void EliminarPerfiles (string Codigo)
+        public void EliminarVuelos (string Codigo)
         {
-            accesoDatos.EliminarPerfiles(Codigo);
+            accesoDatos.EliminarVuelos(Codigo);
         }
         #endregion
 
         #region SEARCH
-        public Perfil BuscarPerfiles (string Codigo)
+        public Vuelo BuscarVuelos (string Codigo)
         {
-            return accesoDatos.BuscarPerfiles(Codigo);
+            return accesoDatos.BuscarVuelos(Codigo);
         }
         #endregion
     }
@@ -68,28 +71,28 @@ namespace Negocios
 
 
     //-------------------------Interfaz -------------------------
-    public interface IPerfilService
+    public interface IVueloService
     {
         //Metodos exponen el servicio atraves de la interfaz
 
         #region CREATE
-        void CrearPerfiles (Perfil perfil);
+        void CrearVuelos (Vuelo vuelo);
         #endregion
 
         #region READ
-        List<Perfil> LeerPerfiles ();
+        List<Vuelo> LeerVuelos ();
         #endregion
 
         #region UPDATE
-        void ActualizarPerfiles (Perfil perfil);
+        void ActualizarVuelos (Vuelo vuelo);
         #endregion
 
         #region DELETE
-        void EliminarPerfiles (string Codigo);
+        void EliminarVuelos (string Codigo);
         #endregion
 
         #region SEARCH
-        Perfil BuscarPerfiles (string Codigo);
+        Vuelo BuscarVuelos (string Codigo);
         #endregion
 
     }
