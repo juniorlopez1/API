@@ -33,7 +33,7 @@ namespace API.Controllers
 
 
         #region CREATE
-        [HttpPost(Name = "Create")]
+        [HttpPost(Name = "CreateAeronave")]
         public IActionResult Create (Aeronave aeronave)
         {
             aeronavesvc.CrearAeronaves(aeronave);
@@ -42,7 +42,7 @@ namespace API.Controllers
         #endregion
 
         #region READ
-        [HttpGet(Name = "Read")]
+        [HttpGet(Name = "ReadAeronave")]
         public IActionResult Read ()
         {
             var aeronave = aeronavesvc.LeerAeronaves();
@@ -51,7 +51,7 @@ namespace API.Controllers
         #endregion
 
         #region UPDATE
-        [HttpPut(Name = "Update")]
+        [HttpPut(Name = "UpdateAeronave")]
         public IActionResult Update (Aeronave aeronave)
         {
             aeronavesvc.ActualizarAeronaves (aeronave);
@@ -60,7 +60,7 @@ namespace API.Controllers
         #endregion
 
         #region DELETE
-        [HttpDelete("{codigo}", Name = "Delete")]
+        [HttpDelete("{codigo}", Name = "DeleteAeronave")]
         public IActionResult Delete (string codigo)
         {
             aeronavesvc.EliminarAeronaves (codigo);
@@ -69,7 +69,7 @@ namespace API.Controllers
         #endregion
 
         #region SEARCH
-        [HttpGet("{codigo}", Name = "Search")]
+        [HttpGet("{codigo}", Name = "SearchAeronave")]
         public IActionResult Search (string codigo)
         {
             var aeronave = aeronavesvc.BuscarAeronaves(codigo);
