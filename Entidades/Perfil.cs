@@ -25,7 +25,7 @@ namespace Entidades
         public string Tipo { get; set; }
 
         [BsonElement(nameof(Estado))]
-        public string Estado { get; set; }
+        public bool Estado { get; set; }
 
         #endregion
 
@@ -35,7 +35,7 @@ namespace Entidades
             Id = string.Empty;
             Tipo = string.Empty;
             Codigo = string.Empty;
-            Estado = string.Empty;
+            Estado = true;
         }
         #endregion
     }

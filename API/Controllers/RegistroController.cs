@@ -10,24 +10,24 @@ namespace API.Controllers
 {
     //Poner el prefix necesario para el API route
     [ApiController]
-    [Route("api/perfil")]
+    [Route("api/registro")]
 
     //ControllerBase en lugar de Controller porque no se ocupan vistas aca
     //No se necesita interfaz en el API, 
     //Solo es necesario consumir servicios
 
 
-    public class PerfilController : ControllerBase
+    public class RegistroController : ControllerBase
     {
         #region Implementación de Servicios
-        private readonly IPerfilService perfilsvc;
+        private readonly IRegistroService registrosvc;
 
         #endregion
 
         #region Constructor
-        public PerfilController (IPerfilService perfilService)
+        public RegistroController(IRegistroService registrosvc)
         {
-            this.perfilsvc = perfilService;
+            this.registrosvc = registrosvc;
         }
 
         #endregion
@@ -36,54 +36,54 @@ namespace API.Controllers
 
 
         #region CREATE
-        [HttpPost(Name = "CreatePerfil")]
-        public IActionResult Create(Perfil perfil)
+        [HttpPost(Name = "CreateRegistro")]
+        public IActionResult Create(Registro Registro)
         {
-            perfilsvc.Crear(perfil);
-            return CreatedAtRoute("SearchPerfil", new { codigo = perfil.Codigo }, perfil);
+            registrosvc.Crear(Registro);
+            return CreatedAtRoute(nameof(Search), new { codigo = Registro.Id }, Registro);
         }
         #endregion
 
         #region READ
-        [HttpGet(Name = "ReadPerfil")]
+        [HttpGet(Name = "ReadRegistro")]
         public IActionResult Read()
         {
-            var perfiles = perfilsvc.Leer();
-            return Ok(perfiles);
+            var Registroes = registrosvc.Leer();
+            return Ok(Registroes);
         }
         #endregion
 
         #region UPDATE
-        [HttpPut(Name = "UpdatePerfil")]
-        public IActionResult Update(Perfil perfil)
+        [HttpPut(Name = "UpdateRegistro")]
+        public IActionResult Update(Registro Registro)
         {
-            perfilsvc.Actualizar(perfil);
-            return CreatedAtRoute(nameof(Search), new { codigo = perfil.Codigo }, perfil);
+            registrosvc.Actualizar(Registro);
+            return CreatedAtRoute(nameof(Search), new { codigo = Registro.Id }, Registro);
         }
         #endregion
 
         #region DELETE
-        [HttpDelete("{codigo}", Name = "DeletePerfil")]
+        [HttpDelete("{codigo}", Name = "DeleteRegistro")]
         public IActionResult Delete(string codigo)
         {
-            perfilsvc.Eliminar(codigo);
+            registrosvc.Eliminar(codigo);
             return NoContent();
         }
         #endregion
 
         #region SEARCH
-        [HttpGet("{codigo}", Name = "SearchPerfil")]
+        [HttpGet("{codigo}", Name = "SearchRegistro")]
         public IActionResult Search(string codigo)
         {
-            var perfil = perfilsvc.Buscar(codigo);
+            var Registro = registrosvc.Buscar(codigo);
 
-            if (perfil == null)
+            if (Registro == null)
             {
                 return NotFound();
             }
             else
             {
-                return Ok(perfil);
+                return Ok(Registro);
             }
         }
         #endregion

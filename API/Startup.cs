@@ -47,12 +47,21 @@ namespace API
             #region region para agregar servicios
             //Se agrega la interfaz y servicio respectivo
             services.AddScoped<IAeronaveService, AeronaveService>();
-            services.AddScoped<IPerfilService, PerfilService > ();
+            services.AddScoped<IAeronaveTipoService, AeronaveTipoService>();
+            services.AddScoped<IEstadoVueloService, EstadoVueloService>();
+            services.AddScoped<IObservacionService, ObservacionService>();
+            services.AddScoped<IPerfilService, PerfilService>();
+            services.AddScoped<IRegistroService, RegistroService > ();
+            services.AddScoped<IUsuarioService, UsuarioService>();
 
             //Se enlaza con la capa de acceso a datos y base de datos
-            services.AddScoped((factory) => new AccesoDatos(conexionString, nombreBD));
             services.AddScoped((factory) => new DatosAeronave(conexionString, nombreBD));
             services.AddScoped((factory) => new DatosAeronaveTipo(conexionString, nombreBD));
+            services.AddScoped((factory) => new DatosEstadoVuelo(conexionString, nombreBD));
+            services.AddScoped((factory) => new DatosObservacion(conexionString, nombreBD));
+            services.AddScoped((factory) => new DatosPerfil(conexionString, nombreBD));
+            services.AddScoped((factory) => new DatosRegistro(conexionString, nombreBD));
+            services.AddScoped((factory) => new DatosUsuario(conexionString, nombreBD));
 
             #endregion
         }

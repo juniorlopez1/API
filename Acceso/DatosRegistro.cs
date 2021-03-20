@@ -6,11 +6,10 @@ using System.Text;
 
 namespace Datos
 {
-    public class DatosPerfil : AccesoDatosBase
+    public class DatosRegistro : AccesoDatosBase
     {
-
         #region Constructor
-        public DatosPerfil(string cadenaConexion, string nombreBD)
+        public DatosRegistro(string cadenaConexion, string nombreBD)
     : base(cadenaConexion, nombreBD)
         {
 
@@ -21,42 +20,41 @@ namespace Datos
 
 
         #region CREATE
-        public void Crear(Perfil Perfil)
+        public void Crear(Registro Registro)
         {
-            Crear(nameof(Perfil), Perfil);
+            Crear(nameof(Registro), Registro);
         }
         #endregion
 
         #region READ
-        public List<Perfil> Leer()
+        public List<Registro> Leer()
         {
-            return Leer<Perfil>(nameof(Perfil));
+            return Leer<Registro>(nameof(Registro));
         }
         #endregion
 
         #region UPDATE
-        public void Actualizar(Perfil Perfil)
+        public void Actualizar(Registro Registro)
         {
-            Actualizar<Perfil>(nameof(Perfil), (u) => u.Id == u.Id, Perfil);
+            Actualizar<Registro>(nameof(Registro), (u) => u.Id == u.Id, Registro);
         }
         #endregion
 
         #region DELETE
         public void Eliminar(string id)
         {
-            Eliminar<Perfil>(nameof(Perfil), (u) => u.Id == id);
+            Eliminar<Registro>(nameof(Registro), (u) => u.Id == id);
         }
         #endregion
 
         #region SEARCH
-        public Perfil Buscar(string Codigo)
+        public Registro Buscar(string id)
         {
-            return Buscar<Perfil>(nameof(Perfil), (u) => u.Codigo == Codigo);
+            return Buscar<Registro>(nameof(Registro), (u) => u.Id == id);
         }
         #endregion 
 
 
         #endregion
-
     }
 }

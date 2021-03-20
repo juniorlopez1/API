@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Datos
 {
-    class DatosObservacion : AccesoDatosBase
+    public class DatosObservacion : AccesoDatosBase
     {
         #region Constructor
         public DatosObservacion(string cadenaConexion, string nombreBD)
