@@ -24,8 +24,17 @@ namespace Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var baseurl = @"https://localhost:5001/api";
             services.AddControllersWithViews();
-            services.AddScoped<IwebPerfilService>((x) => new webPerfilService(@"https://localhost:5001/api"));
+            services.AddScoped<IwebAeronaveService>((x) => new webAeronaveService(baseurl));
+            services.AddScoped<IwebAeronaveTipoService>((x) => new webAeronaveTipoService(baseurl));
+            services.AddScoped<IwebEstadoVueloService>((x) => new webEstadoVueloService(baseurl));
+            services.AddScoped<IwebObservacionService>((x) => new webObservacionService(baseurl));
+            services.AddScoped<IwebPerfilService>((x) => new webPerfilService(baseurl));
+            services.AddScoped<IwebRegistroService>((x) => new webRegistroService(baseurl));
+            services.AddScoped <IwebUsuarioService>((x) => new webUsuarioService(baseurl));
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

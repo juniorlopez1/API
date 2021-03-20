@@ -25,12 +25,12 @@ namespace Web.Servicios
 
     }
 
-    public class webOservacionService : webBaseService, IwebObservacionService
+    public class webObservacionService : webBaseService, IwebObservacionService
     //Hereda del servicio base e implementa la interfaz correspondiente
 
     {
         #region Constructor
-        public webOservacionService(string baseUrl)
+        public webObservacionService(string baseUrl)
     : base(baseUrl)
         {
             //Constructor con la base URL
