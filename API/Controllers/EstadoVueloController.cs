@@ -40,7 +40,7 @@ namespace API.Controllers
         public IActionResult Create(EstadoVuelo EstadoVuelo)
         {
             estadovuelosvc.Crear(EstadoVuelo);
-            return CreatedAtRoute(nameof(Search), new { codigo = EstadoVuelo.Id }, EstadoVuelo);
+            return CreatedAtRoute("SearchEstadoVuelo", new { codigo = EstadoVuelo.Id }, EstadoVuelo);
         }
         #endregion
 
@@ -58,7 +58,7 @@ namespace API.Controllers
         public IActionResult Update(EstadoVuelo EstadoVuelo)
         {
             estadovuelosvc.Actualizar(EstadoVuelo);
-            return CreatedAtRoute(nameof(Search), new { codigo = EstadoVuelo.Id }, EstadoVuelo);
+            return CreatedAtRoute("SearchEstadoVuelo", new { codigo = EstadoVuelo.Id }, EstadoVuelo);
         }
         #endregion
 

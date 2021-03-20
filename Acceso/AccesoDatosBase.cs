@@ -99,7 +99,7 @@ namespace Acceso
             {
                 GetConexion(this.nombreBD);
                 var coleccion = basedatos.GetCollection<T>(nombreColeccion);
-                resultado = coleccion.Find(d => true).ToList();
+                resultado = coleccion.Find(d => true).ToList() ?? new List<T>();
             }
             catch (Exception ex)
             {

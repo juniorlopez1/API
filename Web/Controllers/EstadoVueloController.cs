@@ -34,9 +34,18 @@ namespace Web.Controllers
 
         #region CREATE OR UPDATE
         [HttpGet]
-        public async Task<IActionResult> Editar(string codigo)
+        public async Task<IActionResult> Editar(string id=null)
         {
-            var view = await servicio.Buscar(codigo);
+            var view = default(EstadoVueloViewModel);
+
+            if (string.IsNullOrEmpty(id))
+            {
+                view = new EstadoVueloViewModel();
+            }
+            else
+            {
+                view = await servicio.Buscar(id);
+            }
             return View(view);
         }
 

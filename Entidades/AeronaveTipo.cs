@@ -21,6 +21,9 @@ namespace Entidades
         [BsonElement(nameof(Descripcion))]
         public string Descripcion { get; set; }
 
+        [BsonElement(nameof(Codigo))]
+        public string Codigo { get; set; }
+
         #endregion
 
 
@@ -29,6 +32,7 @@ namespace Entidades
         {
             Id = string.Empty;
             Descripcion = string.Empty;
+            Codigo = string.Empty;
         }
         #endregion
     }

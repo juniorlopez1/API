@@ -28,6 +28,9 @@ namespace Web.Controllers
         public async Task<IActionResult> Lista()
         {
             var view = await servicio.Listar();
+
+            //Si no existe la coleccion en mongodb
+            //var view = await servicio.Listar() ?? new List<AeronaveTipoViewModel>();
             return View(view);
         }
         #endregion

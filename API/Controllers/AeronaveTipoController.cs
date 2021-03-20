@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
+    [ApiController]
+    [Route("api/aeronavetipo")]
     public class AeronaveTipoController : ControllerBase
     {
         #region Implementación de Servicios

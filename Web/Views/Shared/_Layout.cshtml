@@ -19,17 +19,31 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Acerca de</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Aeronave" asp-action="Lista">Aeronave</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Perfil" asp-action="Lista">Perfiles</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Perfil" asp-action="Lista">Perfil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Aeronave" asp-action="Lista">Aeronaves</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Registro" asp-action="Lista">Registro</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Lista">Usuario</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Mantenimiento
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="AeronaveTipo" asp-action="Lista">Aeronave Tipo</a>
+                                <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="EstadoVuelo" asp-action="Lista">Estado Vuelo</a>
+                                <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Observacion" asp-action="Lista">Observacion</a>
+                            </div>
+                        </li>
+
                     </ul>
                 </div>
             </div>
