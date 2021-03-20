@@ -1,4 +1,4 @@
-﻿using Acceso;
+﻿using Datos;
 using Entidades;
 using System;
 using System.Collections.Generic;
@@ -6,16 +6,20 @@ using System.Text;
 
 namespace Negocios
 {
+    //Consta del servicio e interfaz
+
+
+    //-------------------------Servicio -------------------------
     public class PerfilService : IPerfilService
     {
         #region Members
         //Establece propiedades para acceso a datos
-        private readonly AccesoDatos accesoDatos;
+        private readonly DatosPerfil accesoDatos;
         #endregion
 
         #region Constructor
         //Inicializa el servicio
-        public PerfilService(AccesoDatos accesoDatos)
+        public PerfilService(DatosPerfil accesoDatos)
         {
             this.accesoDatos = accesoDatos;
         }
@@ -24,37 +28,37 @@ namespace Negocios
 
 
         #region CREATE
-        public void CrearPerfiles (Perfil perfil)
+        public void Crear(Perfil Perfil)
         {
-            accesoDatos.CrearPerfiles (perfil);
+            accesoDatos.Crear(Perfil);
         }
         #endregion
 
         #region READ
-        public List<Perfil> LeerPerfiles ()
+        public List<Perfil> Leer()
         {
-            return accesoDatos.LeerPerfiles();
+            return accesoDatos.Leer();
         }
         #endregion
 
         #region UPDATE
-        public void ActualizarPerfiles (Perfil perfil)
+        public void Actualizar(Perfil Perfil)
         {
-            accesoDatos.ActualizarPerfiles(perfil);
+            accesoDatos.Actualizar(Perfil);
         }
         #endregion
 
         #region DELETE
-        public void EliminarPerfiles (string Codigo)
+        public void Eliminar(string Codigo)
         {
-            accesoDatos.EliminarPerfiles(Codigo);
+            accesoDatos.Eliminar(Codigo);
         }
         #endregion
 
         #region SEARCH
-        public Perfil BuscarPerfiles (string Codigo)
+        public Perfil Buscar(string Codigo)
         {
-            return accesoDatos.BuscarPerfiles(Codigo);
+            return accesoDatos.Buscar(Codigo);
         }
         #endregion
     }
@@ -73,25 +77,24 @@ namespace Negocios
         //Metodos exponen el servicio atraves de la interfaz
 
         #region CREATE
-        void CrearPerfiles (Perfil perfil);
+        void Crear(Perfil Perfil);
         #endregion
 
         #region READ
-        List<Perfil> LeerPerfiles ();
+        List<Perfil> Leer();
         #endregion
 
         #region UPDATE
-        void ActualizarPerfiles (Perfil perfil);
+        void Actualizar(Perfil Perfil);
         #endregion
 
         #region DELETE
-        void EliminarPerfiles (string Codigo);
+        void Eliminar(string Codigo);
         #endregion
 
         #region SEARCH
-        Perfil BuscarPerfiles (string Codigo);
+        Perfil Buscar(string Codigo);
         #endregion
 
     }
 }
-

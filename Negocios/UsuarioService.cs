@@ -1,4 +1,4 @@
-﻿using Acceso;
+﻿using Datos;
 using Entidades;
 using System;
 using System.Collections.Generic;
@@ -10,16 +10,16 @@ namespace Negocios
 
 
     //-------------------------Servicio -------------------------
-    public class PistaService : IPistaService
+    public class UsuarioService : IUsuarioService
     {
         #region Members
         //Establece propiedades para acceso a datos
-        private readonly AccesoDatos accesoDatos;
+        private readonly DatosUsuario accesoDatos;
         #endregion
 
         #region Constructor
         //Inicializa el servicio
-        public PistaService(AccesoDatos accesoDatos)
+        public UsuarioService (DatosUsuario accesoDatos)
         {
             this.accesoDatos = accesoDatos;
         }
@@ -28,37 +28,37 @@ namespace Negocios
 
 
         #region CREATE
-        public void CrearPistas (Pista pista)
+        public void Crear(Usuario Usuario)
         {
-            accesoDatos.CrearPistas(pista);
+            accesoDatos.Crear(Usuario);
         }
         #endregion
 
         #region READ
-        public List<Pista> LeerPistas ()
+        public List<Usuario> Leer()
         {
-            return accesoDatos.LeerPistas();
+            return accesoDatos.Leer();
         }
         #endregion
 
         #region UPDATE
-        public void ActualizarPistas (Pista pista)
+        public void Actualizar(Usuario Usuario)
         {
-            accesoDatos.ActualizarPistas(pista);
+            accesoDatos.Actualizar(Usuario);
         }
         #endregion
 
         #region DELETE
-        public void EliminarPistas (string Codigo)
+        public void Eliminar(string Codigo)
         {
-            accesoDatos.EliminarPistas(Codigo);
+            accesoDatos.Eliminar(Codigo);
         }
         #endregion
 
         #region SEARCH
-        public Pista BuscarPistas (string Codigo)
+        public Usuario Buscar(string Codigo)
         {
-            return accesoDatos.BuscarPistas(Codigo);
+            return accesoDatos.Buscar(Codigo);
         }
         #endregion
     }
@@ -72,29 +72,30 @@ namespace Negocios
 
 
     //-------------------------Interfaz -------------------------
-    public interface IPistaService
+    public interface IUsuarioService
     {
         //Metodos exponen el servicio atraves de la interfaz
 
         #region CREATE
-        void CrearPistas (Pista pista);
+        void Crear(Usuario Usuario);
         #endregion
 
         #region READ
-        List<Pista> LeerPistas ();
+        List<Usuario> Leer();
         #endregion
 
         #region UPDATE
-        void ActualizarPistas (Pista pista);
+        void Actualizar(Usuario Usuario);
         #endregion
 
         #region DELETE
-        void EliminarPistas (string Codigo);
+        void Eliminar(string Codigo);
         #endregion
 
         #region SEARCH
-        Pista BuscarPistas (string Codigo);
+        Usuario Buscar(string Codigo);
         #endregion
 
     }
 }
+

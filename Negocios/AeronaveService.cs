@@ -1,4 +1,5 @@
 ﻿using Acceso;
+using Datos;
 using Entidades;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,12 @@ namespace Negocios
     {
         #region Members
         //Establece propiedades para acceso a datos
-        private readonly AccesoDatos accesoDatos;
+        private readonly DatosAeronave accesoDatos;
         #endregion
 
         #region Constructor
         //Inicializa el servicio
-        public AeronaveService(AccesoDatos accesoDatos)
+        public AeronaveService(DatosAeronave accesoDatos)
         {
             this.accesoDatos = accesoDatos;
         }
@@ -27,37 +28,37 @@ namespace Negocios
 
 
         #region CREATE
-        public void CrearAeronaves (Aeronave aeronave)
+        public void Crear (Aeronave aeronave)
         {
-            accesoDatos.CrearAeronaves(aeronave);
+            accesoDatos.Crear(aeronave);
         }
         #endregion
 
         #region READ
-        public List<Aeronave> LeerAeronaves()
+        public List<Aeronave> Leer()
         {
-            return accesoDatos.LeerAeronaves();
+            return accesoDatos.Leer();
         }
         #endregion
 
         #region UPDATE
-        public void ActualizarAeronaves (Aeronave aeronave)
+        public void Actualizar (Aeronave aeronave)
         {
-            accesoDatos.ActualizarAeronaves(aeronave);
+            accesoDatos.Actualizar(aeronave);
         }
         #endregion
 
         #region DELETE
-        public void EliminarAeronaves (string Codigo)
+        public void Eliminar (string Codigo)
         {
-            accesoDatos.EliminarAeronaves(Codigo);
+            accesoDatos.Eliminar(Codigo);
         }
         #endregion
 
         #region SEARCH
-        public Aeronave BuscarAeronaves (string Codigo)
+        public Aeronave Buscar (string Codigo)
         {
-            return accesoDatos.BuscarAeronaves(Codigo);
+            return accesoDatos.Buscar(Codigo);
         }
         #endregion
     }
@@ -76,23 +77,23 @@ namespace Negocios
         //Metodos exponen el servicio atraves de la interfaz
 
         #region CREATE
-        void CrearAeronaves (Aeronave aeronave);
+        void Crear (Aeronave aeronave);
         #endregion
 
         #region READ
-        List<Aeronave> LeerAeronaves();
+        List<Aeronave> Leer();
         #endregion
 
         #region UPDATE
-        void ActualizarAeronaves(Aeronave aeronave);
+        void Actualizar(Aeronave aeronave);
         #endregion
 
         #region DELETE
-        void EliminarAeronaves(string Codigo);
+        void Eliminar(string Codigo);
         #endregion
 
         #region SEARCH
-        Aeronave BuscarAeronaves(string Codigo);
+        Aeronave Buscar(string Codigo);
         #endregion
 
     }

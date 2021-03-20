@@ -29,50 +29,53 @@ namespace API.Controllers
         {
             this.perfilsvc = perfilService;
         }
+
         #endregion
+
+        #region CRUD
 
 
         #region CREATE
         [HttpPost(Name = "CreatePerfil")]
-        public IActionResult Create (Perfil perfil)
+        public IActionResult Create(Perfil perfil)
         {
-            perfilsvc.CrearPerfiles(perfil);
+            perfilsvc.Crear(perfil);
             return CreatedAtRoute(nameof(Search), new { codigo = perfil.Codigo }, perfil);
         }
         #endregion
 
         #region READ
         [HttpGet(Name = "ReadPerfil")]
-        public IActionResult Read ()
+        public IActionResult Read()
         {
-            var perfiles = perfilsvc.LeerPerfiles();
+            var perfiles = perfilsvc.Leer();
             return Ok(perfiles);
         }
         #endregion
 
         #region UPDATE
         [HttpPut(Name = "UpdatePerfil")]
-        public IActionResult Update (Perfil perfil)
+        public IActionResult Update(Perfil perfil)
         {
-            perfilsvc.ActualizarPerfiles(perfil);
+            perfilsvc.Actualizar(perfil);
             return CreatedAtRoute(nameof(Search), new { codigo = perfil.Codigo }, perfil);
         }
         #endregion
 
         #region DELETE
         [HttpDelete("{codigo}", Name = "DeletePerfil")]
-        public IActionResult Delete (string codigo)
+        public IActionResult Delete(string codigo)
         {
-            perfilsvc.EliminarPerfiles(codigo);
+            perfilsvc.Eliminar(codigo);
             return NoContent();
         }
         #endregion
 
         #region SEARCH
         [HttpGet("{codigo}", Name = "SearchPerfil")]
-        public IActionResult Search (string codigo)
+        public IActionResult Search(string codigo)
         {
-            var perfil = perfilsvc.BuscarPerfiles(codigo);
+            var perfil = perfilsvc.Buscar(codigo);
 
             if (perfil == null)
             {
@@ -86,5 +89,6 @@ namespace API.Controllers
         #endregion
 
 
+        #endregion
     }
 }

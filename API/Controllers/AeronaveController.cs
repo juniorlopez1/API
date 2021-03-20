@@ -31,48 +31,49 @@ namespace API.Controllers
         }
         #endregion
 
+        #region CRUD
 
         #region CREATE
         [HttpPost(Name = "CreateAeronave")]
-        public IActionResult Create (Aeronave aeronave)
+        public IActionResult Create(Aeronave aeronave)
         {
-            aeronavesvc.CrearAeronaves(aeronave);
+            aeronavesvc.Crear(aeronave);
             return CreatedAtRoute(nameof(Search), new { codigo = aeronave.Codigo }, aeronave);
         }
         #endregion
 
         #region READ
         [HttpGet(Name = "ReadAeronave")]
-        public IActionResult Read ()
+        public IActionResult Read()
         {
-            var aeronave = aeronavesvc.LeerAeronaves();
+            var aeronave = aeronavesvc.Leer();
             return Ok(aeronave);
         }
         #endregion
 
         #region UPDATE
         [HttpPut(Name = "UpdateAeronave")]
-        public IActionResult Update (Aeronave aeronave)
+        public IActionResult Update(Aeronave aeronave)
         {
-            aeronavesvc.ActualizarAeronaves (aeronave);
+            aeronavesvc.Actualizar(aeronave);
             return CreatedAtRoute(nameof(Search), new { codigo = aeronave.Codigo }, aeronave);
         }
         #endregion
 
         #region DELETE
         [HttpDelete("{codigo}", Name = "DeleteAeronave")]
-        public IActionResult Delete (string codigo)
+        public IActionResult Delete(string codigo)
         {
-            aeronavesvc.EliminarAeronaves (codigo);
+            aeronavesvc.Eliminar(codigo);
             return NoContent();
         }
         #endregion
 
         #region SEARCH
         [HttpGet("{codigo}", Name = "SearchAeronave")]
-        public IActionResult Search (string codigo)
+        public IActionResult Search(string codigo)
         {
-            var aeronave = aeronavesvc.BuscarAeronaves(codigo);
+            var aeronave = aeronavesvc.Buscar(codigo);
 
             if (aeronave == null)
             {
@@ -86,5 +87,6 @@ namespace API.Controllers
         #endregion
 
 
+        #endregion
     }
 }

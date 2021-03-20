@@ -1,12 +1,9 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Entidades
 {
-    public class Perfil
+    public class Usuario
     {
         #region Propiedades
         //Primero instalar nuggets de mongoDB Driver
@@ -18,24 +15,30 @@ namespace Entidades
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
-        [BsonElement(nameof(Codigo))]
-        public string Codigo { get; set; }
+        [BsonElement(nameof(NombreUsuario))]
+        public string NombreUsuario { get; set; }
 
-        [BsonElement(nameof(Tipo))]
-        public string Tipo { get; set; }
+        [BsonElement(nameof(Contrasena))]
+        public string Contrasena { get; set; }
 
         [BsonElement(nameof(Estado))]
-        public string Estado { get; set; }
+        public bool Estado { get; set; }
+
+        //Otras entidades
+        [BsonElement(nameof(Perfil))]
+        public Perfil Perfil { get; set; }
 
         #endregion
 
+
         #region Constructor
-        public Perfil()
+        public Usuario()
         {
             Id = string.Empty;
-            Tipo = string.Empty;
-            Codigo = string.Empty;
-            Estado = string.Empty;
+            NombreUsuario = string.Empty;
+            Contrasena = string.Empty;
+            Estado = true;
+            Perfil = new Perfil () ;
         }
         #endregion
     }

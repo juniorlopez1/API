@@ -1,4 +1,5 @@
 using Acceso;
+using Datos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -47,11 +48,11 @@ namespace API
             //Se agrega la interfaz y servicio respectivo
             services.AddScoped<IAeronaveService, AeronaveService>();
             services.AddScoped<IPerfilService, PerfilService > ();
-            services.AddScoped<IPistaService, PistaService>();
-            services.AddScoped<IVueloService, VueloService>();
 
             //Se enlaza con la capa de acceso a datos y base de datos
-            services.AddScoped((factory) => new AccesoDatos(conexionString, nombreBD)); 
+            services.AddScoped((factory) => new AccesoDatos(conexionString, nombreBD));
+            services.AddScoped((factory) => new DatosAeronave(conexionString, nombreBD));
+            services.AddScoped((factory) => new DatosAeronaveTipo(conexionString, nombreBD));
 
             #endregion
         }

@@ -6,19 +6,19 @@ using System.Collections.Generic;
 
 namespace Acceso
 {
-    public class AccesoDatos
+    public abstract class AccesoDatosBase
     {
         #region Propiedades
-        private MongoClient instancia;
-        private IMongoDatabase basedatos;
+        protected MongoClient instancia;
+        protected IMongoDatabase basedatos;
 
-        private readonly string cadenaConexion;
-        private readonly string nombreBD;
+        protected readonly string cadenaConexion;
+        protected readonly string nombreBD;
         #endregion
 
         #region Constructor
 
-        public AccesoDatos(string cadenaConexion, string nombreBD)
+        public AccesoDatosBase(string cadenaConexion, string nombreBD)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace Acceso
         #endregion
 
         #region GetConexion
-        private bool GetConexion(string nombreBD)
+        protected bool GetConexion(string nombreBD)
         {
             bool ConexionCorrecta = false;
 
@@ -75,27 +75,103 @@ namespace Acceso
         }
         #endregion
 
-
-        //----------------------Aeronave ----------------------
-
-        #region CREATE
-        public void CrearAeronaves (Aeronave aeronave)
+        protected void Crear<T>(string nombreColeccion, T entidad)
         {
             try
             {
                 GetConexion(nombreBD);
-                var coleccion = basedatos.GetCollection<Aeronave>("Aeronave");
-                coleccion.InsertOne(aeronave);
+                var coleccion = basedatos.GetCollection<T>(nombreColeccion);
+                coleccion.InsertOne(entidad);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
+        protected List<T> Leer<T>(string nombreColeccion)
+        {
+            var resultado = new List<T>();
+
+            try
+            {
+                GetConexion(this.nombreBD);
+                var coleccion = basedatos.GetCollection<T>(nombreColeccion);
+                resultado = coleccion.Find(d => true).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return resultado;
+        }
+
+        protected void Actualizar<T>(string nombreColeccion, Func<T, bool> filtro, T entidad)
+        {
+            try
+            {
+                GetConexion(this.nombreBD);
+                var coleccion = basedatos.GetCollection<T>(nombreColeccion);
+                basedatos.GetCollection<T>(nombreColeccion).ReplaceOne(u => filtro(u), entidad);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        protected void Eliminar<T>(string nombreColeccion, Func<T, bool> filtro)
+        {
+            try
+            {
+                GetConexion(this.nombreBD);
+                basedatos.GetCollection<T>(nombreColeccion).DeleteOne(u => filtro(u));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        protected T Buscar<T>(string nombreColeccion, Func<T, bool> filtro)
+        {
+            var resultado = default(T);
+
+            try
+            {
+                GetConexion(this.nombreBD);
+                var coleccion = basedatos.GetCollection<T>(nombreColeccion);
+                resultado = coleccion.Find(u => filtro(u)).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return resultado;
+        }
+    }
+
+    public class AccesoDatos : AccesoDatosBase
+    {
+        public AccesoDatos(string cadenaConexion, string nombreBD)
+            :base(cadenaConexion, nombreBD)
+        {
+
+        }
+
+        //----------------------Aeronave ----------------------
+
+        #region CREATE
+        public void CrearAeronaves(Aeronave aeronave)
+        {
+            Crear<Aeronave>(nameof(Aeronave), aeronave);
+        }
         #endregion
 
         #region READ
-        public List<Aeronave> LeerAeronaves ()
+        public List<Aeronave> LeerAeronaves()
         {
             var resultado = new List<Aeronave>();
 
@@ -115,7 +191,7 @@ namespace Acceso
         #endregion
 
         #region UPDATE
-        public void ActualizarAeronaves (Aeronave aeronave)
+        public void ActualizarAeronaves(Aeronave aeronave)
         {
             var resultado = new List<Aeronave>();
 
@@ -133,7 +209,7 @@ namespace Acceso
         #endregion
 
         #region DELETE
-        public void EliminarAeronaves (string Codigo)
+        public void EliminarAeronaves(string Codigo)
         {
 
             try
@@ -144,12 +220,12 @@ namespace Acceso
             catch (Exception ex)
             {
                 throw ex;
-            } 
+            }
         }
         #endregion
 
         #region SEARCH
-        public Aeronave BuscarAeronaves (string Codigo)
+        public Aeronave BuscarAeronaves(string Codigo)
         {
             var resultado = default(Aeronave);
 
@@ -173,7 +249,7 @@ namespace Acceso
         //---------------------- Perfil ----------------------
 
         #region CREATE
-        public void CrearPerfiles (Perfil perfil)
+        public void CrearPerfiles(Perfil perfil)
         {
             try
             {
@@ -189,7 +265,7 @@ namespace Acceso
         #endregion
 
         #region READ
-        public List<Perfil> LeerPerfiles ()
+        public List<Perfil> LeerPerfiles()
         {
             var resultado = new List<Perfil>();
 
@@ -209,7 +285,7 @@ namespace Acceso
         #endregion
 
         #region UPDATE
-        public void ActualizarPerfiles (Perfil perfil)
+        public void ActualizarPerfiles(Perfil perfil)
         {
             var resultado = new List<Perfil>();
 
@@ -227,7 +303,7 @@ namespace Acceso
         #endregion
 
         #region DELETE
-        public void EliminarPerfiles (string Codigo)
+        public void EliminarPerfiles(string Codigo)
         {
 
             try
@@ -243,7 +319,7 @@ namespace Acceso
         #endregion
 
         #region SEARCH
-        public Perfil BuscarPerfiles (string Codigo)
+        public Perfil BuscarPerfiles(string Codigo)
         {
             var resultado = default(Perfil);
 
@@ -262,20 +338,16 @@ namespace Acceso
         }
         #endregion
 
-
-
-
-
-        //---------------------- Pista ----------------------
+        //---------------------- Usuario ----------------------
 
         #region CREATE
-        public void CrearPistas (Pista pista)
+        public void CrearUsuarios(Usuario usuario)
         {
             try
             {
                 GetConexion(nombreBD);
-                var coleccion = basedatos.GetCollection<Pista>("Pista");
-                coleccion.InsertOne(pista);
+                var coleccion = basedatos.GetCollection<Usuario>("Usuario");
+                coleccion.InsertOne(usuario);
             }
             catch (Exception ex)
             {
@@ -285,14 +357,14 @@ namespace Acceso
         #endregion
 
         #region READ
-        public List<Pista> LeerPistas ()
+        public List<Usuario> LeerUsuarios()
         {
-            var resultado = new List<Pista>();
+            var resultado = new List<Usuario>();
 
             try
             {
                 GetConexion(this.nombreBD);
-                var coleccion = basedatos.GetCollection<Pista>("Pista");
+                var coleccion = basedatos.GetCollection<Usuario>("Usuario");
                 resultado = coleccion.Find(d => true).ToList();
             }
             catch (Exception ex)
@@ -305,15 +377,15 @@ namespace Acceso
         #endregion
 
         #region UPDATE
-        public void ActualizarPistas (Pista pista)
+        public void ActualizarUsuarios(Usuario usuario)
         {
-            var resultado = new List<Pista>();
+            var resultado = new List<Usuario>();
 
             try
             {
                 GetConexion(this.nombreBD);
-                var coleccion = basedatos.GetCollection<Pista>("Pista");
-                basedatos.GetCollection<Pista>("Pista").ReplaceOne(u => u.Codigo == pista.Codigo,  pista);
+                var coleccion = basedatos.GetCollection<Usuario>("Usuario");
+                basedatos.GetCollection<Usuario>("Usuario").ReplaceOne(u => u.Id == usuario.Id, usuario);
             }
             catch (Exception ex)
             {
@@ -323,13 +395,13 @@ namespace Acceso
         #endregion
 
         #region DELETE
-        public void EliminarPistas (string Codigo)
+        public void EliminarUsuarios(string Id)
         {
 
             try
             {
                 GetConexion(this.nombreBD);
-                basedatos.GetCollection<Aeronave>("Pista").DeleteOne(u => u.Codigo == Codigo);
+                basedatos.GetCollection<Usuario>("Usuario").DeleteOne(u => u.Id == Id);
             }
             catch (Exception ex)
             {
@@ -339,120 +411,22 @@ namespace Acceso
         #endregion
 
         #region SEARCH
-        public Pista BuscarPistas (string Codigo)
+        public Usuario BuscarUsuarios(string NombreUsuario)
         {
-            var resultado = default(Pista);
+            var usuario = default(Usuario);
 
             try
             {
                 GetConexion(this.nombreBD);
-                var coleccion = basedatos.GetCollection<Pista>("Pista");
-                resultado = coleccion.Find(u => u.Codigo == Codigo).FirstOrDefault();
+                var coleccion = basedatos.GetCollection<Usuario>("Usuario");
+                usuario = coleccion.Find(u => u.NombreUsuario == NombreUsuario).FirstOrDefault();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
 
-            return resultado;
-        }
-        #endregion
-
-
-
-
-
-
-
-        //---------------------- Vuelo ----------------------
-
-        #region CREATE
-        public void CrearVuelos (Vuelo vuelo)
-        {
-            try
-            {
-                GetConexion(nombreBD);
-                var coleccion = basedatos.GetCollection<Vuelo>("Vuelo");
-                coleccion.InsertOne(vuelo);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        #endregion
-
-        #region READ
-        public List<Vuelo> LeerVuelos ()
-        {
-            var resultado = new List<Vuelo>();
-
-            try
-            {
-                GetConexion(this.nombreBD);
-                var coleccion = basedatos.GetCollection<Vuelo>("Vuelo");
-                resultado = coleccion.Find(d => true).ToList();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return resultado;
-        }
-        #endregion
-
-        #region UPDATE
-        public void ActualizarVuelos (Vuelo vuelo)
-        {
-            var resultado = new List<Vuelo>();
-
-            try
-            {
-                GetConexion(this.nombreBD);
-                var coleccion = basedatos.GetCollection<Vuelo>("Vuelo");
-                basedatos.GetCollection<Vuelo>("Vuelo").ReplaceOne(u => u.Codigo == vuelo.Codigo, vuelo);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        #endregion
-
-        #region DELETE
-        public void EliminarVuelos (string Codigo)
-        {
-
-            try
-            {
-                GetConexion(this.nombreBD);
-                basedatos.GetCollection<Aeronave>("Vuelo").DeleteOne(u => u.Codigo == Codigo);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        #endregion
-
-        #region SEARCH
-        public Vuelo BuscarVuelos (string Codigo)
-        {
-            var resultado = default(Vuelo);
-
-            try
-            {
-                GetConexion(this.nombreBD);
-                var coleccion = basedatos.GetCollection<Vuelo>("Vuelo");
-                resultado = coleccion.Find(u => u.Codigo == Codigo).FirstOrDefault();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return resultado;
+            return usuario;
         }
         #endregion
 

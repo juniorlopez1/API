@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Entidades
 {
-    public class Perfil
+    public class EstadoVuelo
     {
         #region Propiedades
         //Primero instalar nuggets de mongoDB Driver
@@ -17,25 +17,15 @@ namespace Entidades
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
-
-        [BsonElement(nameof(Codigo))]
-        public string Codigo { get; set; }
-
-        [BsonElement(nameof(Tipo))]
-        public string Tipo { get; set; }
-
-        [BsonElement(nameof(Estado))]
-        public string Estado { get; set; }
+ 
 
         #endregion
 
+
         #region Constructor
-        public Perfil()
+        public EstadoVuelo()
         {
             Id = string.Empty;
-            Tipo = string.Empty;
-            Codigo = string.Empty;
-            Estado = string.Empty;
         }
         #endregion
     }
