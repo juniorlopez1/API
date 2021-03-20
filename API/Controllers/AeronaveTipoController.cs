@@ -11,12 +11,12 @@ namespace API.Controllers
     public class AeronaveTipoController : ControllerBase
     {
         #region Implementación de Servicios
-        private readonly IAeronaveTipoService aeronavetiposvc;
+        private readonly IapiAeronaveTipoService aeronavetiposvc;
 
         #endregion
 
         #region Constructor
-        public AeronaveTipoController(IAeronaveTipoService aeronavetiposvc)
+        public AeronaveTipoController(IapiAeronaveTipoService aeronavetiposvc)
         {
             this.aeronavetiposvc = aeronavetiposvc;
         }

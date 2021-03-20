@@ -1,23 +1,21 @@
 ﻿using Datos;
 using Entidades;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Negocios
 {
-    public interface IRegistroService
+    public interface IapiAeronaveTipoService
     {
         #region CREATE
-        void Crear(Registro Registro);
+        void Crear(AeronaveTipo aeronaveTipo);
         #endregion
 
         #region READ
-        List<Registro> Leer();
+        List<AeronaveTipo> Leer();
         #endregion
 
         #region UPDATE
-        void Actualizar(Registro Registro);
+        void Actualizar(AeronaveTipo aeronaveTipo);
         #endregion
 
         #region DELETE
@@ -25,20 +23,20 @@ namespace Negocios
         #endregion
 
         #region SEARCH
-        Registro Buscar(string id);
+        AeronaveTipo Buscar(string id);
         #endregion
     }
 
-    public class RegistroService : IRegistroService
+    public class apiAeronaveTipoService : IapiAeronaveTipoService
     {
         #region Members
         //Establece propiedades para acceso a datos
-        private readonly DatosRegistro accesoDatos;
+        private readonly DatosAeronaveTipo accesoDatos;
         #endregion
 
         #region Constructor
         //Inicializa el servicio
-        public RegistroService(DatosRegistro accesoDatos)
+        public apiAeronaveTipoService(DatosAeronaveTipo accesoDatos)
         {
             this.accesoDatos = accesoDatos;
         }
@@ -47,23 +45,23 @@ namespace Negocios
 
 
         #region CREATE
-        public void Crear(Registro Registro)
+        public void Crear(AeronaveTipo aeronaveTipo)
         {
-            accesoDatos.Crear(Registro);
+            accesoDatos.Crear(aeronaveTipo);
         }
         #endregion
 
         #region READ
-        public List<Registro> Leer()
+        public List<AeronaveTipo> Leer()
         {
             return accesoDatos.Leer();
         }
         #endregion
 
         #region UPDATE
-        public void Actualizar(Registro Registro)
+        public void Actualizar(AeronaveTipo aeronaveTipo)
         {
-            accesoDatos.Actualizar(Registro);
+            accesoDatos.Actualizar(aeronaveTipo);
         }
         #endregion
 
@@ -75,11 +73,10 @@ namespace Negocios
         #endregion
 
         #region SEARCH
-        public Registro Buscar(string id)
+        public AeronaveTipo Buscar(string id)
         {
             return accesoDatos.Buscar(id);
         }
         #endregion
     }
 }
-

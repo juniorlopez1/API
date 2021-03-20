@@ -109,13 +109,13 @@ namespace Acceso
             return resultado;
         }
 
-        protected void Actualizar<T>(string nombreColeccion, Func<T, bool> filtro, T entidad)
+        protected void Actualizar<T>(string nombreColeccion, FilterDefinition<T> filtro, T entidad)
         {
             try
             {
                 GetConexion(this.nombreBD);
                 var coleccion = basedatos.GetCollection<T>(nombreColeccion);
-                basedatos.GetCollection<T>(nombreColeccion).ReplaceOne(u => filtro(u), entidad);
+                coleccion.ReplaceOne(filtro, entidad);
             }
             catch (Exception ex)
             {
@@ -123,12 +123,12 @@ namespace Acceso
             }
         }
 
-        protected void Eliminar<T>(string nombreColeccion, Func<T, bool> filtro)
+        protected void Eliminar<T>(string nombreColeccion, Expression<Func<T, bool>> filtro)
         {
             try
             {
                 GetConexion(this.nombreBD);
-                basedatos.GetCollection<T>(nombreColeccion).DeleteOne(u => filtro(u));
+                basedatos.GetCollection<T>(nombreColeccion).DeleteOne(filtro);
             }
             catch (Exception ex)
             {

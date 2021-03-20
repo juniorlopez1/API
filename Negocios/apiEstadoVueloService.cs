@@ -6,18 +6,18 @@ using System.Text;
 
 namespace Negocios
 {
-    public interface IObservacionService
+    public interface IapiEstadoVueloService
     {
         #region CREATE
-        void Crear(Observacion Observacion);
+        void Crear(EstadoVuelo EstadoVuelo);
         #endregion
 
         #region READ
-        List<Observacion> Leer();
+        List<EstadoVuelo> Leer();
         #endregion
 
         #region UPDATE
-        void Actualizar(Observacion Observacion);
+        void Actualizar(EstadoVuelo EstadoVuelo);
         #endregion
 
         #region DELETE
@@ -25,20 +25,20 @@ namespace Negocios
         #endregion
 
         #region SEARCH
-        Observacion Buscar(string id);
+        EstadoVuelo Buscar(string id);
         #endregion
     }
 
-    public class ObservacionService : IObservacionService
+    public class apiEstadoVueloService : IapiEstadoVueloService
     {
         #region Members
         //Establece propiedades para acceso a datos
-        private readonly DatosObservacion accesoDatos;
+        private readonly DatosEstadoVuelo accesoDatos;
         #endregion
 
         #region Constructor
         //Inicializa el servicio
-        public ObservacionService (DatosObservacion accesoDatos)
+        public apiEstadoVueloService(DatosEstadoVuelo accesoDatos)
         {
             this.accesoDatos = accesoDatos;
         }
@@ -47,23 +47,23 @@ namespace Negocios
 
 
         #region CREATE
-        public void Crear(Observacion Observacion)
+        public void Crear(EstadoVuelo EstadoVuelo)
         {
-            accesoDatos.Crear(Observacion);
+            accesoDatos.Crear(EstadoVuelo);
         }
         #endregion
 
         #region READ
-        public List<Observacion> Leer()
+        public List<EstadoVuelo> Leer()
         {
             return accesoDatos.Leer();
         }
         #endregion
 
         #region UPDATE
-        public void Actualizar(Observacion Observacion)
+        public void Actualizar(EstadoVuelo EstadoVuelo)
         {
-            accesoDatos.Actualizar(Observacion);
+            accesoDatos.Actualizar(EstadoVuelo);
         }
         #endregion
 
@@ -75,7 +75,7 @@ namespace Negocios
         #endregion
 
         #region SEARCH
-        public Observacion Buscar(string id)
+        public EstadoVuelo Buscar(string id)
         {
             return accesoDatos.Buscar(id);
         }

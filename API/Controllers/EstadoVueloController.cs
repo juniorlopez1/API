@@ -20,12 +20,12 @@ namespace API.Controllers
     public class EstadoVueloController : ControllerBase
     {
         #region Implementación de Servicios
-        private readonly IEstadoVueloService estadovuelosvc;
+        private readonly IapiEstadoVueloService estadovuelosvc;
 
         #endregion
 
         #region Constructor
-        public EstadoVueloController(IEstadoVueloService estadovuelosvc)
+        public EstadoVueloController(IapiEstadoVueloService estadovuelosvc)
         {
             this.estadovuelosvc = estadovuelosvc;
         }

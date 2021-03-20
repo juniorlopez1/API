@@ -20,12 +20,12 @@ namespace API.Controllers
     public class ObservacionController : ControllerBase
     {
         #region Implementación de Servicios
-        private readonly IObservacionService observacionsvc;
+        private readonly IapiObservacionService observacionsvc;
 
         #endregion
 
         #region Constructor
-        public ObservacionController(IObservacionService observacionsvc)
+        public ObservacionController(IapiObservacionService observacionsvc)
         {
             this.observacionsvc = observacionsvc;
         }

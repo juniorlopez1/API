@@ -20,12 +20,12 @@ namespace API.Controllers
     public class AeronaveController : ControllerBase
     {
         #region Implementación de Servicios
-        private readonly IAeronaveService aeronavesvc;
+        private readonly IapiAeronaveService aeronavesvc;
 
         #endregion
 
         #region Constructor
-        public AeronaveController (IAeronaveService aeronaveService)
+        public AeronaveController (IapiAeronaveService aeronaveService)
         {
             this.aeronavesvc = aeronaveService;
         }

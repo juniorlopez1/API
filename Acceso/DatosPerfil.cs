@@ -1,5 +1,6 @@
 ﻿using Acceso;
 using Entidades;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -37,7 +38,8 @@ namespace Datos
         #region UPDATE
         public void Actualizar(Perfil Perfil)
         {
-            Actualizar<Perfil>(nameof(Perfil), (u) => u.Id == u.Id, Perfil);
+            var filter = Builders<Perfil>.Filter.Eq(x => x.Id, Perfil.Id);
+            Actualizar<Perfil>(nameof(Perfil), filter, Perfil);
         }
         #endregion
 

@@ -20,12 +20,12 @@ namespace API.Controllers
     public class PerfilController : ControllerBase
     {
         #region Implementación de Servicios
-        private readonly IPerfilService perfilsvc;
+        private readonly IapiPerfilService perfilsvc;
 
         #endregion
 
         #region Constructor
-        public PerfilController (IPerfilService perfilService)
+        public PerfilController (IapiPerfilService perfilService)
         {
             this.perfilsvc = perfilService;
         }
@@ -66,7 +66,9 @@ namespace API.Controllers
         [HttpDelete("{codigo}", Name = "DeletePerfil")]
         public IActionResult Delete(string codigo)
         {
-            perfilsvc.Eliminar(codigo);
+            var perfil = perfilsvc.Buscar(codigo);
+            perfil.Estado = false;
+            perfilsvc.Actualizar(perfil);
             return NoContent();
         }
         #endregion

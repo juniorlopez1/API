@@ -10,16 +10,16 @@ namespace Negocios
 
 
     //-------------------------Servicio -------------------------
-    public class PerfilService : IPerfilService
+    public class apiUsuarioService : IapiUsuarioService
     {
         #region Members
         //Establece propiedades para acceso a datos
-        private readonly DatosPerfil accesoDatos;
+        private readonly DatosUsuario accesoDatos;
         #endregion
 
         #region Constructor
         //Inicializa el servicio
-        public PerfilService(DatosPerfil accesoDatos)
+        public apiUsuarioService (DatosUsuario accesoDatos)
         {
             this.accesoDatos = accesoDatos;
         }
@@ -28,23 +28,23 @@ namespace Negocios
 
 
         #region CREATE
-        public void Crear(Perfil Perfil)
+        public void Crear(Usuario Usuario)
         {
-            accesoDatos.Crear(Perfil);
+            accesoDatos.Crear(Usuario);
         }
         #endregion
 
         #region READ
-        public List<Perfil> Leer()
+        public List<Usuario> Leer()
         {
             return accesoDatos.Leer();
         }
         #endregion
 
         #region UPDATE
-        public void Actualizar(Perfil Perfil)
+        public void Actualizar(Usuario Usuario)
         {
-            accesoDatos.Actualizar(Perfil);
+            accesoDatos.Actualizar(Usuario);
         }
         #endregion
 
@@ -56,7 +56,7 @@ namespace Negocios
         #endregion
 
         #region SEARCH
-        public Perfil Buscar(string Codigo)
+        public Usuario Buscar(string Codigo)
         {
             return accesoDatos.Buscar(Codigo);
         }
@@ -72,20 +72,20 @@ namespace Negocios
 
 
     //-------------------------Interfaz -------------------------
-    public interface IPerfilService
+    public interface IapiUsuarioService
     {
         //Metodos exponen el servicio atraves de la interfaz
 
         #region CREATE
-        void Crear(Perfil Perfil);
+        void Crear(Usuario Usuario);
         #endregion
 
         #region READ
-        List<Perfil> Leer();
+        List<Usuario> Leer();
         #endregion
 
         #region UPDATE
-        void Actualizar(Perfil Perfil);
+        void Actualizar(Usuario Usuario);
         #endregion
 
         #region DELETE
@@ -93,8 +93,9 @@ namespace Negocios
         #endregion
 
         #region SEARCH
-        Perfil Buscar(string Codigo);
+        Usuario Buscar(string Codigo);
         #endregion
 
     }
 }
+

@@ -32,6 +32,18 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //CORS para que un dominio distinto se pueda accesar
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "DefaultCorsPolicy",
+                                  builder =>
+                                  {
+                                      builder.AllowAnyOrigin()
+                                             .AllowAnyMethod()
+                                             .AllowAnyHeader();
+                                  });
+            });
+
 
             #region string conexion mongodb
             //Obtiene configuracion de db y connection string
@@ -46,13 +58,13 @@ namespace API
 
             #region region para agregar servicios
             //Se agrega la interfaz y servicio respectivo
-            services.AddScoped<IAeronaveService, AeronaveService>();
-            services.AddScoped<IAeronaveTipoService, AeronaveTipoService>();
-            services.AddScoped<IEstadoVueloService, EstadoVueloService>();
-            services.AddScoped<IObservacionService, ObservacionService>();
-            services.AddScoped<IPerfilService, PerfilService>();
-            services.AddScoped<IRegistroService, RegistroService > ();
-            services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IapiAeronaveService, apiAeronaveService>();
+            services.AddScoped<IapiAeronaveTipoService, apiAeronaveTipoService>();
+            services.AddScoped<IapiEstadoVueloService, apiEstadoVueloService>();
+            services.AddScoped<IapiObservacionService, apiObservacionService>();
+            services.AddScoped<IapiPerfilService, apiPerfilService>();
+            services.AddScoped<IapiRegistroService, apiRegistroService > ();
+            services.AddScoped<IapiUsuarioService, apiUsuarioService>();
 
             //Se enlaza con la capa de acceso a datos y base de datos
             services.AddScoped((factory) => new DatosAeronave(conexionString, nombreBD));
@@ -78,6 +90,9 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            //CORS para que un dominio distinto se pueda accesar
+            app.UseCors("DefaultCorsPolicy");
 
             app.UseAuthorization();
 

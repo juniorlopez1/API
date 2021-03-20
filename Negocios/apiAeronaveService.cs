@@ -1,8 +1,8 @@
-﻿using Datos;
+﻿
+using Datos;
 using Entidades;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Negocios
 {
@@ -10,16 +10,16 @@ namespace Negocios
 
 
     //-------------------------Servicio -------------------------
-    public class UsuarioService : IUsuarioService
+    public class apiAeronaveService : IapiAeronaveService
     {
         #region Members
         //Establece propiedades para acceso a datos
-        private readonly DatosUsuario accesoDatos;
+        private readonly DatosAeronave accesoDatos;
         #endregion
 
         #region Constructor
         //Inicializa el servicio
-        public UsuarioService (DatosUsuario accesoDatos)
+        public apiAeronaveService(DatosAeronave accesoDatos)
         {
             this.accesoDatos = accesoDatos;
         }
@@ -28,35 +28,35 @@ namespace Negocios
 
 
         #region CREATE
-        public void Crear(Usuario Usuario)
+        public void Crear (Aeronave aeronave)
         {
-            accesoDatos.Crear(Usuario);
+            accesoDatos.Crear(aeronave);
         }
         #endregion
 
         #region READ
-        public List<Usuario> Leer()
+        public List<Aeronave> Leer()
         {
             return accesoDatos.Leer();
         }
         #endregion
 
         #region UPDATE
-        public void Actualizar(Usuario Usuario)
+        public void Actualizar (Aeronave aeronave)
         {
-            accesoDatos.Actualizar(Usuario);
+            accesoDatos.Actualizar(aeronave);
         }
         #endregion
 
         #region DELETE
-        public void Eliminar(string Codigo)
+        public void Eliminar (string Codigo)
         {
             accesoDatos.Eliminar(Codigo);
         }
         #endregion
 
         #region SEARCH
-        public Usuario Buscar(string Codigo)
+        public Aeronave Buscar (string Codigo)
         {
             return accesoDatos.Buscar(Codigo);
         }
@@ -72,20 +72,20 @@ namespace Negocios
 
 
     //-------------------------Interfaz -------------------------
-    public interface IUsuarioService
+    public interface IapiAeronaveService
     {
         //Metodos exponen el servicio atraves de la interfaz
 
         #region CREATE
-        void Crear(Usuario Usuario);
+        void Crear (Aeronave aeronave);
         #endregion
 
         #region READ
-        List<Usuario> Leer();
+        List<Aeronave> Leer();
         #endregion
 
         #region UPDATE
-        void Actualizar(Usuario Usuario);
+        void Actualizar(Aeronave aeronave);
         #endregion
 
         #region DELETE
@@ -93,9 +93,8 @@ namespace Negocios
         #endregion
 
         #region SEARCH
-        Usuario Buscar(string Codigo);
+        Aeronave Buscar(string Codigo);
         #endregion
 
     }
 }
-

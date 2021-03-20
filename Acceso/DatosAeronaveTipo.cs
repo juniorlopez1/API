@@ -1,5 +1,6 @@
 ﻿using Acceso;
 using Entidades;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -36,7 +37,8 @@ namespace Datos
         #region UPDATE
         public void Actualizar(AeronaveTipo aeronaveTipo)
         {
-            Actualizar<AeronaveTipo>(nameof(AeronaveTipo), (u) => u.Id == u.Id, aeronaveTipo);
+            var filter = Builders<AeronaveTipo>.Filter.Eq(x => x.Id, aeronaveTipo.Id);
+            Actualizar<AeronaveTipo>(nameof(AeronaveTipo), filter, aeronaveTipo);
         }
         #endregion
 

@@ -21,12 +21,12 @@ namespace API.Controllers
     public class UsuarioController : ControllerBase
     {
         #region Implementación de Servicios
-        private readonly IUsuarioService usuariosvc;
+        private readonly IapiUsuarioService usuariosvc;
 
         #endregion
 
         #region Constructor
-        public UsuarioController(IUsuarioService usuarioService)
+        public UsuarioController(IapiUsuarioService usuarioService)
         {
             this.usuariosvc = usuarioService;
         }
