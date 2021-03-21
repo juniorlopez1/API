@@ -14,10 +14,17 @@ namespace Web.Models
         public DateTime Salida { get; set; }
 
         //Otras entidades
-        public AeronaveViewModel AeronaveViewModel { get; set; }
+        public AeronaveViewModel Aeronave { get; set; }
 
-        public EstadoVueloViewModel EstadoVueloViewModel { get; set; }
+        public EstadoVueloViewModel EstadoVuelo { get; set; }
 
-        public ObservacionViewModel ObservacionViewModel { get; set; }
+        public ObservacionViewModel Observacion { get; set; }
+
+        public RegistroViewModel()
+        {
+            Aeronave = new AeronaveViewModel();
+            EstadoVuelo = new EstadoVueloViewModel();
+            Observacion = new ObservacionViewModel();
+        }
     }
 }

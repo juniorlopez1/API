@@ -74,6 +74,36 @@ namespace Web.Controllers
         }
         #endregion
 
+        #region Login
+        [HttpGet]
+        public IActionResult Login()
+        {
+            var credenciales = new CredencialesViewModel();
+            return View(credenciales);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Autenticar(CredencialesViewModel credenciales)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Login", credenciales);
+            }
+
+            var usuario = await servicio.Autenticar(credenciales);
+            
+            if(usuario == null)
+            {
+                ModelState.AddModelError("", "Nombre de usuario o contraseña invalidos");
+                return View("Login", credenciales);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+        #endregion
+
         #endregion
     }
 }

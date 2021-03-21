@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,21 @@ namespace Web.Controllers
     public class RegistroController : Controller
     {
         #region Miembros
-        private readonly IRegistroService servicio;
+        private readonly IRegistroService servicioRegistro;
+        private readonly IEstadoVueloService servicioVuelo;
+        private readonly IObservacionService servicioObservacion;
+        private readonly IAeronaveService servicioAeronave;
+
         #endregion
 
         #region Constructor
-        public RegistroController(IRegistroService servicio)
+        public RegistroController(IRegistroService servicioRegistro, IEstadoVueloService servicioVuelo, IObservacionService servicioObservacion, IAeronaveService servicioAeronave)
         {
-            this.servicio = servicio;
+            this.servicioRegistro = servicioRegistro;
+            this.servicioVuelo = servicioVuelo;
+            this.servicioObservacion = servicioObservacion;
+            this.servicioAeronave = servicioAeronave;
+           
         }
         #endregion
 
@@ -27,7 +36,7 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Lista()
         {
-            var view = await servicio.Listar();
+            var view = await servicioRegistro.Listar();
             return View(view);
         }
         #endregion
@@ -36,20 +45,59 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Editar(string codigo)
         {
-            var view = await servicio.Buscar(codigo);
+
+            #region dropdowns
+            ViewBag.ListaEstadoVuelo = (await servicioVuelo.Listar()).Select(p => new SelectListItem()
+            {
+                Text = p.Descripcion,
+                Value = p.Codigo.ToString()
+            }).ToList();
+
+            ViewBag.ListaAeronave = (await servicioAeronave.Listar()).Select(p => new SelectListItem()
+            {
+                Text = p.Codigo,
+                Value = p.Codigo.ToString()
+            }).ToList();
+
+            ViewBag.ListaObservacion = (await servicioObservacion.Listar()).Select(p => new SelectListItem()
+            {
+                Text = p.Descripcion,
+                Value = p.Codigo.ToString()
+            }).ToList();
+            #endregion
+
+
+            RegistroViewModel view = null;
+
+            if (string.IsNullOrEmpty(codigo))
+            {
+                view = new RegistroViewModel();
+            }
+            else
+            {
+                view = await servicioRegistro.Buscar(codigo);
+            }
+
             return View(view);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Guardar(RegistroViewModel var)
+        public async Task<IActionResult> Guardar(RegistroViewModel entidad)
         {
-            if (string.IsNullOrEmpty(var.Id))
+            #region dropdowns que obtienen info
+            entidad.Aeronave = await servicioAeronave.Buscar(entidad.Aeronave.Codigo);
+            entidad.Observacion = await servicioObservacion.Buscar(entidad.Observacion.Codigo);
+            entidad.EstadoVuelo = await servicioVuelo.Buscar(entidad.EstadoVuelo.Codigo); 
+            #endregion
+
+
+            if (string.IsNullOrEmpty(entidad.Id))
             {
-                await servicio.Crear(var);
+                await servicioRegistro.Crear(entidad);
             }
             else
             {
-                await servicio.Actualizar(var);
+                await servicioRegistro.Actualizar(entidad);
             }
 
             return RedirectToAction("Lista");
@@ -60,7 +108,7 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Buscar(string codigo)
         {
-            var perfil = await servicio.Buscar(codigo);
+            var perfil = await servicioRegistro.Buscar(codigo);
             return View(perfil);
         }
         #endregion
@@ -69,7 +117,7 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Eliminar(string codigo)
         {
-            await servicio.Eliminar(codigo);
+            await servicioRegistro.Eliminar(codigo);
             return RedirectToAction("Lista");
         }
         #endregion

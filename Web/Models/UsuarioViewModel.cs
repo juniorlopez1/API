@@ -22,6 +22,6 @@ namespace Web.Models
         public bool Estado { get; set; }
 
         //Otras entidades
-        public PerfilViewModel PerfilViewModel { get; set; }
+        public PerfilViewModel Perfil { get; set; }
     }
 }

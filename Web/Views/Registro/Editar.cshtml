@@ -1,0 +1,72 @@
+﻿@model Web.Models.RegistroViewModel
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<h1>Editar</h1>
+
+<h4>RegistroViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Guardar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type ="hidden" asp-for="Id" class="form-control" />
+            <div class="form-group">
+                <label asp-for="Ingreso" class="control-label"></label>
+                <input asp-for="Ingreso" class="form-control" />
+                <span asp-validation-for="Ingreso" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Salida" class="control-label"></label>
+                <input asp-for="Salida" class="form-control" />
+                <span asp-validation-for="Salida" class="text-danger"></span>
+            </div>
+
+            @*drop down 1*@
+            <div class="form-group">
+                <label class="control-label">Aeronave</label>
+                <div class="form-group">
+                    <div class="checkbox">
+                        @Html.DropDownListFor(m => m.Aeronave.Codigo, (IEnumerable<SelectListItem>)ViewBag.ListaAeronave, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+            @*drop down 2*@
+            <div class="form-group">
+                <label class="control-label">Estado de vuelo</label>
+                <div class="form-group">
+                    <div class="checkbox">
+                        @Html.DropDownListFor(m => m.EstadoVuelo.Codigo, (IEnumerable<SelectListItem>)ViewBag.ListaEstadoVuelo, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+            @* drop down 3 *@
+            <div class="form-group">
+                <label class="control-label">Observaciones de vuelo</label>
+                <div class="form-group">
+                    <div class="checkbox">
+                        @Html.DropDownListFor(m => m.Observacion.Codigo, (IEnumerable<SelectListItem>)ViewBag.ListaObservacion, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Lista">Regresar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

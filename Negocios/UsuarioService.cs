@@ -25,8 +25,6 @@ namespace Negocios
         }
         #endregion
 
-
-
         #region CREATE
         public void Crear(Usuario Usuario)
         {
@@ -59,6 +57,11 @@ namespace Negocios
         public Usuario Buscar(string Codigo)
         {
             return accesoDatos.Buscar(Codigo);
+        }
+
+        public Usuario BuscarPonombreUsuarioContrasena(string nombreUsuario, string contrasenna)
+        {
+            return accesoDatos.BuscarPorNombreUsuarioContrasena(nombreUsuario, contrasenna);
         }
         #endregion
     }
@@ -94,6 +97,9 @@ namespace Negocios
 
         #region SEARCH
         Usuario Buscar(string Codigo);
+
+        Usuario BuscarPonombreUsuarioContrasena(string nombreUsuario, string contrasenna);
+
         #endregion
 
     }

@@ -23,6 +23,8 @@ namespace Web.Servicios
         //SEARCH
         Task<UsuarioViewModel> Buscar(string codigo);
 
+        Task<UsuarioViewModel> Autenticar(CredencialesViewModel credenciales);
+        
     }
 
     public class UsuarioService : ServicioBase, IUsuarioService
@@ -71,6 +73,11 @@ namespace Web.Servicios
         public async Task<UsuarioViewModel> Buscar(string codigo)
         {
             return await GetAsync<UsuarioViewModel>($"usuario/{codigo}").ConfigureAwait(false);
+        }
+
+        public async Task<UsuarioViewModel> Autenticar(CredencialesViewModel credenciales)
+        {
+            return await PostAsync<CredencialesViewModel, UsuarioViewModel>("autenticar", credenciales);
         }
         #endregion
 

@@ -85,6 +85,21 @@ namespace API.Controllers
                 return Ok(usuario);
             }
         }
+
+        [HttpPost(Name = "autenticar")]
+        public IActionResult Autenticar(Credenciales credenciales)
+        {
+            var usuario = usuariosvc.BuscarPonombreUsuarioContrasena(credenciales.NombreUsuario, credenciales.Contrasena);
+
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(usuario);
+            }
+        }
         #endregion
 
         #endregion

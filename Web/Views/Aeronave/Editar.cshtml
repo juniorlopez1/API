@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Editar">
+        <form asp-action="Guardar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" class="form-control" />
             <div class="form-group">
@@ -24,10 +24,10 @@
                 <span asp-validation-for="Capacidad" class="text-danger"></span>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.AeronaveTipoViewModel.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                @Html.LabelFor(model => model.AeronaveTipo.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="form-group">
                     <div class="checkbox">
-                        @Html.DropDownListFor(m => m.Id, (IEnumerable<SelectListItem>)ViewBag.ListaAeronaveTipo, new { })
+                        @Html.DropDownListFor(m => m.AeronaveTipo.Codigo, (IEnumerable<SelectListItem>)ViewBag.ListaAeronaveTipo, new { @class = "form-control"})
                     </div>
                 </div>
             </div>

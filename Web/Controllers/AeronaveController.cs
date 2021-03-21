@@ -63,6 +63,8 @@ namespace Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Guardar(AeronaveViewModel entidad)
         {
+            entidad.AeronaveTipo = await servicioaeronavetipo.Buscar(entidad.AeronaveTipo.Codigo);       
+
             if (string.IsNullOrEmpty(entidad.Id))
             {
                 await servicio.Crear(entidad);

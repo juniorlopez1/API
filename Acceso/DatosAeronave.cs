@@ -52,7 +52,7 @@ namespace Datos
         #region SEARCH
         public Aeronave Buscar(string Codigo)
         {
-            return Buscar<Aeronave>(nameof(Aeronave), (u) => u.Id == Codigo);
+            return Buscar<Aeronave>(nameof(Aeronave), (u) => u.Codigo == Codigo);
         }
         #endregion 
 

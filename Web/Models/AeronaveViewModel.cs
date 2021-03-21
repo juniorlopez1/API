@@ -16,6 +16,11 @@ namespace Web.Models
         public int Capacidad { get; set; }
 
         //Otras entidades
-        public AeronaveTipoViewModel AeronaveTipoViewModel { get; set; }
+        public AeronaveTipoViewModel AeronaveTipo { get; set; }
+
+        public AeronaveViewModel()
+        {
+            AeronaveTipo = new AeronaveTipoViewModel();
+        }
     }
 }

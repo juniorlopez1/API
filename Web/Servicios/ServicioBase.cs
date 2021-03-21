@@ -33,6 +33,21 @@ namespace Web.Servicios
             using var httpResponse = await client.PostAsJsonAsync($"{baseUrl}/{uri}", entidad);
         }
 
+        protected async Task<R> PostAsync<T,R>(string uri, T entidad)
+        {
+            var client = HttpClientFactory.Create();
+
+            using var httpResponse = await client.PostAsJsonAsync($"{baseUrl}/{uri}", entidad);
+
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                return default;
+            }
+
+            var content = await httpResponse.Content.ReadAsStreamAsync();
+            return DeserializeContent<R>(content);
+        }
+
         protected async Task PutAsync<T>(string uri, T entidad)
         {
             var client = HttpClientFactory.Create();

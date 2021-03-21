@@ -56,6 +56,11 @@ namespace Datos
         }
         #endregion 
 
+        public Usuario BuscarPorNombreUsuarioContrasena(string nombreUsuario, string contrasenna)
+        {
+            return Buscar<Usuario>(nameof(Usuario), (u) => u.NombreUsuario == nombreUsuario && u.Contrasena == contrasenna);
+        }
+
 
         #endregion
     }

@@ -31,8 +31,8 @@ namespace Entidades
         [BsonElement(nameof(EstadoVuelo))]
         public EstadoVuelo EstadoVuelo { get; set; }
 
-        [BsonElement(nameof(Observaciones))]
-        public Observacion Observaciones { get; set; }
+        [BsonElement(nameof(Observacion))]
+        public Observacion Observacion { get; set; }
         #endregion
 
 
@@ -45,7 +45,7 @@ namespace Entidades
             Salida = DateTime.MinValue;
             Aeronave = new Aeronave ();
             EstadoVuelo = new EstadoVuelo();
-            Observaciones = new Observacion();
+            Observacion = new Observacion();
         }
         #endregion
     }
