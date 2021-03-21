@@ -6,7 +6,7 @@ using Web.Models;
 
 namespace Web.Servicios
 {
-    public interface IwebPerfilService
+    public interface IPerfilService
     {
 
         #region CRUD
@@ -30,12 +30,12 @@ namespace Web.Servicios
 
     }
 
-    public class webPerfilService : webBaseService, IwebPerfilService
+    public class PerfilService : ServicioBase, IPerfilService
         //Hereda del servicio base e implementa la interfaz correspondiente
 
     {
         #region Constructor
-        public webPerfilService(string baseUrl)
+        public PerfilService(string baseUrl)
     : base(baseUrl)
         {
             //Constructor con la base URL

@@ -6,18 +6,18 @@ using System.Text;
 
 namespace Negocios
 {
-    public interface IapiEstadoVueloService
+    public interface IObservacionService
     {
         #region CREATE
-        void Crear(EstadoVuelo EstadoVuelo);
+        void Crear(Observacion Observacion);
         #endregion
 
         #region READ
-        List<EstadoVuelo> Leer();
+        List<Observacion> Leer();
         #endregion
 
         #region UPDATE
-        void Actualizar(EstadoVuelo EstadoVuelo);
+        void Actualizar(Observacion Observacion);
         #endregion
 
         #region DELETE
@@ -25,20 +25,20 @@ namespace Negocios
         #endregion
 
         #region SEARCH
-        EstadoVuelo Buscar(string id);
+        Observacion Buscar(string id);
         #endregion
     }
 
-    public class apiEstadoVueloService : IapiEstadoVueloService
+    public class ObservacionService : IObservacionService
     {
         #region Members
         //Establece propiedades para acceso a datos
-        private readonly DatosEstadoVuelo accesoDatos;
+        private readonly DatosObservacion accesoDatos;
         #endregion
 
         #region Constructor
         //Inicializa el servicio
-        public apiEstadoVueloService(DatosEstadoVuelo accesoDatos)
+        public ObservacionService (DatosObservacion accesoDatos)
         {
             this.accesoDatos = accesoDatos;
         }
@@ -47,37 +47,37 @@ namespace Negocios
 
 
         #region CREATE
-        public void Crear(EstadoVuelo EstadoVuelo)
+        public void Crear(Observacion Observacion)
         {
-            accesoDatos.Crear(EstadoVuelo);
+            accesoDatos.Crear(Observacion);
         }
         #endregion
 
         #region READ
-        public List<EstadoVuelo> Leer()
+        public List<Observacion> Leer()
         {
             return accesoDatos.Leer();
         }
         #endregion
 
         #region UPDATE
-        public void Actualizar(EstadoVuelo EstadoVuelo)
+        public void Actualizar(Observacion Observacion)
         {
-            accesoDatos.Actualizar(EstadoVuelo);
+            accesoDatos.Actualizar(Observacion);
         }
         #endregion
 
         #region DELETE
-        public void Eliminar(string id)
+        public void Eliminar(string Codigo)
         {
-            accesoDatos.Eliminar(id);
+            accesoDatos.Eliminar(Codigo);
         }
         #endregion
 
         #region SEARCH
-        public EstadoVuelo Buscar(string id)
+        public Observacion Buscar(string Codigo)
         {
-            return accesoDatos.Buscar(id);
+            return accesoDatos.Buscar(Codigo);
         }
         #endregion
     }

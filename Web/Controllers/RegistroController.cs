@@ -11,11 +11,11 @@ namespace Web.Controllers
     public class RegistroController : Controller
     {
         #region Miembros
-        private readonly IwebRegistroService servicio;
+        private readonly IRegistroService servicio;
         #endregion
 
         #region Constructor
-        public RegistroController(IwebRegistroService servicio)
+        public RegistroController(IRegistroService servicio)
         {
             this.servicio = servicio;
         }

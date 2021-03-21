@@ -10,8 +10,7 @@ namespace Datos
     public class DatosAeronaveTipo : AccesoDatosBase
     {
         #region Constructor
-        public DatosAeronaveTipo(string cadenaConexion, string nombreBD)
-    : base(cadenaConexion, nombreBD)
+        public DatosAeronaveTipo(string cadenaConexion, string nombreBD) : base(cadenaConexion, nombreBD)
         {
 
         }
@@ -37,22 +36,22 @@ namespace Datos
         #region UPDATE
         public void Actualizar(AeronaveTipo aeronaveTipo)
         {
-            var filter = Builders<AeronaveTipo>.Filter.Eq(x => x.Id, aeronaveTipo.Id);
+            var filter = Builders<AeronaveTipo>.Filter.Eq(x => x.Codigo, aeronaveTipo.Codigo);
             Actualizar<AeronaveTipo>(nameof(AeronaveTipo), filter, aeronaveTipo);
         }
         #endregion
 
         #region DELETE
-        public void Eliminar(string id)
+        public void Eliminar(string Codigo)
         {
-            Eliminar<AeronaveTipo>(nameof(AeronaveTipo), (u) => u.Id == id);
+            Eliminar<AeronaveTipo>(nameof(AeronaveTipo), (u) => u.Codigo == Codigo);
         }
         #endregion
 
         #region SEARCH
-        public AeronaveTipo Buscar(string id)
+        public AeronaveTipo Buscar(string Codigo)
         {
-            return Buscar<AeronaveTipo>(nameof(AeronaveTipo), (u) => u.Id == id);
+            return Buscar<AeronaveTipo>(nameof(AeronaveTipo), (u) => u.Codigo == Codigo);
         }
         #endregion 
 

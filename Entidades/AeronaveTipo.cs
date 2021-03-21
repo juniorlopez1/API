@@ -21,6 +21,9 @@ namespace Entidades
         [BsonElement(nameof(Descripcion))]
         public string Descripcion { get; set; }
 
+        [BsonElement(nameof(Estado))]
+        public bool Estado { get; set; }
+
         [BsonElement(nameof(Codigo))]
         public string Codigo { get; set; }
 

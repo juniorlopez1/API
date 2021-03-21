@@ -7,7 +7,7 @@
 <h1>Lista</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Editar">Crear Aeronave</a>
 </p>
 <table class="table">
     <thead>
@@ -20,6 +20,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Capacidad)
+            </th>
+            <th>
+                Tipo Aeronave
             </th>
             <th></th>
         </tr>
@@ -37,9 +40,11 @@
                 @Html.DisplayFor(modelItem => item.Capacidad)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.DisplayFor(modelItem => item.AeronaveTipoViewModel.Descripcion)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Editar", new { codigo = item.Codigo }) |
+                @Html.ActionLink("Editar", "Editar", new { codigo = item.Codigo }) |
             </td>
         </tr>
 }

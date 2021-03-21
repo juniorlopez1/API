@@ -6,7 +6,7 @@ using Web.Models;
 
 namespace Web.Servicios
 {
-    public interface IwebAeronaveService
+    public interface IAeronaveService
     {
         //CREATE
         Task Crear(AeronaveViewModel aeronave);
@@ -25,12 +25,12 @@ namespace Web.Servicios
 
     }
 
-    public class webAeronaveService : webBaseService, IwebAeronaveService
+    public class AeronaveService : ServicioBase, IAeronaveService
     //Hereda del servicio base e implementa la interfaz correspondiente
 
     {
         #region Constructor
-        public webAeronaveService(string baseUrl)
+        public AeronaveService(string baseUrl)
     : base(baseUrl)
         {
             //Constructor con la base URL

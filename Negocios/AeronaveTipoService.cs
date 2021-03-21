@@ -1,44 +1,42 @@
 ﻿using Datos;
 using Entidades;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Negocios
 {
-    public interface IapiObservacionService
+    public interface IAeronaveTipoService
     {
         #region CREATE
-        void Crear(Observacion Observacion);
+        void Crear(AeronaveTipo aeronaveTipo);
         #endregion
 
         #region READ
-        List<Observacion> Leer();
+        List<AeronaveTipo> Leer();
         #endregion
 
         #region UPDATE
-        void Actualizar(Observacion Observacion);
+        void Actualizar(AeronaveTipo aeronaveTipo);
         #endregion
 
         #region DELETE
-        void Eliminar(string id);
+        void Eliminar(string Codigo);
         #endregion
 
         #region SEARCH
-        Observacion Buscar(string id);
+        AeronaveTipo Buscar(string id);
         #endregion
     }
 
-    public class apiObservacionService : IapiObservacionService
+    public class AeronaveTipoService : IAeronaveTipoService
     {
         #region Members
         //Establece propiedades para acceso a datos
-        private readonly DatosObservacion accesoDatos;
+        private readonly DatosAeronaveTipo accesoDatos;
         #endregion
 
         #region Constructor
         //Inicializa el servicio
-        public apiObservacionService (DatosObservacion accesoDatos)
+        public AeronaveTipoService(DatosAeronaveTipo accesoDatos)
         {
             this.accesoDatos = accesoDatos;
         }
@@ -47,37 +45,37 @@ namespace Negocios
 
 
         #region CREATE
-        public void Crear(Observacion Observacion)
+        public void Crear(AeronaveTipo aeronaveTipo)
         {
-            accesoDatos.Crear(Observacion);
+            accesoDatos.Crear(aeronaveTipo);
         }
         #endregion
 
         #region READ
-        public List<Observacion> Leer()
+        public List<AeronaveTipo> Leer()
         {
             return accesoDatos.Leer();
         }
         #endregion
 
         #region UPDATE
-        public void Actualizar(Observacion Observacion)
+        public void Actualizar(AeronaveTipo aeronaveTipo)
         {
-            accesoDatos.Actualizar(Observacion);
+            accesoDatos.Actualizar(aeronaveTipo);
         }
         #endregion
 
         #region DELETE
-        public void Eliminar(string id)
+        public void Eliminar(string Codigo)
         {
-            accesoDatos.Eliminar(id);
+            accesoDatos.Eliminar(Codigo);
         }
         #endregion
 
         #region SEARCH
-        public Observacion Buscar(string id)
+        public AeronaveTipo Buscar(string Codigo)
         {
-            return accesoDatos.Buscar(id);
+            return accesoDatos.Buscar(Codigo);
         }
         #endregion
     }

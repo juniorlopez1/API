@@ -20,12 +20,12 @@ namespace API.Controllers
     public class RegistroController : ControllerBase
     {
         #region Implementación de Servicios
-        private readonly IapiRegistroService registrosvc;
+        private readonly IRegistroService registrosvc;
 
         #endregion
 
         #region Constructor
-        public RegistroController(IapiRegistroService registrosvc)
+        public RegistroController(IRegistroService registrosvc)
         {
             this.registrosvc = registrosvc;
         }

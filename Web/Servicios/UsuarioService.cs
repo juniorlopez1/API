@@ -6,7 +6,7 @@ using Web.Models;
 
 namespace Web.Servicios
 {
-    public interface IwebUsuarioService
+    public interface IUsuarioService
     {
         //CREATE
         Task Crear(UsuarioViewModel usuario);
@@ -25,12 +25,12 @@ namespace Web.Servicios
 
     }
 
-    public class webUsuarioService : webBaseService, IwebUsuarioService
+    public class UsuarioService : ServicioBase, IUsuarioService
     //Hereda del servicio base e implementa la interfaz correspondiente
 
     {
         #region Constructor
-        public webUsuarioService(string baseUrl)
+        public UsuarioService(string baseUrl)
     : base(baseUrl)
         {
             //Constructor con la base URL

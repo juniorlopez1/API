@@ -20,12 +20,12 @@ namespace API.Controllers
     public class EstadoVueloController : ControllerBase
     {
         #region Implementación de Servicios
-        private readonly IapiEstadoVueloService estadovuelosvc;
+        private readonly IEstadoVueloService estadovuelosvc;
 
         #endregion
 
         #region Constructor
-        public EstadoVueloController(IapiEstadoVueloService estadovuelosvc)
+        public EstadoVueloController(IEstadoVueloService estadovuelosvc)
         {
             this.estadovuelosvc = estadovuelosvc;
         }
@@ -40,7 +40,7 @@ namespace API.Controllers
         public IActionResult Create(EstadoVuelo EstadoVuelo)
         {
             estadovuelosvc.Crear(EstadoVuelo);
-            return CreatedAtRoute("SearchEstadoVuelo", new { codigo = EstadoVuelo.Id }, EstadoVuelo);
+            return CreatedAtRoute("SearchEstadoVuelo", new { codigo = EstadoVuelo.Codigo }, EstadoVuelo);
         }
         #endregion
 
@@ -58,7 +58,7 @@ namespace API.Controllers
         public IActionResult Update(EstadoVuelo EstadoVuelo)
         {
             estadovuelosvc.Actualizar(EstadoVuelo);
-            return CreatedAtRoute("SearchEstadoVuelo", new { codigo = EstadoVuelo.Id }, EstadoVuelo);
+            return CreatedAtRoute("SearchEstadoVuelo", new { codigo = EstadoVuelo.Codigo }, EstadoVuelo);
         }
         #endregion
 

@@ -11,11 +11,11 @@ namespace Web.Controllers
     public class AeronaveTipoController : Controller
     {
         #region Miembros
-        private readonly IwebAeronaveTipoService servicio;
+        private readonly IAeronaveTipoService servicio;
         #endregion
 
         #region Constructor
-        public AeronaveTipoController(IwebAeronaveTipoService servicio)
+        public AeronaveTipoController(IAeronaveTipoService servicio)
         {
             this.servicio = servicio;
         }
@@ -39,7 +39,16 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Editar(string codigo)
         {
-            var view = await servicio.Buscar(codigo);
+            AeronaveTipoViewModel view = null;
+
+            if (string.IsNullOrWhiteSpace(codigo))
+            {
+                view = new AeronaveTipoViewModel();
+            }
+            else
+            {
+                view = await servicio.Buscar(codigo);
+            }
             return View(view);
         }
 

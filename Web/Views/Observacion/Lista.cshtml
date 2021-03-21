@@ -7,7 +7,7 @@
 <h1>Lista</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Editar">Crear observacion para registro</a>
 </p>
 <table class="table">
     <thead>
@@ -24,11 +24,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
+            @Html.ActionLink("Editar", "Editar", new { codigo = item.Codigo }) |
+            @Html.ActionLink("Editar", "Editar", new { codigo = item.Codigo }) |
         </tr>
 }
     </tbody>

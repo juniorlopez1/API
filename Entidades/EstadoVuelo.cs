@@ -18,6 +18,10 @@ namespace Entidades
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
+        [BsonElement(nameof(Codigo))]
+        public string Codigo { get; set; }
+
+        [BsonElement(nameof(Descripcion))]
         public string Descripcion { get; set; }
  
 
@@ -28,6 +32,7 @@ namespace Entidades
         public EstadoVuelo()
         {
             Id = string.Empty;
+            Codigo = string.Empty;
             Descripcion = string.Empty;
         }
         #endregion

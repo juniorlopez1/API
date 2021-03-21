@@ -6,18 +6,18 @@ using System.Text;
 
 namespace Negocios
 {
-    public interface IapiRegistroService
+    public interface IEstadoVueloService
     {
         #region CREATE
-        void Crear(Registro Registro);
+        void Crear(EstadoVuelo EstadoVuelo);
         #endregion
 
         #region READ
-        List<Registro> Leer();
+        List<EstadoVuelo> Leer();
         #endregion
 
         #region UPDATE
-        void Actualizar(Registro Registro);
+        void Actualizar(EstadoVuelo EstadoVuelo);
         #endregion
 
         #region DELETE
@@ -25,20 +25,20 @@ namespace Negocios
         #endregion
 
         #region SEARCH
-        Registro Buscar(string id);
+        EstadoVuelo Buscar(string id);
         #endregion
     }
 
-    public class apiRegistroService : IapiRegistroService
+    public class EstadoVueloService : IEstadoVueloService
     {
         #region Members
         //Establece propiedades para acceso a datos
-        private readonly DatosRegistro accesoDatos;
+        private readonly DatosEstadoVuelo accesoDatos;
         #endregion
 
         #region Constructor
         //Inicializa el servicio
-        public apiRegistroService(DatosRegistro accesoDatos)
+        public EstadoVueloService(DatosEstadoVuelo accesoDatos)
         {
             this.accesoDatos = accesoDatos;
         }
@@ -47,39 +47,38 @@ namespace Negocios
 
 
         #region CREATE
-        public void Crear(Registro Registro)
+        public void Crear(EstadoVuelo EstadoVuelo)
         {
-            accesoDatos.Crear(Registro);
+            accesoDatos.Crear(EstadoVuelo);
         }
         #endregion
 
         #region READ
-        public List<Registro> Leer()
+        public List<EstadoVuelo> Leer()
         {
             return accesoDatos.Leer();
         }
         #endregion
 
         #region UPDATE
-        public void Actualizar(Registro Registro)
+        public void Actualizar(EstadoVuelo EstadoVuelo)
         {
-            accesoDatos.Actualizar(Registro);
+            accesoDatos.Actualizar(EstadoVuelo);
         }
         #endregion
 
         #region DELETE
-        public void Eliminar(string id)
+        public void Eliminar(string Codigo)
         {
-            accesoDatos.Eliminar(id);
+            accesoDatos.Eliminar(Codigo);
         }
         #endregion
 
         #region SEARCH
-        public Registro Buscar(string id)
+        public EstadoVuelo Buscar(string Codigo)
         {
-            return accesoDatos.Buscar(id);
+            return accesoDatos.Buscar(Codigo);
         }
         #endregion
     }
 }
-

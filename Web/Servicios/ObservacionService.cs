@@ -6,7 +6,7 @@ using Web.Models;
 
 namespace Web.Servicios
 {
-    public interface IwebObservacionService
+    public interface IObservacionService
     {
         //CREATE
         Task Crear(ObservacionViewModel observacion);
@@ -25,12 +25,12 @@ namespace Web.Servicios
 
     }
 
-    public class webObservacionService : webBaseService, IwebObservacionService
+    public class ObservacionService : ServicioBase, IObservacionService
     //Hereda del servicio base e implementa la interfaz correspondiente
 
     {
         #region Constructor
-        public webObservacionService(string baseUrl)
+        public ObservacionService(string baseUrl)
     : base(baseUrl)
         {
             //Constructor con la base URL

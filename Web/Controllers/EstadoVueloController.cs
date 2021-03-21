@@ -11,11 +11,11 @@ namespace Web.Controllers
     public class EstadoVueloController : Controller
     {
         #region Miembros
-        private readonly IwebEstadoVueloService servicio;
+        private readonly IEstadoVueloService servicio;
         #endregion
 
         #region Constructor
-        public EstadoVueloController(IwebEstadoVueloService servicio)
+        public EstadoVueloController(IEstadoVueloService servicio)
         {
             this.servicio = servicio;
         }
@@ -34,17 +34,17 @@ namespace Web.Controllers
 
         #region CREATE OR UPDATE
         [HttpGet]
-        public async Task<IActionResult> Editar(string id=null)
+        public async Task<IActionResult> Editar(string codigo=null)
         {
             var view = default(EstadoVueloViewModel);
 
-            if (string.IsNullOrEmpty(id))
+            if (string.IsNullOrEmpty(codigo))
             {
                 view = new EstadoVueloViewModel();
             }
             else
             {
-                view = await servicio.Buscar(id);
+                view = await servicio.Buscar(codigo);
             }
             return View(view);
         }

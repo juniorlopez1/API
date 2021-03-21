@@ -15,6 +15,10 @@ namespace Web.Models
         public string Descripcion { get; set; }
 
         [Required(ErrorMessage = "Requerido")]
+        public bool Estado { get; set; }
+
+        [Required(ErrorMessage = "Requerido")]
         public string Codigo { get; set; }
+
     }
 }

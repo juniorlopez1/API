@@ -1,8 +1,8 @@
-﻿using Datos;
+﻿
+using Datos;
 using Entidades;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Negocios
 {
@@ -10,16 +10,16 @@ namespace Negocios
 
 
     //-------------------------Servicio -------------------------
-    public class apiPerfilService : IapiPerfilService
+    public class AeronaveService : IAeronaveService
     {
         #region Members
         //Establece propiedades para acceso a datos
-        private readonly DatosPerfil accesoDatos;
+        private readonly DatosAeronave accesoDatos;
         #endregion
 
         #region Constructor
         //Inicializa el servicio
-        public apiPerfilService(DatosPerfil accesoDatos)
+        public AeronaveService(DatosAeronave accesoDatos)
         {
             this.accesoDatos = accesoDatos;
         }
@@ -28,35 +28,35 @@ namespace Negocios
 
 
         #region CREATE
-        public void Crear(Perfil Perfil)
+        public void Crear (Aeronave aeronave)
         {
-            accesoDatos.Crear(Perfil);
+            accesoDatos.Crear(aeronave);
         }
         #endregion
 
         #region READ
-        public List<Perfil> Leer()
+        public List<Aeronave> Leer()
         {
             return accesoDatos.Leer();
         }
         #endregion
 
         #region UPDATE
-        public void Actualizar(Perfil Perfil)
+        public void Actualizar (Aeronave aeronave)
         {
-            accesoDatos.Actualizar(Perfil);
+            accesoDatos.Actualizar(aeronave);
         }
         #endregion
 
         #region DELETE
-        public void Eliminar(string Codigo)
+        public void Eliminar (string Codigo)
         {
             accesoDatos.Eliminar(Codigo);
         }
         #endregion
 
         #region SEARCH
-        public Perfil Buscar(string Codigo)
+        public Aeronave Buscar (string Codigo)
         {
             return accesoDatos.Buscar(Codigo);
         }
@@ -72,20 +72,20 @@ namespace Negocios
 
 
     //-------------------------Interfaz -------------------------
-    public interface IapiPerfilService
+    public interface IAeronaveService
     {
         //Metodos exponen el servicio atraves de la interfaz
 
         #region CREATE
-        void Crear(Perfil Perfil);
+        void Crear (Aeronave aeronave);
         #endregion
 
         #region READ
-        List<Perfil> Leer();
+        List<Aeronave> Leer();
         #endregion
 
         #region UPDATE
-        void Actualizar(Perfil Perfil);
+        void Actualizar(Aeronave aeronave);
         #endregion
 
         #region DELETE
@@ -93,7 +93,7 @@ namespace Negocios
         #endregion
 
         #region SEARCH
-        Perfil Buscar(string Codigo);
+        Aeronave Buscar(string Codigo);
         #endregion
 
     }

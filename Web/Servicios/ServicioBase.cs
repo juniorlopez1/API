@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Web.Servicios
 {
-    public class webBaseService
+    public class ServicioBase
     {
         private readonly string baseUrl;
 
-        public webBaseService(string baseUrl)
+        public ServicioBase(string baseUrl)
         {
             this.baseUrl = baseUrl;
         }

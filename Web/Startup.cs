@@ -26,13 +26,13 @@ namespace Web
         {
             var baseurl = @"https://localhost:5001/api";
             services.AddControllersWithViews();
-            services.AddScoped<IwebAeronaveService>((x) => new webAeronaveService(baseurl));
-            services.AddScoped<IwebAeronaveTipoService>((x) => new webAeronaveTipoService(baseurl));
-            services.AddScoped<IwebEstadoVueloService>((x) => new webEstadoVueloService(baseurl));
-            services.AddScoped<IwebObservacionService>((x) => new webObservacionService(baseurl));
-            services.AddScoped<IwebPerfilService>((x) => new webPerfilService(baseurl));
-            services.AddScoped<IwebRegistroService>((x) => new webRegistroService(baseurl));
-            services.AddScoped <IwebUsuarioService>((x) => new webUsuarioService(baseurl));
+            services.AddScoped<IAeronaveService>((x) => new AeronaveService(baseurl));
+            services.AddScoped<IAeronaveTipoService>((x) => new AeronaveTipoService(baseurl));
+            services.AddScoped<IEstadoVueloService>((x) => new EstadoVueloService(baseurl));
+            services.AddScoped<IObservacionService>((x) => new ObservacionService(baseurl));
+            services.AddScoped<IPerfilService>((x) => new PerfilService(baseurl));
+            services.AddScoped<IRegistroService>((x) => new RegistroService(baseurl));
+            services.AddScoped <IUsuarioService>((x) => new UsuarioService(baseurl));
 
 
         }

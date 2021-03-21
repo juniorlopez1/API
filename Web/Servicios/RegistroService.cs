@@ -6,7 +6,7 @@ using Web.Models;
 
 namespace Web.Servicios
 {
-    public interface IwebRegistroService
+    public interface IRegistroService
     {
         //CREATE
         Task Crear(RegistroViewModel registro);
@@ -26,12 +26,12 @@ namespace Web.Servicios
     }
 
 
-    public class webRegistroService : webBaseService, IwebRegistroService
+    public class RegistroService : ServicioBase, IRegistroService
     //Hereda del servicio base e implementa la interfaz correspondiente
 
     {
         #region Constructor
-        public webRegistroService(string baseUrl)
+        public RegistroService(string baseUrl)
     : base(baseUrl)
         {
             //Constructor con la base URL

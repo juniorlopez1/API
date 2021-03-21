@@ -20,12 +20,12 @@ namespace API.Controllers
     public class ObservacionController : ControllerBase
     {
         #region Implementación de Servicios
-        private readonly IapiObservacionService observacionsvc;
+        private readonly IObservacionService observacionsvc;
 
         #endregion
 
         #region Constructor
-        public ObservacionController(IapiObservacionService observacionsvc)
+        public ObservacionController(IObservacionService observacionsvc)
         {
             this.observacionsvc = observacionsvc;
         }
@@ -40,7 +40,7 @@ namespace API.Controllers
         public IActionResult Create(Observacion Observacion)
         {
             observacionsvc.Crear(Observacion);
-            return CreatedAtRoute(nameof(Search), new { codigo = Observacion.Id }, Observacion);
+            return CreatedAtRoute(nameof(Search), new { codigo = Observacion.Codigo }, Observacion);
         }
         #endregion
 
@@ -58,7 +58,7 @@ namespace API.Controllers
         public IActionResult Update(Observacion Observacion)
         {
             observacionsvc.Actualizar(Observacion);
-            return CreatedAtRoute(nameof(Search), new { codigo = Observacion.Id }, Observacion);
+            return CreatedAtRoute(nameof(Search), new { codigo = Observacion.Codigo }, Observacion);
         }
         #endregion
 

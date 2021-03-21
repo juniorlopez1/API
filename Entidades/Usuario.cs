@@ -15,6 +15,9 @@ namespace Entidades
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
+        [BsonElement(nameof(Codigo))]
+        public string Codigo { get; set; }
+
         [BsonElement(nameof(NombreUsuario))]
         public string NombreUsuario { get; set; }
 
@@ -35,6 +38,7 @@ namespace Entidades
         public Usuario()
         {
             Id = string.Empty;
+            Codigo = string.Empty;
             NombreUsuario = string.Empty;
             Contrasena = string.Empty;
             Estado = true;

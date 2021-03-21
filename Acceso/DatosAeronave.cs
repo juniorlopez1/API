@@ -11,8 +11,7 @@ namespace Datos
     {
 
         #region Constructor
-        public DatosAeronave (string cadenaConexion, string nombreBD)
-    : base(cadenaConexion, nombreBD)
+        public DatosAeronave (string cadenaConexion, string nombreBD) : base(cadenaConexion, nombreBD)
         {
 
         }
@@ -38,22 +37,22 @@ namespace Datos
         #region UPDATE
         public void Actualizar(Aeronave aeronave)
         {
-            var filter = Builders<Aeronave>.Filter.Eq(x => x.Id, aeronave.Id);
+            var filter = Builders<Aeronave>.Filter.Eq(x => x.Codigo, aeronave.Codigo);
             Actualizar<Aeronave>(nameof(Aeronave), filter, aeronave);
         }
         #endregion
 
         #region DELETE
-        public void Eliminar(string id)
+        public void Eliminar(string Codigo)
         {
-            Eliminar<Aeronave>(nameof(Aeronave), (u) => u.Id == id);
+            Eliminar<Aeronave>(nameof(Aeronave), (u) => u.Codigo == Codigo);
         }
         #endregion
 
         #region SEARCH
-        public Aeronave Buscar(string id)
+        public Aeronave Buscar(string Codigo)
         {
-            return Buscar<Aeronave>(nameof(Aeronave), (u) => u.Id == id);
+            return Buscar<Aeronave>(nameof(Aeronave), (u) => u.Id == Codigo);
         }
         #endregion 
 

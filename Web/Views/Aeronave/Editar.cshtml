@@ -1,4 +1,4 @@
-﻿@model Web.Models.PerfilViewModel
+﻿@model Web.Models.AeronaveViewModel
 
 @{
     ViewData["Title"] = "Editar";
@@ -6,12 +6,11 @@
 
 <h1>Editar</h1>
 
-<h4>PerfilViewModel</h4>
+<h4>AeronaveViewModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-controller="Perfil" asp-action="Guardar" method="post">
-            @*https://docs.microsoft.com/en-us/aspnet/core/mvc/views/working-with-forms?view=aspnetcore-5.0*@
+        <form asp-action="Editar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" class="form-control" />
             <div class="form-group">
@@ -20,14 +19,17 @@
                 <span asp-validation-for="Codigo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Tipo" class="control-label"></label>
-                <input asp-for="Tipo" class="form-control" />
-                <span asp-validation-for="Tipo" class="text-danger"></span>
+                <label asp-for="Capacidad" class="control-label"></label>
+                <input asp-for="Capacidad" class="form-control" />
+                <span asp-validation-for="Capacidad" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Estado" /> @Html.DisplayNameFor(model => model.Estado)
-                </label>
+            <div class="form-group">
+                @Html.LabelFor(model => model.AeronaveTipoViewModel.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.DropDownListFor(m => m.Id, (IEnumerable<SelectListItem>)ViewBag.ListaAeronaveTipo, new { })
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

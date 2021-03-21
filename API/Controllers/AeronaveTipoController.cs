@@ -13,12 +13,12 @@ namespace API.Controllers
     public class AeronaveTipoController : ControllerBase
     {
         #region Implementación de Servicios
-        private readonly IapiAeronaveTipoService aeronavetiposvc;
+        private readonly IAeronaveTipoService aeronavetiposvc;
 
         #endregion
 
         #region Constructor
-        public AeronaveTipoController(IapiAeronaveTipoService aeronavetiposvc)
+        public AeronaveTipoController(IAeronaveTipoService aeronavetiposvc)
         {
             this.aeronavetiposvc = aeronavetiposvc;
         }
@@ -33,7 +33,7 @@ namespace API.Controllers
         public IActionResult Create(AeronaveTipo AeronaveTipo)
         {
             aeronavetiposvc.Crear(AeronaveTipo);
-            return CreatedAtRoute(nameof(Search), new { codigo = AeronaveTipo.Id }, AeronaveTipo);
+            return CreatedAtRoute(nameof(Search), new { codigo = AeronaveTipo.Codigo }, AeronaveTipo);
         }
         #endregion
 
@@ -51,15 +51,18 @@ namespace API.Controllers
         public IActionResult Update(AeronaveTipo AeronaveTipo)
         {
             aeronavetiposvc.Actualizar(AeronaveTipo);
-            return CreatedAtRoute(nameof(Search), new { codigo = AeronaveTipo.Id }, AeronaveTipo);
+            return CreatedAtRoute(nameof(Search), new { codigo = AeronaveTipo.Codigo }, AeronaveTipo);
         }
         #endregion
 
         #region DELETE
+  
         [HttpDelete("{codigo}", Name = "DeleteAeronaveTipo")]
         public IActionResult Delete(string codigo)
         {
-            aeronavetiposvc.Eliminar(codigo);
+            var perfil = aeronavetiposvc.Buscar(codigo);
+            perfil.Estado = false;
+            aeronavetiposvc.Actualizar(perfil);
             return NoContent();
         }
         #endregion

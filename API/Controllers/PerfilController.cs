@@ -20,12 +20,12 @@ namespace API.Controllers
     public class PerfilController : ControllerBase
     {
         #region Implementación de Servicios
-        private readonly IapiPerfilService perfilsvc;
+        private readonly IPerfilService perfilsvc;
 
         #endregion
 
         #region Constructor
-        public PerfilController (IapiPerfilService perfilService)
+        public PerfilController (IPerfilService perfilService)
         {
             this.perfilsvc = perfilService;
         }

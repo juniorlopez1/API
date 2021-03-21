@@ -38,15 +38,15 @@ namespace Datos
         #region UPDATE
         public void Actualizar(Perfil Perfil)
         {
-            var filter = Builders<Perfil>.Filter.Eq(x => x.Id, Perfil.Id);
+            var filter = Builders<Perfil>.Filter.Eq(x => x.Codigo, Perfil.Codigo);
             Actualizar<Perfil>(nameof(Perfil), filter, Perfil);
         }
         #endregion
 
         #region DELETE
-        public void Eliminar(string id)
+        public void Eliminar(string Codigo)
         {
-            Eliminar<Perfil>(nameof(Perfil), (u) => u.Id == id);
+            Eliminar<Perfil>(nameof(Perfil), (u) => u.Codigo == Codigo);
         }
         #endregion
 

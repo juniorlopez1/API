@@ -11,11 +11,11 @@ namespace Web.Controllers
     public class ObservacionController : Controller
     {
         #region Miembros
-        private readonly IwebObservacionService servicio;
+        private readonly IObservacionService servicio;
         #endregion
 
         #region Constructor
-        public ObservacionController (IwebObservacionService servicio)
+        public ObservacionController (IObservacionService servicio)
         {
             this.servicio = servicio;
         }

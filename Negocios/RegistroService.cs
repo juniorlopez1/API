@@ -1,42 +1,44 @@
 ﻿using Datos;
 using Entidades;
+using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Negocios
 {
-    public interface IapiAeronaveTipoService
+    public interface IRegistroService
     {
         #region CREATE
-        void Crear(AeronaveTipo aeronaveTipo);
+        void Crear(Registro Registro);
         #endregion
 
         #region READ
-        List<AeronaveTipo> Leer();
+        List<Registro> Leer();
         #endregion
 
         #region UPDATE
-        void Actualizar(AeronaveTipo aeronaveTipo);
+        void Actualizar(Registro Registro);
         #endregion
 
         #region DELETE
-        void Eliminar(string id);
+        void Eliminar(string Codigo);
         #endregion
 
         #region SEARCH
-        AeronaveTipo Buscar(string id);
+        Registro Buscar(string Codigo);
         #endregion
     }
 
-    public class apiAeronaveTipoService : IapiAeronaveTipoService
+    public class RegistroService : IRegistroService
     {
         #region Members
         //Establece propiedades para acceso a datos
-        private readonly DatosAeronaveTipo accesoDatos;
+        private readonly DatosRegistro accesoDatos;
         #endregion
 
         #region Constructor
         //Inicializa el servicio
-        public apiAeronaveTipoService(DatosAeronaveTipo accesoDatos)
+        public RegistroService(DatosRegistro accesoDatos)
         {
             this.accesoDatos = accesoDatos;
         }
@@ -45,38 +47,39 @@ namespace Negocios
 
 
         #region CREATE
-        public void Crear(AeronaveTipo aeronaveTipo)
+        public void Crear(Registro Registro)
         {
-            accesoDatos.Crear(aeronaveTipo);
+            accesoDatos.Crear(Registro);
         }
         #endregion
 
         #region READ
-        public List<AeronaveTipo> Leer()
+        public List<Registro> Leer()
         {
             return accesoDatos.Leer();
         }
         #endregion
 
         #region UPDATE
-        public void Actualizar(AeronaveTipo aeronaveTipo)
+        public void Actualizar(Registro Registro)
         {
-            accesoDatos.Actualizar(aeronaveTipo);
+            accesoDatos.Actualizar(Registro);
         }
         #endregion
 
         #region DELETE
-        public void Eliminar(string id)
+        public void Eliminar(string Codigo)
         {
-            accesoDatos.Eliminar(id);
+            accesoDatos.Eliminar(Codigo);
         }
         #endregion
 
         #region SEARCH
-        public AeronaveTipo Buscar(string id)
+        public Registro Buscar(string Codigo)
         {
-            return accesoDatos.Buscar(id);
+            return accesoDatos.Buscar(Codigo);
         }
         #endregion
     }
 }
+

@@ -11,11 +11,11 @@ namespace Web.Controllers
     public class UsuarioController : Controller
     {
         #region Miembros
-        private readonly IwebUsuarioService servicio;
+        private readonly IUsuarioService servicio;
         #endregion
 
         #region Constructor
-        public UsuarioController(IwebUsuarioService servicio)
+        public UsuarioController(IUsuarioService servicio)
         {
             this.servicio = servicio;
         }

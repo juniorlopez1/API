@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,15 @@ namespace Web.Controllers
     public class AeronaveController : Controller
     {
         #region Miembros
-        private readonly IwebAeronaveService servicio;
+        private readonly IAeronaveService servicio;
+        private readonly IAeronaveTipoService servicioaeronavetipo;
         #endregion
 
         #region Constructor
-        public AeronaveController(IwebAeronaveService servicio)
+        public AeronaveController(IAeronaveService servicio, IAeronaveTipoService aeronavetiposvc)
         {
             this.servicio = servicio;
+            this.servicioaeronavetipo = aeronavetiposvc;
         }
         #endregion
 
@@ -36,7 +39,24 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Editar(string codigo)
         {
-            var view = await servicio.Buscar(codigo);
+            ViewBag.ListaAeronaveTipo = (await servicioaeronavetipo.Listar()).Select(p => new SelectListItem()
+            {
+                Text = p.Descripcion,
+                Value = p.Codigo.ToString()
+            }).ToList();
+
+            AeronaveViewModel view = null;
+
+            if(string.IsNullOrEmpty(codigo))
+            {
+                view = new AeronaveViewModel();
+            }
+            else
+            {
+                view = await servicio.Buscar(codigo);
+            }
+
+
             return View(view);
         }
 

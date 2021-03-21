@@ -10,8 +10,7 @@ namespace Datos
     public class DatosObservacion : AccesoDatosBase
     {
         #region Constructor
-        public DatosObservacion(string cadenaConexion, string nombreBD)
-    : base(cadenaConexion, nombreBD)
+        public DatosObservacion(string cadenaConexion, string nombreBD)  : base(cadenaConexion, nombreBD)
         {
 
         }
@@ -37,22 +36,22 @@ namespace Datos
         #region UPDATE
         public void Actualizar(Observacion Observacion)
         {
-            var filter = Builders<Observacion>.Filter.Eq(x => x.Id, Observacion.Id);
+            var filter = Builders<Observacion>.Filter.Eq(x => x.Codigo, Observacion.Codigo);
             Actualizar<Observacion>(nameof(Observacion), filter, Observacion);
         }
         #endregion
 
         #region DELETE
-        public void Eliminar(string id)
+        public void Eliminar(string Codigo)
         {
-            Eliminar<Observacion>(nameof(Observacion), (u) => u.Id == id);
+            Eliminar<Observacion>(nameof(Observacion), (u) => u.Codigo == Codigo);
         }
         #endregion
 
         #region SEARCH
-        public Observacion Buscar(string id)
+        public Observacion Buscar(string Codigo)
         {
-            return Buscar<Observacion>(nameof(Observacion), (u) => u.Id == id);
+            return Buscar<Observacion>(nameof(Observacion), (u) => u.Codigo == Codigo);
         }
         #endregion 
 

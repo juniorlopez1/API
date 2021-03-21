@@ -11,11 +11,11 @@ namespace Web.Controllers
     public class PerfilController : Controller
     {
         #region Miembros
-        private readonly IwebPerfilService servicio; 
+        private readonly IPerfilService servicio; 
         #endregion
 
         #region Constructor
-        public PerfilController(IwebPerfilService servicio)
+        public PerfilController(IPerfilService servicio)
         {
             this.servicio = servicio;
         }

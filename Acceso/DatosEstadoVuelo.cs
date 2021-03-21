@@ -10,8 +10,7 @@ namespace Datos
     public class DatosEstadoVuelo : AccesoDatosBase
     {
         #region Constructor
-        public DatosEstadoVuelo(string cadenaConexion, string nombreBD)
-    : base(cadenaConexion, nombreBD)
+        public DatosEstadoVuelo(string cadenaConexion, string nombreBD) : base(cadenaConexion, nombreBD)
         {
 
         }
@@ -37,22 +36,22 @@ namespace Datos
         #region UPDATE
         public void Actualizar(EstadoVuelo EstadoVuelo)
         {
-            var filter = Builders<EstadoVuelo>.Filter.Eq(x => x.Id, EstadoVuelo.Id);
+            var filter = Builders<EstadoVuelo>.Filter.Eq(x => x.Codigo, EstadoVuelo.Codigo);
             Actualizar<EstadoVuelo>(nameof(EstadoVuelo), filter, EstadoVuelo);
         }
         #endregion
 
         #region DELETE
-        public void Eliminar(string id)
+        public void Eliminar(string Codigo)
         {
-            Eliminar<EstadoVuelo>(nameof(EstadoVuelo), (u) => u.Id == id);
+            Eliminar<EstadoVuelo>(nameof(EstadoVuelo), (u) => u.Codigo == Codigo);
         }
         #endregion
 
         #region SEARCH
-        public EstadoVuelo Buscar(string id)
+        public EstadoVuelo Buscar(string Codigo)
         {
-            return Buscar<EstadoVuelo>(nameof(EstadoVuelo), (u) => u.Id == id);
+            return Buscar<EstadoVuelo>(nameof(EstadoVuelo), (u) => u.Codigo == Codigo);
         }
         #endregion 
 
