@@ -37,22 +37,22 @@ namespace Datos
         #region UPDATE
         public void Actualizar(Registro Registro)
         {
-            var filter = Builders<Registro>.Filter.Eq(x => x.Id, Registro.Id);
+            var filter = Builders<Registro>.Filter.Eq(x => x.Codigo, Registro.Codigo);
             Actualizar<Registro>(nameof(Registro), filter, Registro);
         }
         #endregion
 
         #region DELETE
-        public void Eliminar(string id)
+        public void Eliminar(string Codigo)
         {
-            Eliminar<Registro>(nameof(Registro), (u) => u.Id == id);
+            Eliminar<Registro>(nameof(Registro), (u) => u.Codigo == Codigo);
         }
         #endregion
 
         #region SEARCH
-        public Registro Buscar(string id)
+        public Registro Buscar(string Codigo)
         {
-            return Buscar<Registro>(nameof(Registro), (u) => u.Id == id);
+            return Buscar<Registro>(nameof(Registro), (u) => u.Codigo == Codigo);
         }
         #endregion 
 

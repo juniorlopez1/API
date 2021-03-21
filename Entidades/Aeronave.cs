@@ -22,6 +22,9 @@ namespace Entidades
         [BsonElement(nameof(Capacidad))]
         public int Capacidad { get; set; }
 
+        [BsonElement(nameof(Estado))]
+        public bool Estado { get; set; }
+
         [BsonElement(nameof(AeronaveTipo))]
         public AeronaveTipo AeronaveTipo { get; set; }
 
@@ -33,6 +36,7 @@ namespace Entidades
         {
             Id = string.Empty;
             Codigo = string.Empty;
+            Estado = true;
             Capacidad = 0;
             AeronaveTipo = new AeronaveTipo ();
         }

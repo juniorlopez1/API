@@ -15,6 +15,8 @@ namespace Web.Models
         [Required(ErrorMessage = "Requerido")]
         public int Capacidad { get; set; }
 
+        public bool Estado { get; set; }
+
         //Otras entidades
         public AeronaveTipoViewModel AeronaveTipo { get; set; }
 

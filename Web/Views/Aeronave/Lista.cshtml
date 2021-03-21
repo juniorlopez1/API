@@ -13,13 +13,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Codigo)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Capacidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
             </th>
             <th>
                 Tipo Aeronave
@@ -31,20 +31,20 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Codigo)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Capacidad)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.AeronaveTipo.Descripcion)
             </td>
             <td>
                 @Html.ActionLink("Editar", "Editar", new { codigo = item.Codigo }) |
-                @Html.ActionLink("Editar", "Editar", new { codigo = item.Codigo }) |
+                @Html.ActionLink("Eliminar", "Eliminar", new { codigo = item.Codigo }) |
             </td>
         </tr>
 }

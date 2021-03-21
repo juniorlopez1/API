@@ -12,6 +12,7 @@ namespace Web.Models
         public DateTime Ingreso { get; set; }
 
         public DateTime Salida { get; set; }
+        public string Codigo { get; set; }
 
         //Otras entidades
         public AeronaveViewModel Aeronave { get; set; }

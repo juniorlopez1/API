@@ -15,5 +15,12 @@ namespace Web.Models
 
         [Required(ErrorMessage = "Requerido")]
         public string Descripcion { get; set; }
+
+        public EstadoVueloViewModel()
+        {
+            Id = string.Empty;
+            Codigo = string.Empty;
+            Descripcion = string.Empty;
+        }
     }
 }

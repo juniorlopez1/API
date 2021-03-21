@@ -24,6 +24,9 @@ namespace Entidades
         [BsonElement(nameof(Salida))]
         public DateTime Salida { get; set; }
 
+        [BsonElement(nameof(Codigo))]
+        public string Codigo { get; set; }
+
         //Otras entidades
         [BsonElement(nameof(Aeronave))]
         public Aeronave Aeronave { get; set; }
@@ -43,6 +46,7 @@ namespace Entidades
             Id = string.Empty;
             Ingreso = DateTime.MinValue;
             Salida = DateTime.MinValue;
+            Codigo = string.Empty;
             Aeronave = new Aeronave ();
             EstadoVuelo = new EstadoVuelo();
             Observacion = new Observacion();

@@ -64,9 +64,14 @@ namespace API.Controllers
         [HttpDelete("{codigo}", Name = "DeleteAeronave")]
         public IActionResult Delete(string codigo)
         {
-            aeronavesvc.Eliminar(codigo);
+            //aeronavesvc.Eliminar(codigo);
+            //return NoContent();
+            var match = aeronavesvc.Buscar(codigo);
+            match.Estado = false;
+            aeronavesvc.Actualizar(match);
             return NoContent();
         }
+
         #endregion
 
         #region SEARCH
