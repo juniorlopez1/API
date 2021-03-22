@@ -11,31 +11,18 @@ namespace Web.Controllers
 {
     public class AeronaveController : Controller
     {
-        #region Miembros
         private readonly IAeronaveService servicio;
         private readonly IAeronaveTipoService servicioaeronavetipo;
-        #endregion
+        
 
-        #region Constructor
         public AeronaveController(IAeronaveService servicio, IAeronaveTipoService aeronavetiposvc)
         {
             this.servicio = servicio;
             this.servicioaeronavetipo = aeronavetiposvc;
         }
-        #endregion
+
 
         #region CRUD
-
-        #region READ
-        [HttpGet]
-        public async Task<IActionResult> Lista()
-        {
-            var view = await servicio.Listar();
-            return View(view);
-        }
-        #endregion
-
-        #region CREATE OR UPDATE
         [HttpGet]
         public async Task<IActionResult> Editar(string codigo)
         {
@@ -47,7 +34,7 @@ namespace Web.Controllers
 
             AeronaveViewModel view = null;
 
-            if(string.IsNullOrEmpty(codigo))
+            if (string.IsNullOrEmpty(codigo))
             {
                 view = new AeronaveViewModel();
             }
@@ -56,14 +43,20 @@ namespace Web.Controllers
                 view = await servicio.Buscar(codigo);
             }
 
+            return View(view);
+        }
 
+        [HttpGet]
+        public async Task<IActionResult> Lista()
+        {
+            var view = await servicio.Listar();
             return View(view);
         }
 
         [HttpPost]
         public async Task<IActionResult> Guardar(AeronaveViewModel entidad)
         {
-            entidad.AeronaveTipo = await servicioaeronavetipo.Buscar(entidad.AeronaveTipo.Codigo);       
+            entidad.AeronaveTipo = await servicioaeronavetipo.Buscar(entidad.AeronaveTipo.Codigo);
 
             if (string.IsNullOrEmpty(entidad.Id))
             {
@@ -76,9 +69,16 @@ namespace Web.Controllers
 
             return RedirectToAction("Lista");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Eliminar(string codigo)
+        {
+            await servicio.Eliminar(codigo);
+            return RedirectToAction("Lista");
+        }
+
         #endregion
 
-        #region SEARCH
         [HttpGet]
         public async Task<IActionResult> Buscar(string codigo)
         {
@@ -118,18 +118,8 @@ namespace Web.Controllers
 
             return View(resultado);
         }
-        #endregion
 
-        #region DELETE
-        [HttpGet]
-        public async Task<IActionResult> Eliminar(string codigo)
-        {
-            await servicio.Eliminar(codigo);
-            return RedirectToAction("Lista");
-        }
-        #endregion
 
-        #endregion
 
     }
 }

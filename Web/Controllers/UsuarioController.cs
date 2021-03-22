@@ -10,33 +10,27 @@ namespace Web.Controllers
 {
     public class UsuarioController : Controller
     {
-        #region Miembros
         private readonly IUsuarioService servicio;
-        #endregion
 
-        #region Constructor
         public UsuarioController(IUsuarioService servicio)
         {
             this.servicio = servicio;
         }
-        #endregion
+
 
         #region CRUD
 
-        #region READ
-        [HttpGet]
-        public async Task<IActionResult> Lista()
-        {
-            var view = await servicio.Listar();
-            return View(view);
-        }
-        #endregion
-
-        #region CREATE OR UPDATE
         [HttpGet]
         public async Task<IActionResult> Editar(string codigo)
         {
             var view = await servicio.Buscar(codigo);
+            return View(view);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Lista()
+        {
+            var view = await servicio.Listar();
             return View(view);
         }
 
@@ -54,27 +48,25 @@ namespace Web.Controllers
 
             return RedirectToAction("Lista");
         }
-        #endregion
 
-        #region SEARCH
-        [HttpGet]
-        public async Task<IActionResult> Buscar(string codigo)
-        {
-            var perfil = await servicio.Buscar(codigo);
-            return View(perfil);
-        }
-        #endregion
-
-        #region DELETE
         [HttpGet]
         public async Task<IActionResult> Eliminar(string codigo)
         {
             await servicio.Eliminar(codigo);
             return RedirectToAction("Lista");
         }
+
         #endregion
 
-        #region Login
+        [HttpGet]
+        public async Task<IActionResult> Buscar(string codigo)
+        {
+            var perfil = await servicio.Buscar(codigo);
+            return View(perfil);
+        }
+
+
+        #region Gestion de contrasena
         [HttpGet]
         public IActionResult Login()
         {
@@ -102,8 +94,9 @@ namespace Web.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
-        #endregion
 
         #endregion
+
+
     }
 }

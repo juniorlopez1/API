@@ -11,37 +11,22 @@ namespace Web.Controllers
 {
     public class RegistroController : Controller
     {
-        #region Miembros
         private readonly IRegistroService servicioRegistro;
         private readonly IEstadoVueloService servicioVuelo;
         private readonly IObservacionService servicioObservacion;
         private readonly IAeronaveService servicioAeronave;
 
-        #endregion
-
-        #region Constructor
         public RegistroController(IRegistroService servicioRegistro, IEstadoVueloService servicioVuelo, IObservacionService servicioObservacion, IAeronaveService servicioAeronave)
         {
             this.servicioRegistro = servicioRegistro;
             this.servicioVuelo = servicioVuelo;
             this.servicioObservacion = servicioObservacion;
             this.servicioAeronave = servicioAeronave;
-           
         }
-        #endregion
+
 
         #region CRUD
 
-        #region READ
-        [HttpGet]
-        public async Task<IActionResult> Lista()
-        {
-            var view = await servicioRegistro.Listar();
-            return View(view);
-        }
-        #endregion
-
-        #region CREATE OR UPDATE
         [HttpGet]
         public async Task<IActionResult> Editar(string codigo)
         {
@@ -81,13 +66,20 @@ namespace Web.Controllers
             return View(view);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Lista()
+        {
+            var view = await servicioRegistro.Listar();
+            return View(view);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Guardar(RegistroViewModel entidad)
         {
-            #region dropdowns que obtienen info
+            #region dropdowns
             entidad.Aeronave = await servicioAeronave.Buscar(entidad.Aeronave.Codigo);
             entidad.Observacion = await servicioObservacion.Buscar(entidad.Observacion.Codigo);
-            entidad.EstadoVuelo = await servicioVuelo.Buscar(entidad.EstadoVuelo.Codigo); 
+            entidad.EstadoVuelo = await servicioVuelo.Buscar(entidad.EstadoVuelo.Codigo);
             #endregion
 
 
@@ -102,26 +94,26 @@ namespace Web.Controllers
 
             return RedirectToAction("Lista");
         }
-        #endregion
 
-        #region SEARCH
-        [HttpGet]
-        public async Task<IActionResult> Buscar(string codigo)
-        {
-            var perfil = await servicioRegistro.Buscar(codigo);
-            return View(perfil);
-        }
-        #endregion
-
-        #region DELETE
         [HttpGet]
         public async Task<IActionResult> Eliminar(string codigo)
         {
             await servicioRegistro.Eliminar(codigo);
             return RedirectToAction("Lista");
         }
-        #endregion
 
         #endregion
+
+        [HttpGet]
+        public async Task<IActionResult> Buscar(string codigo)
+        {
+            var perfil = await servicioRegistro.Buscar(codigo);
+            return View(perfil);
+        }
+
+
+        
+
+        
     }
 }

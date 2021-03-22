@@ -10,31 +10,17 @@ namespace Web.Controllers
 {
     public class EstadoVueloController : Controller
     {
-        #region Miembros
         private readonly IEstadoVueloService servicio;
-        #endregion
 
-        #region Constructor
         public EstadoVueloController(IEstadoVueloService servicio)
         {
             this.servicio = servicio;
         }
-        #endregion
+
 
         #region CRUD
-
-        #region READ
         [HttpGet]
-        public async Task<IActionResult> Lista()
-        {
-            var view = await servicio.Listar();
-            return View(view);
-        }
-        #endregion
-
-        #region CREATE OR UPDATE
-        [HttpGet]
-        public async Task<IActionResult> Editar(string codigo=null)
+        public async Task<IActionResult> Editar(string codigo = null)
         {
             var view = default(EstadoVueloViewModel);
 
@@ -46,6 +32,13 @@ namespace Web.Controllers
             {
                 view = await servicio.Buscar(codigo);
             }
+            return View(view);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Lista()
+        {
+            var view = await servicio.Listar();
             return View(view);
         }
 
@@ -63,26 +56,25 @@ namespace Web.Controllers
 
             return RedirectToAction("Lista");
         }
-        #endregion
-
-        #region SEARCH
-        [HttpGet]
-        public async Task<IActionResult> Buscar(string codigo)
-        {
-            var perfil = await servicio.Buscar(codigo);
-            return View(perfil);
-        }
-        #endregion
-
-        #region DELETE
+        
         [HttpGet]
         public async Task<IActionResult> Eliminar(string codigo)
         {
             await servicio.Eliminar(codigo);
             return RedirectToAction("Lista");
         }
-        #endregion
 
         #endregion
+
+        [HttpGet]
+        public async Task<IActionResult> Buscar(string codigo)
+        {
+            var perfil = await servicio.Buscar(codigo);
+            return View(perfil);
+        }
+
+
+
+        
     }
 }
