@@ -12,15 +12,15 @@
     <div class="col-md-4">
         <form asp-action="Guardar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type ="hidden" asp-for="Id" class="form-control" />
+            <input type="hidden" asp-for="Id" class="form-control" />
             <div class="form-group">
                 <label asp-for="Ingreso" class="control-label"></label>
-                <input asp-for="Ingreso" class="form-control" />
+                <input asp-for="Ingreso" class="form-control" data-datepicker />
                 <span asp-validation-for="Ingreso" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Salida" class="control-label"></label>
-                <input asp-for="Salida" class="form-control" />
+                <input asp-for="Salida" class="form-control" data-datepicker />
                 <span asp-validation-for="Salida" class="text-danger"></span>
             </div>
 
@@ -67,6 +67,17 @@
     <a asp-action="Lista">Regresar</a>
 </div>
 
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(function () {
+
+            $('input[data-datepicker]').flatpickr({
+                enableTime: true,
+                dateFormat: "Y/m/d H:i",
+            });
+
+        });
+    </script>
 }
