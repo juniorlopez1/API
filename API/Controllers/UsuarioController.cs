@@ -86,7 +86,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpPost(Name = "autenticar")]
+        [HttpPost("autenticar",Name = "Autenticar")]
         public IActionResult Autenticar(Credenciales credenciales)
         {
             var usuario = usuariosvc.BuscarPonombreUsuarioContrasena(credenciales.NombreUsuario, credenciales.Contrasena);

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Web.Models.AeronaveViewModel>
+
+@{
+    ViewData["Title"] = "Reporte Aeronaves";
+}
+
+<h1>Reporte de Aeronaves</h1>
+
+<p>
+    <a asp-action="Editar">Crear Aeronave</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Capacidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>
+                Tipo Aeronave
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Capacidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AeronaveTipo.Descripcion)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Filtrar">Regresar</a>
+</div>

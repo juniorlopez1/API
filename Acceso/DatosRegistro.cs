@@ -3,6 +3,7 @@ using Entidades;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Datos
@@ -52,7 +53,7 @@ namespace Datos
         #region SEARCH
         public Registro Buscar(string Codigo)
         {
-            return Buscar<Registro>(nameof(Registro), (u) => u.Codigo == Codigo);
+            return Buscar<Registro>(nameof(Registro), (u) => u.Codigo == Codigo).FirstOrDefault();
         }
         #endregion 
 

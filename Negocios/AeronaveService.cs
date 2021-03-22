@@ -60,6 +60,11 @@ namespace Negocios
         {
             return accesoDatos.Buscar(Codigo);
         }
+
+        public List<Aeronave> BuscarPorTipoAeronave(string Codigo)
+        {
+            return accesoDatos.BuscarPorTipoAeronave(Codigo);
+        }
         #endregion
     }
 
@@ -94,6 +99,7 @@ namespace Negocios
 
         #region SEARCH
         Aeronave Buscar(string Codigo);
+        List<Aeronave> BuscarPorTipoAeronave(string Codigo);
         #endregion
 
     }

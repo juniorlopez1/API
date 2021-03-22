@@ -3,6 +3,7 @@ using Entidades;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Datos
@@ -52,9 +53,14 @@ namespace Datos
         #region SEARCH
         public Aeronave Buscar(string Codigo)
         {
-            return Buscar<Aeronave>(nameof(Aeronave), (u) => u.Codigo == Codigo);
+            return Buscar<Aeronave>(nameof(Aeronave), (u) => u.Codigo == Codigo).FirstOrDefault();
         }
-        #endregion 
+
+        public List<Aeronave> BuscarPorTipoAeronave(string codigo)
+        {
+            return Buscar<Aeronave>(nameof(Aeronave), (u) => u.AeronaveTipo.Codigo == codigo);
+        }
+        #endregion
 
 
         #endregion

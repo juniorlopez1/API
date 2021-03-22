@@ -77,7 +77,7 @@ namespace Web.Servicios
 
         public async Task<UsuarioViewModel> Autenticar(CredencialesViewModel credenciales)
         {
-            return await PostAsync<CredencialesViewModel, UsuarioViewModel>("autenticar", credenciales);
+            return await PostAsync<CredencialesViewModel, UsuarioViewModel>("usuario/autenticar", credenciales);
         }
         #endregion
 

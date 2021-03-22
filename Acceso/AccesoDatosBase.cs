@@ -136,15 +136,14 @@ namespace Acceso
             }
         }
 
-        protected T Buscar<T>(string nombreColeccion, Expression<Func<T, bool>> filtro)
+        protected List<T> Buscar<T>(string nombreColeccion, Expression<Func<T, bool>> filtro)
         {
-            var resultado = default(T);
-
+            List<T> resultado;
             try
             {
                 GetConexion(this.nombreBD);
                 var coleccion = basedatos.GetCollection<T>(nombreColeccion);
-                resultado = coleccion.AsQueryable().Where(filtro).FirstOrDefault();
+                resultado = coleccion.AsQueryable().Where(filtro).ToList();
             }
             catch (Exception ex)
             {

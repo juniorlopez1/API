@@ -89,6 +89,21 @@ namespace API.Controllers
                 return Ok(aeronave);
             }
         }
+
+        [HttpGet("tipo-aeronave/{codigo}", Name = "SearchByTipoAeronave")]
+        public IActionResult SearchByTipoAeronave(string codigo)
+        {
+            var aeronave = aeronavesvc.BuscarPorTipoAeronave(codigo);
+
+            if (aeronave == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(aeronave);
+            }
+        }
         #endregion
 
 

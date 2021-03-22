@@ -12,10 +12,10 @@
                 <form asp-action="Autenticar">
                     <h1 class="h3 mb-3 fw-normal">Inicie Sesion</h1>
                     <label for="inputEmail" class="visually-hidden">Correo</label>
-                    <input asp-for="NombreUsuario" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus />
+                    <input asp-for="NombreUsuario" value="andresaguilar@gmail.com" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus />
                     <label for="inputPassword" class="visually-hidden">Contraseña</label>
-                    <input asp-for="Contrasena" for="inputPassword" class="form-control" placeholder="Contraseña" required  />
-                    <button class="w-100 btn btn-lg btn-primary" type="submit">Ingresar</button>
+                    <input asp-for="Contrasena" value="pass123" type="password" for="inputPassword" class="form-control" placeholder="Contraseña" required  />
+                    <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Ingresar</button>
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 </form>
             </div>

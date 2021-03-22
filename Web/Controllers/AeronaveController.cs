@@ -85,6 +85,39 @@ namespace Web.Controllers
             var view = await servicio.Buscar(codigo);
             return View(view);
         }
+
+        public async Task<IActionResult> Filtrar()
+        {
+
+            var listaAeronaveTipo = new List<SelectListItem>();
+            listaAeronaveTipo.Add(new SelectListItem() { Text = "Todos", Selected = true, Value = "" });
+
+            (await servicioaeronavetipo.Listar()).ForEach(p => listaAeronaveTipo.Add(new SelectListItem()
+            {
+                Text = p.Descripcion,
+                Value = p.Codigo.ToString()
+            }));
+
+            ViewBag.ListaAeronaveTipo = listaAeronaveTipo;
+
+            return View();
+        }
+
+        public async Task<IActionResult> Reporte(string codigo)
+        {
+            List<AeronaveViewModel> resultado = null;
+
+            if (string.IsNullOrEmpty(codigo))
+            {
+                resultado = await servicio.Listar();
+            }
+            else
+            {
+                resultado = await servicio.BuscarPorTipoAeronave(codigo);
+            }
+
+            return View(resultado);
+        }
         #endregion
 
         #region DELETE

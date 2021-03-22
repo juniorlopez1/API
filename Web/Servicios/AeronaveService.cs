@@ -23,6 +23,8 @@ namespace Web.Servicios
         //SEARCH
         Task<AeronaveViewModel> Buscar(string codigo);
 
+        Task<List<AeronaveViewModel>> BuscarPorTipoAeronave(string codigo);
+
     }
 
     public class AeronaveService : ServicioBase, IAeronaveService
@@ -71,6 +73,11 @@ namespace Web.Servicios
         public async Task<AeronaveViewModel> Buscar(string codigo)
         {
             return await GetAsync<AeronaveViewModel>($"aeronave/{codigo}").ConfigureAwait(false);
+        }
+
+        public async Task<List<AeronaveViewModel>> BuscarPorTipoAeronave(string codigo)
+        {
+            return await GetAsync<List<AeronaveViewModel>>($"aeronave/tipo-aeronave/{codigo}").ConfigureAwait(false);
         }
         #endregion
 
