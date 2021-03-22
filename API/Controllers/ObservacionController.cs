@@ -8,86 +8,87 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    //Poner el prefix necesario para el API route
+    //Se especifica el APIController para la publicacion de servicios
     [ApiController]
+
+    //Se especifica la ruta Prefix del controller
     [Route("api/observacion")]
 
-    //ControllerBase en lugar de Controller porque no se ocupan vistas aca
-    //No se necesita interfaz en el API, 
-    //Solo es necesario consumir servicios
-
-
+    //ControllerBase porque no devuelve vistas. (No se ocupa para el API)
     public class ObservacionController : ControllerBase
     {
-        #region Implementación de Servicios
-        private readonly IObservacionService observacionsvc;
-
+        //Esta region implementa los servicios - interfaz de la capa de logica
+        #region Servicios
+        private readonly IObservacionService servicio;
         #endregion
 
+        //Esta region es el constructor que inicializa el servicio de la capa de logica
         #region Constructor
-        public ObservacionController(IObservacionService observacionsvc)
+        public ObservacionController(IObservacionService servicio)
         {
-            this.observacionsvc = observacionsvc;
+            this.servicio = servicio;
         }
-
         #endregion
 
+        //Esta region implementa CRUD y SEARCH adicionales para el filtro de reporteria
         #region CRUD
 
-
-        #region CREATE
         [HttpPost(Name = "CreateObservacion")]
-        public IActionResult Create(Observacion Observacion)
+        public IActionResult Create(Observacion entidad)
         {
-            observacionsvc.Crear(Observacion);
-            return CreatedAtRoute(nameof(Search), new { codigo = Observacion.Codigo }, Observacion);
-        }
-        #endregion
+            //Instancia la entidad
+            servicio.Crear(entidad);
 
-        #region READ
+            //Regresa la ruta de la entidad creada de acuerdo al key {Id o Codigo}
+            return CreatedAtRoute(nameof(Search), new { codigo = entidad.Codigo }, entidad);
+        }
+
         [HttpGet(Name = "ReadObservacion")]
         public IActionResult Read()
         {
-            var Observaciones = observacionsvc.Leer();
-            return Ok(Observaciones);
-        }
-        #endregion
+            //Crea la vista haciendo instancia del servicio
+            var view = servicio.Leer();
 
-        #region UPDATE
+            //Regresa el objeto Ok de NET Core con vista parametro
+            return Ok(view);
+        }
+
         [HttpPut(Name = "UpdateObservacion")]
-        public IActionResult Update(Observacion Observacion)
+        public IActionResult Update(Observacion entidad)
         {
-            observacionsvc.Actualizar(Observacion);
-            return CreatedAtRoute(nameof(Search), new { codigo = Observacion.Codigo }, Observacion);
-        }
-        #endregion
+            //Instancia la entidad
+            servicio.Actualizar(entidad);
 
-        #region DELETE
-        [HttpDelete("{codigo}", Name = "DeleteObservacion")]
+            //Regresa la ruta de la entidad creada de acuerdo al key {Id o Codigo}
+            return CreatedAtRoute(nameof(Search), new { codigo = entidad.Codigo }, entidad);
+        }
+
+        [HttpDelete("{codigo}", Name = "DeleteObservacion")] //Borrado fisico!
         public IActionResult Delete(string codigo)
         {
-            observacionsvc.Eliminar(codigo);
+            //Se elimina del todo el documento de mongodb
+            servicio.Eliminar(codigo);
+
+            //No regresa contenido
             return NoContent();
         }
-        #endregion
 
-        #region SEARCH
         [HttpGet("{codigo}", Name = "SearchObservacion")]
         public IActionResult Search(string codigo)
         {
-            var Observacion = observacionsvc.Buscar(codigo);
+            //Busca la entidad de acuerdo al key {Id, Codigo}
+            var entidad = servicio.Buscar(codigo);
 
-            if (Observacion == null)
+            //Si es nula "not found", Si no es nula regresa entidad
+            if (entidad == null)
             {
                 return NotFound();
             }
             else
             {
-                return Ok(Observacion);
+                return Ok(entidad);
             }
         }
-        #endregion
-
 
         #endregion
     }

@@ -8,86 +8,92 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    //Poner el prefix necesario para el API route
+    //Se especifica el APIController para la publicacion de servicios
     [ApiController]
+
+    //Se especifica la ruta Prefix del controller
     [Route("api/registro")]
 
-    //ControllerBase en lugar de Controller porque no se ocupan vistas aca
-    //No se necesita interfaz en el API, 
-    //Solo es necesario consumir servicios
-
-
+    //ControllerBase porque no devuelve vistas. (No se ocupa para el API)
     public class RegistroController : ControllerBase
     {
-        #region Implementación de Servicios
-        private readonly IRegistroService registrosvc;
-
+        //Esta region implementa los servicios - interfaz de la capa de logica
+        #region Servicios
+        private readonly IRegistroService servicio;
         #endregion
 
+        //Esta region es el constructor que inicializa el servicio de la capa de logica
         #region Constructor
         public RegistroController(IRegistroService registrosvc)
         {
-            this.registrosvc = registrosvc;
+            this.servicio = registrosvc;
         }
-
         #endregion
 
+        //Esta region implementa CRUD y SEARCH adicionales para el filtro de reporteria
         #region CRUD
+        //Nota:
+        //Pregunta :
+        //Se puede borrar o comentar el controller delete
+        //No tiene delete de ningun tipo. El registro no deberia de tener borrado fisico o logico
+        //Pregunta :
+        // SEARCH es necesario en este controller?
 
-
-        #region CREATE
         [HttpPost(Name = "CreateRegistro")]
-        public IActionResult Create(Registro Registro)
+        public IActionResult Create(Registro entidad)
         {
-            registrosvc.Crear(Registro);
-            return CreatedAtRoute(nameof(Search), new { codigo = Registro.Id }, Registro);
-        }
-        #endregion
+            //Instancia la entidad
+            servicio.Crear(entidad);
 
-        #region READ
+            //Regresa la ruta de la entidad creada de acuerdo al key {Id o Codigo}
+            return CreatedAtRoute(nameof(Search), new { codigo = entidad.Id }, entidad);
+        }
+
         [HttpGet(Name = "ReadRegistro")]
         public IActionResult Read()
         {
-            var Registroes = registrosvc.Leer();
-            return Ok(Registroes);
-        }
-        #endregion
+            //Crea la vista haciendo instancia del servicio
+            var view = servicio.Leer();
 
-        #region UPDATE
+            //Regresa el objeto Ok de NET Core con vista parametro
+            return Ok(view);
+        }
+
         [HttpPut(Name = "UpdateRegistro")]
-        public IActionResult Update(Registro Registro)
+        public IActionResult Update(Registro entidad)
         {
-            registrosvc.Actualizar(Registro);
-            return CreatedAtRoute(nameof(Search), new { codigo = Registro.Id }, Registro);
-        }
-        #endregion
+            //Instancia la entidad
+            servicio.Actualizar(entidad);
 
-        #region DELETE
-        [HttpDelete("{codigo}", Name = "DeleteRegistro")]
-        public IActionResult Delete(string codigo)
-        {
-            registrosvc.Eliminar(codigo);
-            return NoContent();
+            //Regresa la ruta de la entidad creada de acuerdo al key {Id o Codigo}
+            return CreatedAtRoute(nameof(Search), new { codigo = entidad.Id }, entidad);
         }
-        #endregion
 
-        #region SEARCH
         [HttpGet("{codigo}", Name = "SearchRegistro")]
         public IActionResult Search(string codigo)
         {
-            var Registro = registrosvc.Buscar(codigo);
+            //Busca la entidad de acuerdo al key {Id, Codigo}
+            var entidad = servicio.Buscar(codigo);
 
-            if (Registro == null)
+            //Si es nula "not found", Si no es nula regresa entidad
+            if (entidad == null)
             {
                 return NotFound();
             }
             else
             {
-                return Ok(Registro);
+                return Ok(entidad);
             }
         }
-        #endregion
 
+        #region DELETE
+        [HttpDelete("{codigo}", Name = "DeleteRegistro")]
+        public IActionResult Delete(string codigo)
+        {
+            servicio.Eliminar(codigo);
+            return NoContent();
+        }
+        #endregion
 
         #endregion
     }

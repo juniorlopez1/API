@@ -7,87 +7,88 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace API.Controllers
-{ 
-    //Poner el prefix necesario para el API route
+{
+    //Se especifica el APIController para la publicacion de servicios
     [ApiController]
+
+    //Se especifica la ruta Prefix del controller
     [Route("api/estadovuelo")]
 
-    //ControllerBase en lugar de Controller porque no se ocupan vistas aca
-    //No se necesita interfaz en el API, 
-    //Solo es necesario consumir servicios
-
-
+    //ControllerBase porque no devuelve vistas. (No se ocupa para el API)
     public class EstadoVueloController : ControllerBase
     {
-        #region Implementación de Servicios
-        private readonly IEstadoVueloService estadovuelosvc;
-
+        //Esta region implementa los servicios - interfaz de la capa de logica
+        #region Services
+        private readonly IEstadoVueloService servicio;
         #endregion
 
+        //Esta region es el constructor que inicializa el servicio de la capa de logica
         #region Constructor
-        public EstadoVueloController(IEstadoVueloService estadovuelosvc)
+        public EstadoVueloController(IEstadoVueloService servicio)
         {
-            this.estadovuelosvc = estadovuelosvc;
+            this.servicio = servicio;
         }
-
         #endregion
 
+        //Esta region implementa CRUD y SEARCH adicionales para el filtro de reporteria
         #region CRUD
 
-
-        #region CREATE
         [HttpPost(Name = "CreateEstadoVuelo")]
-        public IActionResult Create(EstadoVuelo EstadoVuelo)
+        public IActionResult Create(EstadoVuelo entidad)
         {
-            estadovuelosvc.Crear(EstadoVuelo);
-            return CreatedAtRoute("SearchEstadoVuelo", new { codigo = EstadoVuelo.Codigo }, EstadoVuelo);
-        }
-        #endregion
+            //Instancia la entidad
+            servicio.Crear(entidad);
 
-        #region READ
+            //Regresa la ruta de la entidad creada de acuerdo al key {Id o Codigo}
+            return CreatedAtRoute("SearchEstadoVuelo", new { codigo = entidad.Codigo }, entidad);
+        }
+
         [HttpGet(Name = "ReadEstadoVuelo")]
         public IActionResult Read()
         {
-            var EstadoVueloes = estadovuelosvc.Leer();
-            return Ok(EstadoVueloes);
-        }
-        #endregion
+            //Crea la vista haciendo instancia del servicio
+            var view = servicio.Leer();
 
-        #region UPDATE
+            //Regresa el objeto Ok de NET Core con vista parametro
+            return Ok(view);
+        }
+
         [HttpPut(Name = "UpdateEstadoVuelo")]
-        public IActionResult Update(EstadoVuelo EstadoVuelo)
+        public IActionResult Update(EstadoVuelo entidad)
         {
-            estadovuelosvc.Actualizar(EstadoVuelo);
-            return CreatedAtRoute("SearchEstadoVuelo", new { codigo = EstadoVuelo.Codigo }, EstadoVuelo);
-        }
-        #endregion
+            //Instancia la entidad
+            servicio.Actualizar(entidad);
 
-        #region DELETE
-        [HttpDelete("{codigo}", Name = "DeleteEstadoVuelo")]
+            //Regresa la ruta de la entidad creada de acuerdo al key {Id o Codigo}
+            return CreatedAtRoute("SearchEstadoVuelo", new { codigo = entidad.Codigo }, entidad);
+        }
+
+        [HttpDelete("{codigo}", Name = "DeleteEstadoVuelo")] //Borrado fisico!
         public IActionResult Delete(string codigo)
         {
-            estadovuelosvc.Eliminar(codigo);
+            //Se elimina del todo el documento de mongodb
+            servicio.Eliminar(codigo);
+
+            //No regresa contenido
             return NoContent();
         }
-        #endregion
 
-        #region SEARCH
         [HttpGet("{codigo}", Name = "SearchEstadoVuelo")]
         public IActionResult Search(string codigo)
         {
-            var EstadoVuelo = estadovuelosvc.Buscar(codigo);
+            //Busca la entidad de acuerdo al key {Id, Codigo}
+            var entidad = servicio.Buscar(codigo);
 
-            if (EstadoVuelo == null)
+            //Si es nula "not found", Si no es nula regresa entidad
+            if (entidad == null)
             {
                 return NotFound();
             }
             else
             {
-                return Ok(EstadoVuelo);
+                return Ok(entidad);
             }
         }
-        #endregion
-
 
         #endregion
     }

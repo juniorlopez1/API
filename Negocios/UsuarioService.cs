@@ -6,54 +6,46 @@ using System.Text;
 
 namespace Negocios
 {
-    //Consta del servicio e interfaz
+    public interface IUsuarioService
+    {
+        void Crear(Usuario Usuario);
+        List<Usuario> Leer();
+        void Actualizar(Usuario Usuario);
+        void Eliminar(string Codigo);
+        Usuario Buscar(string Codigo);
+        Usuario BuscarPonombreUsuarioContrasena(string nombreUsuario, string contrasenna);
 
+    }
 
-    //-------------------------Servicio -------------------------
     public class UsuarioService : IUsuarioService
     {
-        #region Members
-        //Establece propiedades para acceso a datos
-        private readonly DatosUsuario accesoDatos;
-        #endregion
 
-        #region Constructor
-        //Inicializa el servicio
+        private readonly DatosUsuario accesoDatos;
+
         public UsuarioService (DatosUsuario accesoDatos)
         {
             this.accesoDatos = accesoDatos;
         }
-        #endregion
 
-        #region CREATE
+
+        #region CRUD
+
         public void Crear(Usuario Usuario)
         {
             accesoDatos.Crear(Usuario);
         }
-        #endregion
-
-        #region READ
         public List<Usuario> Leer()
         {
             return accesoDatos.Leer();
         }
-        #endregion
-
-        #region UPDATE
         public void Actualizar(Usuario Usuario)
         {
             accesoDatos.Actualizar(Usuario);
         }
-        #endregion
-
-        #region DELETE
         public void Eliminar(string Codigo)
         {
             accesoDatos.Eliminar(Codigo);
         }
-        #endregion
-
-        #region SEARCH
         public Usuario Buscar(string Codigo)
         {
             return accesoDatos.Buscar(Codigo);
@@ -62,46 +54,11 @@ namespace Negocios
         public Usuario BuscarPonombreUsuarioContrasena(string nombreUsuario, string contrasenna)
         {
             return accesoDatos.BuscarPorNombreUsuarioContrasena(nombreUsuario, contrasenna);
-        }
+        } 
         #endregion
     }
 
 
 
-
-
-
-
-
-
-    //-------------------------Interfaz -------------------------
-    public interface IUsuarioService
-    {
-        //Metodos exponen el servicio atraves de la interfaz
-
-        #region CREATE
-        void Crear(Usuario Usuario);
-        #endregion
-
-        #region READ
-        List<Usuario> Leer();
-        #endregion
-
-        #region UPDATE
-        void Actualizar(Usuario Usuario);
-        #endregion
-
-        #region DELETE
-        void Eliminar(string Codigo);
-        #endregion
-
-        #region SEARCH
-        Usuario Buscar(string Codigo);
-
-        Usuario BuscarPonombreUsuarioContrasena(string nombreUsuario, string contrasenna);
-
-        #endregion
-
-    }
 }
 

@@ -8,88 +8,93 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    //Poner el prefix necesario para el API route
+    //Se especifica el APIController para la publicacion de servicios
     [ApiController]
+
+    //Se especifica la ruta Prefix del controller
     [Route("api/perfil")]
 
-    //ControllerBase en lugar de Controller porque no se ocupan vistas aca
-    //No se necesita interfaz en el API, 
-    //Solo es necesario consumir servicios
-
-
+    //ControllerBase porque no devuelve vistas. (No se ocupa para el API)
     public class PerfilController : ControllerBase
     {
-        #region Implementación de Servicios
-        private readonly IPerfilService perfilsvc;
-
+        //Esta region implementa los servicios - interfaz de la capa de logica
+        #region Servicios
+        private readonly IPerfilService servicio;
         #endregion
 
+        //Esta region es el constructor que inicializa el servicio de la capa de logica
         #region Constructor
-        public PerfilController (IPerfilService perfilService)
+        public PerfilController (IPerfilService servicio)
         {
-            this.perfilsvc = perfilService;
+            this.servicio = servicio;
         }
-
         #endregion
 
+        //Esta region implementa CRUD y SEARCH adicionales para el filtro de reporteria
         #region CRUD
 
-
-        #region CREATE
         [HttpPost(Name = "CreatePerfil")]
-        public IActionResult Create(Perfil perfil)
+        public IActionResult Create(Perfil entidad)
         {
-            perfilsvc.Crear(perfil);
-            return CreatedAtRoute("SearchPerfil", new { codigo = perfil.Codigo }, perfil);
-        }
-        #endregion
+            //Instancia la entidad
+            servicio.Crear(entidad);
 
-        #region READ
+            //Regresa la ruta de la entidad creada de acuerdo al key {Id o Codigo}
+            return CreatedAtRoute("SearchPerfil", new { codigo = entidad.Codigo }, entidad);
+        }
+
         [HttpGet(Name = "ReadPerfil")]
         public IActionResult Read()
         {
-            var perfiles = perfilsvc.Leer();
-            return Ok(perfiles);
-        }
-        #endregion
+            //Crea la vista haciendo instancia del servicio
+            var view = servicio.Leer();
 
-        #region UPDATE
+            //Regresa el objeto Ok de NET Core con vista parametro
+            return Ok(view);
+        }
+
         [HttpPut(Name = "UpdatePerfil")]
-        public IActionResult Update(Perfil perfil)
+        public IActionResult Update(Perfil entidad)
         {
-            perfilsvc.Actualizar(perfil);
-            return CreatedAtRoute(nameof(Search), new { codigo = perfil.Codigo }, perfil);
-        }
-        #endregion
+            //Instancia la entidad
+            servicio.Actualizar(entidad);
 
-        #region DELETE
-        [HttpDelete("{codigo}", Name = "DeletePerfil")]
+            //Regresa la ruta de la entidad creada de acuerdo al key {Id o Codigo}
+            return CreatedAtRoute(nameof(Search), new { codigo = entidad.Codigo }, entidad);
+        }
+
+        [HttpDelete("{codigo}", Name = "DeletePerfil")] //Borrado logico!
         public IActionResult Delete(string codigo)
         {
-            var perfil = perfilsvc.Buscar(codigo);
-            perfil.Estado = false;
-            perfilsvc.Actualizar(perfil);
+            //Variable que implementa "Search" metodo adicional
+            var match = servicio.Buscar(codigo);
+
+            //Es un borrado logico, Estado {true, false}
+            match.Estado = false;
+
+            //Instancia del servicio de acuerdo al valor de la variable
+            servicio.Actualizar(match);
+
+            //No regresa contenido es un borrado logico
             return NoContent();
         }
-        #endregion
 
-        #region SEARCH
         [HttpGet("{codigo}", Name = "SearchPerfil")]
         public IActionResult Search(string codigo)
         {
-            var perfil = perfilsvc.Buscar(codigo);
+            //Busca la entidad de acuerdo al key {Id, Codigo}
+            var entidad = servicio.Buscar(codigo);
 
-            if (perfil == null)
+            //Si es nula "not found", Si no es nula regresa entidad
+            if (entidad == null)
             {
                 return NotFound();
             }
             else
             {
-                return Ok(perfil);
+                return Ok(entidad);
             }
         }
-        #endregion
-
 
         #endregion
     }

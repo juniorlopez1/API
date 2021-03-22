@@ -1,0 +1,29 @@
+
+--------------------- project : API - DEBUG
+
+Profile:
+API
+
+Launch:
+Project
+
+Browser:
+None
+
+App URL:
+https://localhost:5001;http://localhost:5000
+
+
+--------------------- project : WEB
+
+Profile:
+IIS Express
+
+Launch:
+IIS Express
+
+Browser:
+Launch
+
+App URL:
+https://localhost:*****

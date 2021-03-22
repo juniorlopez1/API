@@ -8,88 +8,99 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    //Poner el prefix necesario para el API route
+    //Se especifica el APIController para la publicacion de servicios
     [ApiController]
+
+    //Se especifica la ruta Prefix del controller
     [Route("api/usuario")]
 
-    //ControllerBase en lugar de Controller porque no se ocupan vistas aca
-    //No se necesita interfaz en el API, 
-    //Solo es necesario consumir servicios
-
-
-
+    //ControllerBase porque no devuelve vistas. (No se ocupa para el API)
     public class UsuarioController : ControllerBase
     {
-        #region Implementación de Servicios
-        private readonly IUsuarioService usuariosvc;
-
+        //Esta region implementa los servicios - interfaz de la capa de logica
+        #region Servicios
+        private readonly IUsuarioService servicio;
         #endregion
 
+        //Esta region es el constructor que inicializa el servicio de la capa de logica
         #region Constructor
-        public UsuarioController(IUsuarioService usuarioService)
+        public UsuarioController(IUsuarioService servicio)
         {
-            this.usuariosvc = usuarioService;
+            this.servicio = servicio;
         }
         #endregion
 
+        //Esta region implementa CRUD y SEARCH adicionales para el filtro de reporteria
         #region CRUD
+        // Este controller incluye gestion de contraseñas
 
-        #region CREATE
         [HttpPost(Name = "CreateUsuario")]
-        public IActionResult Create(Usuario usuario)
+        public IActionResult Create(Usuario entidad)
         {
-            usuariosvc.Crear(usuario);
-            return CreatedAtRoute(nameof(Search), new { codigo = usuario.Id }, usuario);
-        }
-        #endregion
+            //Instancia la entidad
+            servicio.Crear(entidad);
 
-        #region READ
+            //Regresa la ruta de la entidad creada de acuerdo al key {Id o Codigo}
+            return CreatedAtRoute(nameof(Search), new { codigo = entidad.Id }, entidad);
+        }
+
         [HttpGet(Name = "ReadUsuario")]
         public IActionResult Read()
         {
-            var usuario = usuariosvc.Leer();
-            return Ok(usuario);
-        }
-        #endregion
+            //Crea la vista haciendo instancia del servicio
+            var view = servicio.Leer();
 
-        #region UPDATE
+            //Regresa el objeto Ok de NET Core con vista parametro
+            return Ok(view);
+        }
+
         [HttpPut(Name = "UpdateUsuario")]
-        public IActionResult Update(Usuario usuario)
+        public IActionResult Update(Usuario entidad)
         {
-            usuariosvc.Actualizar(usuario);
-            return CreatedAtRoute(nameof(Search), new { codigo = usuario.Id }, usuario);
-        }
-        #endregion
+            //Instancia la entidad
+            servicio.Actualizar(entidad);
 
-        #region DELETE
-        [HttpDelete("{codigo}", Name = "DeleteUsuario")]
+            //Regresa la ruta de la entidad creada de acuerdo al key {Id o Codigo}
+            return CreatedAtRoute(nameof(Search), new { codigo = entidad.Id }, entidad);
+        }
+
+        [HttpDelete("{codigo}", Name = "DeleteUsuario")] //Borrado logico!
         public IActionResult Delete(string codigo)
         {
-            usuariosvc.Eliminar (codigo);
+            //Variable que implementa "Search" metodo adicional
+            var match = servicio.Buscar(codigo);
+
+            //Es un borrado logico, Estado {true, false}
+            match.Estado = false;
+
+            //Instancia del servicio de acuerdo al valor de la variable
+            servicio.Actualizar(match);
+
+            //No regresa contenido es un borrado logico
             return NoContent();
         }
-        #endregion
 
-        #region SEARCH
         [HttpGet("{codigo}", Name = "SerchUsuario")]
         public IActionResult Search(string codigo)
         {
-            var usuario = usuariosvc.Buscar(codigo);
+            //Busca la entidad de acuerdo al key {Id, Codigo}
+            var entidad = servicio.Buscar(codigo);
 
-            if (usuario == null)
+            //Si es nula "not found", Si no es nula regresa entidad
+            if (entidad == null)
             {
                 return NotFound();
             }
             else
             {
-                return Ok(usuario);
+                return Ok(entidad);
             }
         }
 
-        [HttpPost("autenticar",Name = "Autenticar")]
+        [HttpPost("autenticar", Name = "Autenticar")]
         public IActionResult Autenticar(Credenciales credenciales)
         {
-            var usuario = usuariosvc.BuscarPonombreUsuarioContrasena(credenciales.NombreUsuario, credenciales.Contrasena);
+            var usuario = servicio.BuscarPonombreUsuarioContrasena(credenciales.NombreUsuario, credenciales.Contrasena);
 
             if (usuario == null)
             {
@@ -100,7 +111,6 @@ namespace API.Controllers
                 return Ok(usuario);
             }
         }
-        #endregion
 
         #endregion
 

@@ -8,82 +8,93 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
+    //Se especifica el APIController para la publicacion de servicios
     [ApiController]
+
+    //Se especifica la ruta Prefix del controller
     [Route("api/aeronavetipo")]
+
+    //ControllerBase porque no devuelve vistas. (No se ocupa para el API)
     public class AeronaveTipoController : ControllerBase
     {
-        #region Implementación de Servicios
-        private readonly IAeronaveTipoService aeronavetiposvc;
-
+        //Esta region implementa los servicios - interfaz de la capa de logica
+        #region Services
+        private readonly IAeronaveTipoService servicio;
         #endregion
 
+        //Esta region es el constructor que inicializa el servicio de la capa de logica
         #region Constructor
-        public AeronaveTipoController(IAeronaveTipoService aeronavetiposvc)
+        public AeronaveTipoController(IAeronaveTipoService servicio)
         {
-            this.aeronavetiposvc = aeronavetiposvc;
+            this.servicio = servicio;
         }
-
         #endregion
 
+        //Esta region implementa CRUD y SEARCH adicionales para el filtro de reporteria
         #region CRUD
 
-
-        #region CREATE
         [HttpPost(Name = "CreateAeronaveTipo")]
-        public IActionResult Create(AeronaveTipo AeronaveTipo)
+        public IActionResult Create(AeronaveTipo entidad)
         {
-            aeronavetiposvc.Crear(AeronaveTipo);
-            return CreatedAtRoute(nameof(Search), new { codigo = AeronaveTipo.Codigo }, AeronaveTipo);
-        }
-        #endregion
+            //Instancia la entidad
+            servicio.Crear(entidad);
 
-        #region READ
+            // Regresa la ruta de la entidad creada de acuerdo al key { Id o Codigo}
+            return CreatedAtRoute(nameof(Search), new { codigo = entidad.Codigo }, entidad);
+        }
+
         [HttpGet(Name = "ReadAeronaveTipo")]
         public IActionResult Read()
         {
-            var AeronaveTipoes = aeronavetiposvc.Leer();
-            return Ok(AeronaveTipoes);
-        }
-        #endregion
+            //Crea la vista haciendo instancia del servicio
+            var view = servicio.Leer();
 
-        #region UPDATE
+            //Regresa el objeto Ok de NET Core con vista parametro
+            return Ok(view);
+        }
+
         [HttpPut(Name = "UpdateAeronaveTipo")]
-        public IActionResult Update(AeronaveTipo AeronaveTipo)
+        public IActionResult Update(AeronaveTipo entidad)
         {
-            aeronavetiposvc.Actualizar(AeronaveTipo);
-            return CreatedAtRoute(nameof(Search), new { codigo = AeronaveTipo.Codigo }, AeronaveTipo);
-        }
-        #endregion
+            //Instancia la entidad
+            servicio.Actualizar(entidad);
 
-        #region DELETE
+            //Regresa la ruta de la entidad creada de acuerdo al key {Id o Codigo}
+            return CreatedAtRoute(nameof(Search), new { codigo = entidad.Codigo }, entidad);
+        }
   
-        [HttpDelete("{codigo}", Name = "DeleteAeronaveTipo")]
+        [HttpDelete("{codigo}", Name = "DeleteAeronaveTipo")] //Borrado logico!
         public IActionResult Delete(string codigo)
         {
-            var perfil = aeronavetiposvc.Buscar(codigo);
-            perfil.Estado = false;
-            aeronavetiposvc.Actualizar(perfil);
+            //Variable que implementa "Search" metodo adicional
+            var match = servicio.Buscar(codigo);
+
+            //Es un borrado logico, Estado {true, false}
+            match.Estado = false;
+
+            //Instancia del servicio de acuerdo al valor de la variable
+            servicio.Actualizar(match);
+
+            //No regresa contenido es un borrado logico
             return NoContent();
         }
-        #endregion
 
-        #region SEARCH
         [HttpGet("{codigo}", Name = "SearchAeronaveTipo")]
         public IActionResult Search(string codigo)
         {
-            var AeronaveTipo = aeronavetiposvc.Buscar(codigo);
+            //Busca la entidad de acuerdo al key {Id, Codigo}
+            var entidad = servicio.Buscar(codigo);
 
-            if (AeronaveTipo == null)
+            //Si es nula "not found", Si no es nula regresa entidad
+            if (entidad == null)
             {
                 return NotFound();
             }
             else
             {
-                return Ok(AeronaveTipo);
+                return Ok(entidad);
             }
         }
-        #endregion
-
 
         #endregion
     }
