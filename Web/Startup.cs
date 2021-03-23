@@ -26,6 +26,7 @@ namespace Web
         {
             var baseurl = @"https://localhost:5001/api";
             services.AddControllersWithViews();
+
             services.AddScoped<IAeronaveService>((x) => new AeronaveService(baseurl));
             services.AddScoped<IAeronaveTipoService>((x) => new AeronaveTipoService(baseurl));
             services.AddScoped<IEstadoVueloService>((x) => new EstadoVueloService(baseurl));
@@ -33,8 +34,8 @@ namespace Web
             services.AddScoped<IPerfilService>((x) => new PerfilService(baseurl));
             services.AddScoped<IRegistroService>((x) => new RegistroService(baseurl));
             services.AddScoped <IUsuarioService>((x) => new UsuarioService(baseurl));
-
-
+            services.AddScoped<IEmailService>((x) => new GmailEmailService("smtp.gmail.com", "",""));
+            services.AddScoped<IRestablecimientoService>((x) => new RestablecimientoService(baseurl, x.GetService<IEmailService>()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

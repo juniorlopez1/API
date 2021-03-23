@@ -34,7 +34,8 @@ namespace Datos
 
         public void Eliminar(string Codigo)
         {
-            Eliminar<Usuario>(nameof(Usuario), (u) => u.Codigo == Codigo);
+            var filter = Builders<Usuario>.Filter.Eq(x => x.Codigo, Codigo);
+            Eliminar<Usuario>(nameof(Usuario), filter);
         }
 
         public Usuario Buscar(string Codigo)
@@ -50,6 +51,16 @@ namespace Datos
         public Usuario BuscarEstadoUsuario (string estadoUsuario)
         {
             return Buscar<Usuario>(nameof(Usuario), (u) => u.Estado  ).FirstOrDefault();
+        }
+
+        public Usuario BuscarPorNombreUsuario(string nombreUsuario)
+        {
+            return Buscar<Usuario>(nameof(Usuario), (u) => u.NombreUsuario == nombreUsuario).FirstOrDefault();
+        }
+
+        public Usuario BuscarPorId(string id)
+        {
+            return Buscar<Usuario>(nameof(Usuario), (u) => u.Id == id).FirstOrDefault();
         }
     }
 }

@@ -123,7 +123,7 @@ namespace Acceso
             }
         }
 
-        protected void Eliminar<T>(string nombreColeccion, Expression<Func<T, bool>> filtro)
+        protected void Eliminar<T>(string nombreColeccion, FilterDefinition<T> filtro)
         {
             try
             {

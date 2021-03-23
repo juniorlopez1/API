@@ -65,6 +65,7 @@ namespace API
             services.AddScoped<IPerfilService, PerfilService>();
             services.AddScoped<IRegistroService, RegistroService > ();
             services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IRestablecimientoService, RestablecimientoService>();
 
             //Se enlaza con la capa de acceso a datos y base de datos
             services.AddScoped((factory) => new DatosAeronave(conexionString, nombreBD));
@@ -74,6 +75,7 @@ namespace API
             services.AddScoped((factory) => new DatosPerfil(conexionString, nombreBD));
             services.AddScoped((factory) => new DatosRegistro(conexionString, nombreBD));
             services.AddScoped((factory) => new DatosUsuario(conexionString, nombreBD));
+            services.AddScoped((factory) => new DatosRestablecimiento(conexionString, nombreBD));
 
             #endregion
         }

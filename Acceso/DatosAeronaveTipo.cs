@@ -33,7 +33,8 @@ namespace Datos
 
         public void Eliminar(string Codigo)
         {
-            Eliminar<AeronaveTipo>(nameof(AeronaveTipo), (u) => u.Codigo == Codigo);
+            var filter = Builders<AeronaveTipo>.Filter.Eq(x => x.Codigo, Codigo);
+            Eliminar<AeronaveTipo>(nameof(AeronaveTipo), filter);
         }
 
         public AeronaveTipo Buscar(string Codigo)
