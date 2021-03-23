@@ -24,7 +24,7 @@ namespace API.Controllers
 
         //Esta region es el constructor que inicializa el servicio de la capa de logica
         #region Constructor
-        public AeronaveController (IAeronaveService servicio)
+        public AeronaveController(IAeronaveService servicio)
         {
             this.servicio = servicio;
         }
@@ -115,6 +115,41 @@ namespace API.Controllers
             }
         }
 
-        
+
+        //!
+        [HttpGet("observacion/{observacion}", Name = "SearchByObservacion")]
+        public IActionResult SearchByObservacion(string Observacion)
+        {
+            //Busca la entidad de acuerdo al key {Id, Codigo}
+            var entidad = servicio.BuscarPorObservacion(Observacion.Equals("activos", StringComparison.CurrentCultureIgnoreCase));
+
+            //Si es nula "not found", Si no es nula regresa entidad
+            if (entidad == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(entidad);
+            }
+        }
+
+        //!
+        [HttpGet("descripcion/{desperfecto}", Name = "SearchByDesperfecto")]
+        public IActionResult SearchByDescripcion(string Desperfecto)
+        {
+            //Busca la entidad de acuerdo al key {Id, Codigo}
+            var entidad = servicio.BuscarPorDesperfecto(Desperfecto.Equals("activos", StringComparison.CurrentCultureIgnoreCase));
+
+            //Si es nula "not found", Si no es nula regresa entidad
+            if (entidad == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(entidad);
+            }
+        }
     }
 }

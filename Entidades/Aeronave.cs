@@ -25,6 +25,15 @@ namespace Entidades
         [BsonElement(nameof(Estado))]
         public bool Estado { get; set; }
 
+        //!
+        [BsonElement(nameof(Observacion))]
+        public bool Observacion { get; set; }
+
+        //!
+        [BsonElement(nameof(Desperfecto))]
+        public bool Desperfecto { get; set; }
+
+
         [BsonElement(nameof(AeronaveTipo))]
         public AeronaveTipo AeronaveTipo { get; set; }
 
@@ -32,13 +41,15 @@ namespace Entidades
 
 
         #region Constructor
-        public Aeronave ()
+        public Aeronave()
         {
             Id = string.Empty;
             Codigo = string.Empty;
             Estado = true;
             Capacidad = 0;
-            AeronaveTipo = new AeronaveTipo ();
+            AeronaveTipo = new AeronaveTipo();
+            Observacion = true;
+            Desperfecto = true;
         }
         #endregion
     }

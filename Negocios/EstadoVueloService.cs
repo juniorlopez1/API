@@ -12,8 +12,8 @@ namespace Negocios
         List<EstadoVuelo> Leer();
         void Actualizar(EstadoVuelo EstadoVuelo);
         void Eliminar(string id);
-        EstadoVuelo Buscar(string id);
-        List<EstadoVuelo> BuscarPorEstadoVuelo (string Codigo);
+        EstadoVuelo Buscar(string Codigo);
+        List<EstadoVuelo> BuscarPorEstadoVuelo(string Codigo);
 
 
     }

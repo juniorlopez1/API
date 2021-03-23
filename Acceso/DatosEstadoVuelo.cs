@@ -30,7 +30,7 @@ namespace Datos
             var filter = Builders<EstadoVuelo>.Filter.Eq(x => x.Codigo, EstadoVuelo.Codigo);
             Actualizar<EstadoVuelo>(nameof(EstadoVuelo), filter, EstadoVuelo);
         }
-    
+
         public void Eliminar(string Codigo)
         {
             var filter = Builders<EstadoVuelo>.Filter.Eq(x => x.Codigo, Codigo);
@@ -42,7 +42,7 @@ namespace Datos
             return Buscar<EstadoVuelo>(nameof(EstadoVuelo), (u) => u.Codigo == Codigo).FirstOrDefault();
         }
 
-        public List<EstadoVuelo> BuscarPorEstadoVuelo (string codigo)
+        public List<EstadoVuelo> BuscarPorEstadoVuelo(string codigo)
         {
             return Buscar<EstadoVuelo>(nameof(EstadoVuelo), (u) => u.Codigo == codigo);
         }

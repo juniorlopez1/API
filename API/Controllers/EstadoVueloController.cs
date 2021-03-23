@@ -76,13 +76,11 @@ namespace API.Controllers
         #endregion
 
 
-
-
         [HttpGet("{codigo}", Name = "SearchEstadoVuelo")]
-        public IActionResult Search(string codigo)
+        public IActionResult SearchById(string Codigo)
         {
             //Busca la entidad de acuerdo al key {Id, Codigo}
-            var entidad = servicio.Buscar(codigo);
+            var entidad = servicio.Buscar(Codigo);
 
             //Si es nula "not found", Si no es nula regresa entidad
             if (entidad == null)
@@ -95,7 +93,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpGet("estadovuelo/{codigo}", Name = "SearchByEstadoVuelo")]
+        [HttpGet("estado-vuelo/{codigo}", Name = "SearchByEstadoVuelo")]
         public IActionResult SearchByTipoAeronave(string codigo)
         {
             //Busca la entidad de acuerdo al key {Id, Codigo}

@@ -95,6 +95,7 @@ namespace Web.Controllers
             return View();
         }
 
+
         public async Task<IActionResult> Reporte(string codigo)
         {
             List<UsuarioViewModel> resultado;
@@ -127,8 +128,8 @@ namespace Web.Controllers
             }
 
             var usuario = await servicio.Autenticar(credenciales);
-            
-            if(usuario == null)
+
+            if (usuario == null)
             {
                 ModelState.AddModelError("", "Nombre de usuario o contraseña invalidos");
                 return View("Login", credenciales);

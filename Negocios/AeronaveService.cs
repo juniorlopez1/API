@@ -15,6 +15,11 @@ namespace Negocios
         Aeronave Buscar(string Codigo);
         List<Aeronave> BuscarPorTipoAeronave(string Codigo);
 
+        //!
+        List<Aeronave> BuscarPorObservacion(bool Observacion);
+        //!
+        List<Aeronave> BuscarPorDesperfecto(bool Descripcion);
+
     }
 
     public class AeronaveService : IAeronaveService
@@ -27,7 +32,7 @@ namespace Negocios
         }
 
         #region CRUD
-        public void Crear (Aeronave aeronave)
+        public void Crear(Aeronave aeronave)
         {
             accesoDatos.Crear(aeronave);
         }
@@ -37,12 +42,12 @@ namespace Negocios
             return accesoDatos.Leer();
         }
 
-        public void Actualizar (Aeronave aeronave)
+        public void Actualizar(Aeronave aeronave)
         {
             accesoDatos.Actualizar(aeronave);
         }
 
-        public void Eliminar (string Codigo)
+        public void Eliminar(string Codigo)
         {
             accesoDatos.Eliminar(Codigo);
         }
@@ -50,7 +55,7 @@ namespace Negocios
         #endregion
 
 
-        public Aeronave Buscar (string Codigo)
+        public Aeronave Buscar(string Codigo)
         {
             return accesoDatos.Buscar(Codigo);
         }
@@ -59,6 +64,18 @@ namespace Negocios
         {
             return accesoDatos.BuscarPorTipoAeronave(Codigo);
         }
-        
+
+        //!
+        public List<Aeronave> BuscarPorObservacion(bool Observacion)
+        {
+            return accesoDatos.BuscarPorObservacion(Observacion);
+        }
+
+        //!
+        public List<Aeronave> BuscarPorDesperfecto(bool Desperfecto)
+        {
+            return accesoDatos.BuscarPorDesperfecto(Desperfecto);
+        }
+
     }
 }

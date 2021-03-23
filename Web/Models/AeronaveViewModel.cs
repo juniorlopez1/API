@@ -10,12 +10,19 @@ namespace Web.Models
     {
         public string Id { get; set; }
 
-        [Required (ErrorMessage ="Requerido")]
+        [Required(ErrorMessage = "Requerido")]
         public string Codigo { get; set; }
         [Required(ErrorMessage = "Requerido")]
         public int Capacidad { get; set; }
 
         public bool Estado { get; set; }
+
+        //!
+        public bool Observacion { get; set; }
+
+        //!
+        public bool Desperfecto { get; set; }
+
 
         //Otras entidades
         public AeronaveTipoViewModel AeronaveTipo { get; set; }

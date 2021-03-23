@@ -30,7 +30,7 @@ namespace Datos
             var filter = Builders<Aeronave>.Filter.Eq(x => x.Codigo, aeronave.Codigo);
             Actualizar<Aeronave>(nameof(Aeronave), filter, aeronave);
         }
-  
+
         public void Eliminar(string Codigo)
         {
             var filter = Builders<Aeronave>.Filter.Eq(x => x.Codigo, Codigo);
@@ -46,6 +46,20 @@ namespace Datos
         {
             return Buscar<Aeronave>(nameof(Aeronave), (u) => u.AeronaveTipo.Codigo == codigo);
         }
+
+        //!
+        public List<Aeronave> BuscarPorObservacion(bool Observacion)
+        {
+            return Buscar<Aeronave>(nameof(Aeronave), (u) => u.Observacion == Observacion).ToList();
+        }
+
+        //!
+        public List<Aeronave> BuscarPorDesperfecto(bool Desperfecto)
+        {
+            return Buscar<Aeronave>(nameof(Aeronave), (u) => u.Desperfecto == Desperfecto).ToList();
+        }
+
+
 
     }
 }

@@ -20,6 +20,10 @@ namespace Web.Servicios
 
         Task<List<AeronaveViewModel>> BuscarPorTipoAeronave(string codigo);
 
+        Task<AeronaveViewModel> BuscarPorDesperfecto(string Descripcion);
+
+        Task<AeronaveViewModel> BuscarPorObservacion(string Observacion);
+
     }
 
     public class AeronaveService : ServicioBase, IAeronaveService
@@ -30,7 +34,7 @@ namespace Web.Servicios
         {
             //Constructor con la base URL
         }
-        
+
 
         #region CRUD
 
@@ -67,5 +71,14 @@ namespace Web.Servicios
             return await GetAsync<List<AeronaveViewModel>>($"aeronave/tipo-aeronave/{codigo}").ConfigureAwait(false);
         }
 
+        public async Task<AeronaveViewModel> BuscarPorDesperfecto(string Desperfecto)
+        {
+            return await GetAsync<AeronaveViewModel>($"aeronave/desperfecto/{Desperfecto}").ConfigureAwait(false);
+        }
+
+        public async Task<AeronaveViewModel> BuscarPorObservacion(string Observacion)
+        {
+            return await GetAsync<AeronaveViewModel>($"aeronave/observacion/{Observacion}").ConfigureAwait(false);
+        }
     }
 }
