@@ -117,11 +117,11 @@ namespace API.Controllers
 
 
         //!
-        [HttpGet("observacion/{observacion}", Name = "SearchByObservacion")]
-        public IActionResult SearchByObservacion(string Observacion)
+        [HttpGet("observacion-prioritaria", Name = "SearchByObservacion")]
+        public IActionResult SearchByObservacion()
         {
             //Busca la entidad de acuerdo al key {Id, Codigo}
-            var entidad = servicio.BuscarPorObservacion(Observacion.Equals("activos", StringComparison.CurrentCultureIgnoreCase));
+            var entidad = servicio.AeronavesConObservacion();
 
             //Si es nula "not found", Si no es nula regresa entidad
             if (entidad == null)
@@ -135,11 +135,11 @@ namespace API.Controllers
         }
 
         //!
-        [HttpGet("descripcion/{desperfecto}", Name = "SearchByDesperfecto")]
-        public IActionResult SearchByDescripcion(string Desperfecto)
+        [HttpGet("desperfecto", Name = "SearchByDesperfecto")]
+        public IActionResult SearchByDesperfecto()
         {
             //Busca la entidad de acuerdo al key {Id, Codigo}
-            var entidad = servicio.BuscarPorDesperfecto(Desperfecto.Equals("activos", StringComparison.CurrentCultureIgnoreCase));
+            var entidad = servicio.AeronavesConDesperfecto();
 
             //Si es nula "not found", Si no es nula regresa entidad
             if (entidad == null)

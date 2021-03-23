@@ -104,39 +104,6 @@ namespace Web.Controllers
         }
 
 
-        //!
-        public IActionResult FiltrarPorObservacion()
-        {
-
-            var listaAeronaveObservacion = new List<SelectListItem>();
-            listaAeronaveObservacion.Add(new SelectListItem() { Text = "Todos", Selected = true, Value = string.Empty });
-            listaAeronaveObservacion.Add(new SelectListItem() { Text = "Activos", Value = "Activos" });
-            listaAeronaveObservacion.Add(new SelectListItem() { Text = "Inactivos", Value = "Inactivos" });
-
-            ViewBag.ListaAeronaveObservacion = listaAeronaveObservacion;
-
-            return View();
-        }
-
-
-
-        //!
-        public IActionResult FiltrarPorDesperfecto()
-        {
-
-            var listaAeronaveDesperfecto = new List<SelectListItem>();
-            listaAeronaveDesperfecto.Add(new SelectListItem() { Text = "Todos", Selected = true, Value = string.Empty });
-            listaAeronaveDesperfecto.Add(new SelectListItem() { Text = "Activos", Value = "Activos" });
-            listaAeronaveDesperfecto.Add(new SelectListItem() { Text = "Inactivos", Value = "Inactivos" });
-
-            ViewBag.ListaAeronaveDesperfecto = listaAeronaveDesperfecto;
-
-            return View();
-        }
-
-
-
-
         public async Task<IActionResult> Reporte(string codigo)
         {
             List<AeronaveViewModel> resultado = null;
@@ -153,6 +120,17 @@ namespace Web.Controllers
             return View(resultado);
         }
 
+        public async Task<IActionResult> ReporteDesperfecto()
+        {
+            List<AeronaveViewModel> resultado = await servicio.AeronavesConDesperfecto();
+            return View(resultado);
+        }
+
+        public async Task<IActionResult> ReporteObservacionPrioritaria()
+        {
+            List<AeronaveViewModel> resultado = await servicio.AeronavesConObservacion();    
+            return View(resultado);
+        }
 
     }
 }

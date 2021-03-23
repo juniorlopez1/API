@@ -48,15 +48,15 @@ namespace Datos
         }
 
         //!
-        public List<Aeronave> BuscarPorObservacion(bool Observacion)
+        public List<Aeronave> AeronavesConObservacion()
         {
-            return Buscar<Aeronave>(nameof(Aeronave), (u) => u.Observacion == Observacion).ToList();
+            return Buscar<Aeronave>(nameof(Aeronave), (u) => u.Observacion).ToList();
         }
 
         //!
-        public List<Aeronave> BuscarPorDesperfecto(bool Desperfecto)
+        public List<Aeronave> AeronavesConDesperfecto()
         {
-            return Buscar<Aeronave>(nameof(Aeronave), (u) => u.Desperfecto == Desperfecto).ToList();
+            return Buscar<Aeronave>(nameof(Aeronave), (u) => u.Desperfecto ).ToList();
         }
 
 

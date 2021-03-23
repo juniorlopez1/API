@@ -16,9 +16,9 @@ namespace Negocios
         List<Aeronave> BuscarPorTipoAeronave(string Codigo);
 
         //!
-        List<Aeronave> BuscarPorObservacion(bool Observacion);
+        List<Aeronave> AeronavesConObservacion();
         //!
-        List<Aeronave> BuscarPorDesperfecto(bool Descripcion);
+        List<Aeronave> AeronavesConDesperfecto();
 
     }
 
@@ -66,15 +66,15 @@ namespace Negocios
         }
 
         //!
-        public List<Aeronave> BuscarPorObservacion(bool Observacion)
+        public List<Aeronave> AeronavesConObservacion()
         {
-            return accesoDatos.BuscarPorObservacion(Observacion);
+            return accesoDatos.AeronavesConObservacion();
         }
 
         //!
-        public List<Aeronave> BuscarPorDesperfecto(bool Desperfecto)
+        public List<Aeronave> AeronavesConDesperfecto()
         {
-            return accesoDatos.BuscarPorDesperfecto(Desperfecto);
+            return accesoDatos.AeronavesConDesperfecto();
         }
 
     }

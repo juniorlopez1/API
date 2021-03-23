@@ -20,9 +20,9 @@ namespace Web.Servicios
 
         Task<List<AeronaveViewModel>> BuscarPorTipoAeronave(string codigo);
 
-        Task<AeronaveViewModel> BuscarPorDesperfecto(string Descripcion);
+        Task<List<AeronaveViewModel>> AeronavesConDesperfecto();
 
-        Task<AeronaveViewModel> BuscarPorObservacion(string Observacion);
+        Task<List<AeronaveViewModel>> AeronavesConObservacion();
 
     }
 
@@ -71,14 +71,14 @@ namespace Web.Servicios
             return await GetAsync<List<AeronaveViewModel>>($"aeronave/tipo-aeronave/{codigo}").ConfigureAwait(false);
         }
 
-        public async Task<AeronaveViewModel> BuscarPorDesperfecto(string Desperfecto)
+        public async Task<List<AeronaveViewModel>> AeronavesConDesperfecto()
         {
-            return await GetAsync<AeronaveViewModel>($"aeronave/desperfecto/{Desperfecto}").ConfigureAwait(false);
+            return await GetAsync<List<AeronaveViewModel>>($"aeronave/desperfecto").ConfigureAwait(false);
         }
 
-        public async Task<AeronaveViewModel> BuscarPorObservacion(string Observacion)
+        public async Task<List<AeronaveViewModel>> AeronavesConObservacion()
         {
-            return await GetAsync<AeronaveViewModel>($"aeronave/observacion/{Observacion}").ConfigureAwait(false);
+            return await GetAsync<List<AeronaveViewModel>>($"aeronave/observacion-prioritaria").ConfigureAwait(false);
         }
     }
 }
