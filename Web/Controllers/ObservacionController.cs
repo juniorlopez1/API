@@ -23,7 +23,16 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Editar(string codigo)
         {
-            var view = await servicio.Buscar(codigo);
+            ObservacionViewModel view = null;
+
+            if (string.IsNullOrEmpty(codigo))
+            {
+                view = new ObservacionViewModel();
+            }
+            else
+            {
+                view = await servicio.Buscar(codigo);
+            }
             return View(view);
         }
 
