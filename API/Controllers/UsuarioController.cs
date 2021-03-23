@@ -131,6 +131,23 @@ namespace API.Controllers
             }
         }
 
+        [HttpGet("estado/{estado}", Name = "SearchByEstado")]
+        public IActionResult SearchByEstado(string estado)
+        {
+            //Busca la entidad de acuerdo al key {Id, Codigo}
+            var entidad = servicio.BuscarPorEstado(estado.Equals("activos", StringComparison.CurrentCultureIgnoreCase));
+
+            //Si es nula "not found", Si no es nula regresa entidad
+            if (entidad == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(entidad);
+            }
+        }
+
 
 
         [HttpPost("autenticar", Name = "Autenticar")]

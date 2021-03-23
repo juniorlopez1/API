@@ -62,5 +62,10 @@ namespace Datos
         {
             return Buscar<Usuario>(nameof(Usuario), (u) => u.Id == id).FirstOrDefault();
         }
+
+        public List<Usuario> BuscarPorEstado(bool estado)
+        {
+            return Buscar<Usuario>(nameof(Usuario), (u) => u.Estado == estado).ToList();
+        }
     }
 }

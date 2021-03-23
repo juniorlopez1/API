@@ -16,6 +16,7 @@ namespace Negocios
         Usuario BuscarPonombreUsuarioContrasena(string nombreUsuario, string contrasenna);
         Usuario BuscarPorNombreUsuario(string nombreUsuario);
         Usuario BuscarPorId(string id);
+        List<Usuario> BuscarPorEstado(bool estado);
     }
 
     public class UsuarioService : IUsuarioService
@@ -74,6 +75,11 @@ namespace Negocios
         public Usuario BuscarPorId(string id)
         {
             return accesoDatos.BuscarPorId(id);
+        }
+
+        public List<Usuario> BuscarPorEstado(bool estado)
+        {
+            return accesoDatos.BuscarPorEstado(estado);
         }
     }
 

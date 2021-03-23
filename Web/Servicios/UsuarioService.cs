@@ -15,7 +15,7 @@ namespace Web.Servicios
         Task<UsuarioViewModel> Buscar(string codigo);
         Task<UsuarioViewModel> BuscarPorNombreUsuario(string nombreUsuario);
         Task<UsuarioViewModel> BuscarPorId(string id);
-        Task<List<UsuarioViewModel>> BuscarEstadoUsuario (string codigo);
+        Task<List<UsuarioViewModel>> BuscarEstadoUsuario (string estado);
         Task<UsuarioViewModel> Autenticar(CredencialesViewModel credenciales);
         
     }
@@ -58,9 +58,9 @@ namespace Web.Servicios
             return await GetAsync<UsuarioViewModel>($"usuario/{codigo}").ConfigureAwait(false);
         }
 
-        public async Task<List<UsuarioViewModel>> BuscarEstadoUsuario(string codigo)
+        public async Task<List<UsuarioViewModel>> BuscarEstadoUsuario(string estado)
         {
-            return await GetAsync<List<UsuarioViewModel>>($"usuario/estado-usuario/{codigo}").ConfigureAwait(false);
+            return await GetAsync<List<UsuarioViewModel>>($"usuario/estado/{estado}").ConfigureAwait(false);
         }
         public async Task<UsuarioViewModel> Autenticar(CredencialesViewModel credenciales)
         {

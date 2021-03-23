@@ -82,17 +82,13 @@ namespace Web.Controllers
             return View(perfil);
         }
 
-        public async Task<IActionResult> Filtrar()
+        public IActionResult Filtrar()
         {
 
             var listaUsuario = new List<SelectListItem>();
-            listaUsuario.Add(new SelectListItem() { Text = "Todos", Selected = true, Value = "" });
-
-            (await servicio.Listar()).ForEach(p => listaUsuario.Add(new SelectListItem()
-            {
-                Text = p.Estado.ToString(),
-                Value = p.Codigo.ToString()
-            }));
+            listaUsuario.Add(new SelectListItem() { Text = "Todos", Selected = true, Value = string.Empty });
+            listaUsuario.Add(new SelectListItem() { Text = "Activos", Value = "Activos" });
+            listaUsuario.Add(new SelectListItem() { Text = "Inactivos", Value = "Inactivos" });
 
             ViewBag.ListaEstadoUsuario = listaUsuario;
 
@@ -101,8 +97,7 @@ namespace Web.Controllers
 
         public async Task<IActionResult> Reporte(string codigo)
         {
-            List<UsuarioViewModel> resultado = null;
-
+            List<UsuarioViewModel> resultado;
             if (string.IsNullOrEmpty(codigo))
             {
                 resultado = await servicio.Listar();
