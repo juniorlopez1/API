@@ -9,14 +9,11 @@ namespace Web.Servicios
     public interface IEstadoVueloService
     {
         Task Crear(EstadoVueloViewModel estadoVuelo);
-
         Task<List<EstadoVueloViewModel>> Listar();
-
         Task Actualizar(EstadoVueloViewModel estadoVuelo);
-
         Task Eliminar(string codigo);
-
         Task<EstadoVueloViewModel> Buscar(string codigo);
+        Task<List<EstadoVueloViewModel>> BuscarPorEstadoVuelo(string codigo);
 
     }
 
@@ -59,9 +56,9 @@ namespace Web.Servicios
             return await GetAsync<EstadoVueloViewModel>($"estadovuelo/{codigo}").ConfigureAwait(false);
         }
 
-        public async Task<EstadoVueloViewModel> BuscarEstadoVuelo (string descripcion)
+        public async Task<List<EstadoVueloViewModel>> BuscarPorEstadoVuelo (string codigo)
         {
-            return await GetAsync<EstadoVueloViewModel>($"estadovuelo/{descripcion}").ConfigureAwait(false);
+            return await GetAsync<List<EstadoVueloViewModel>>($"estadovuelo/{codigo}").ConfigureAwait(false);
         }
 
     }

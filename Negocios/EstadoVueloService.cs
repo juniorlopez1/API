@@ -13,7 +13,8 @@ namespace Negocios
         void Actualizar(EstadoVuelo EstadoVuelo);
         void Eliminar(string id);
         EstadoVuelo Buscar(string id);
-        EstadoVuelo BuscarEstadoVuelo(string Codigo);
+        List<EstadoVuelo> BuscarPorEstadoVuelo (string Codigo);
+
 
     }
 
@@ -54,11 +55,9 @@ namespace Negocios
             return accesoDatos.Buscar(Codigo);
         }
 
-        public EstadoVuelo BuscarEstadoVuelo(string Descripcion)
+        public List<EstadoVuelo> BuscarPorEstadoVuelo(string Codigo)
         {
-            return accesoDatos.Buscar(Descripcion);
+            return accesoDatos.BuscarPorEstadoVuelo(Codigo);
         }
-
-
     }
 }

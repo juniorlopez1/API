@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,15 +74,38 @@ namespace Web.Controllers
             return View(perfil);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> BuscarEstadoVuelo(string Descripcion)
+        public async Task<IActionResult> Filtrar()
         {
-            var view = await servicio.Buscar(Descripcion);
-            return View(view);
+
+            var listaEstadoVuelo = new List<SelectListItem>();
+            listaEstadoVuelo.Add(new SelectListItem() { Text = "Todos", Selected = true, Value = "" });
+
+            (await servicio.Listar()).ForEach(p => listaEstadoVuelo.Add(new SelectListItem()
+            {
+                Text = p.Descripcion,
+                Value = p.Codigo.ToString()
+            }));
+
+            ViewBag.ListaEstadoVuelo = listaEstadoVuelo;
+
+            return View();
         }
 
+        public async Task<IActionResult> Reporte(string codigo)
+        {
+            List<EstadoVueloViewModel> resultado = null;
 
+            if (string.IsNullOrEmpty(codigo))
+            {
+                resultado = await servicio.Listar();
+            }
+            else
+            {
+                resultado = await servicio.BuscarPorEstadoVuelo(codigo);
+            }
 
+            return View(resultado);
+        }
 
     }
 }

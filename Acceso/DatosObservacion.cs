@@ -41,5 +41,11 @@ namespace Datos
             return Buscar<Observacion>(nameof(Observacion), (u) => u.Codigo == Codigo).FirstOrDefault();
         }
 
+        public List<Observacion> BuscarPorCodigo(string codigo)
+        {
+            return Buscar<Observacion>(nameof(Observacion), (u) => u.Codigo == codigo);
+        }
+
+
     }
 }

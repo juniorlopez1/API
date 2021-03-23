@@ -13,6 +13,7 @@ namespace Web.Servicios
         Task Actualizar(ObservacionViewModel observacion);
         Task Eliminar(string codigo);
         Task<ObservacionViewModel> Buscar(string codigo);
+        Task<List<ObservacionViewModel>> BuscarPorCodigo (string codigo);
     }
 
     public class ObservacionService : ServicioBase, IObservacionService
@@ -53,5 +54,9 @@ namespace Web.Servicios
             return await GetAsync<ObservacionViewModel>($"observacion/{codigo}").ConfigureAwait(false);
         }
 
+        public async Task<List<ObservacionViewModel>> BuscarPorCodigo(string codigo)
+        {
+            return await GetAsync<List<ObservacionViewModel>>($"observacion/{codigo}").ConfigureAwait(false);
+        }
     }
 }

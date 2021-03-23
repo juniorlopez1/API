@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,6 +58,7 @@ namespace Web.Controllers
 
         #endregion
 
+
         [HttpGet]
         public async Task<IActionResult> Buscar(string codigo)
         {
@@ -64,10 +66,40 @@ namespace Web.Controllers
             return View(perfil);
         }
 
+        public async Task<IActionResult> Filtrar()
+        {
 
-        
+            var listaObservacion = new List<SelectListItem>();
+            listaObservacion.Add(new SelectListItem() { Text = "Todos", Selected = true, Value = "" });
 
-        
+            (await servicio.Listar()).ForEach(p => listaObservacion.Add(new SelectListItem()
+            {
+                Text = p.Descripcion,
+                Value = p.Codigo.ToString()
+            }));
+
+            ViewBag.ListaObservacion = listaObservacion;
+
+            return View();
+        }
+
+        public async Task<IActionResult> Reporte(string codigo)
+        {
+            List<ObservacionViewModel> resultado = null;
+
+            if (string.IsNullOrEmpty(codigo))
+            {
+                resultado = await servicio.Listar();
+            }
+            else
+            {
+                resultado = await servicio.BuscarPorCodigo(codigo);
+            }
+
+            return View(resultado);
+        }
+
+
     }
 }
 

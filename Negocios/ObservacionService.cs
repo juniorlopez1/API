@@ -12,7 +12,8 @@ namespace Negocios
         List<Observacion> Leer();
         void Actualizar(Observacion Observacion);
         void Eliminar(string id);
-        Observacion Buscar(string id);
+        Observacion Buscar(string Codigo);
+        List<Observacion> BuscarPorCodigo(string Codigo);
     }
 
     public class ObservacionService : IObservacionService
@@ -45,11 +46,20 @@ namespace Negocios
             accesoDatos.Eliminar(Codigo);
         }
 
+        #endregion
+
+
+
         public Observacion Buscar(string Codigo)
         {
             return accesoDatos.Buscar(Codigo);
         }
 
-        #endregion
+        public List<Observacion> BuscarPorCodigo(string Codigo)
+        {
+            return accesoDatos.BuscarPorCodigo(Codigo);
+        }
+
+
     }
 }

@@ -47,6 +47,9 @@ namespace Negocios
             accesoDatos.Eliminar(Codigo);
         }
 
+        #endregion
+
+
         public Aeronave Buscar (string Codigo)
         {
             return accesoDatos.Buscar(Codigo);
@@ -56,6 +59,6 @@ namespace Negocios
         {
             return accesoDatos.BuscarPorTipoAeronave(Codigo);
         }
-        #endregion
+        
     }
 }

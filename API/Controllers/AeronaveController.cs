@@ -79,6 +79,8 @@ namespace API.Controllers
             return NoContent();
         }
 
+        #endregion
+
         [HttpGet("{codigo}", Name = "SearchAeronave")]
         public IActionResult Search(string codigo)
         {
@@ -113,6 +115,6 @@ namespace API.Controllers
             }
         }
 
-        #endregion
+        
     }
 }
