@@ -34,7 +34,8 @@ namespace Datos
  
         public void Eliminar(string Codigo)
         {
-            Eliminar<Registro>(nameof(Registro), (u) => u.Codigo == Codigo);
+            var filter = Builders<Registro>.Filter.Eq(x => x.Codigo, Codigo);
+            Eliminar<Registro>(nameof(Registro), filter);
         }
 
         public Registro Buscar(string Codigo)

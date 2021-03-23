@@ -14,7 +14,8 @@ namespace Negocios
         void Eliminar(string Codigo);
         Usuario Buscar(string Codigo);
         Usuario BuscarPonombreUsuarioContrasena(string nombreUsuario, string contrasenna);
-
+        Usuario BuscarPorNombreUsuario(string nombreUsuario);
+        Usuario BuscarPorId(string id);
     }
 
     public class UsuarioService : IUsuarioService
@@ -65,6 +66,15 @@ namespace Negocios
             return accesoDatos.BuscarEstadoUsuario(estadoUsuario);
         }
 
+        public Usuario BuscarPorNombreUsuario(string nombreUsuario)
+        {
+            return accesoDatos.BuscarPorNombreUsuario(nombreUsuario);
+        }
+
+        public Usuario BuscarPorId(string id)
+        {
+            return accesoDatos.BuscarPorId(id);
+        }
     }
 
 

@@ -33,7 +33,8 @@ namespace Datos
 
         public void Eliminar(string Codigo)
         {
-            Eliminar<Observacion>(nameof(Observacion), (u) => u.Codigo == Codigo);
+            var filter = Builders<Observacion>.Filter.Eq(x => x.Codigo, Codigo);
+            Eliminar<Observacion>(nameof(Observacion), filter);
         }
    
         public Observacion Buscar(string Codigo)

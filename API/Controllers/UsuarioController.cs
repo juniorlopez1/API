@@ -97,6 +97,42 @@ namespace API.Controllers
             }
         }
 
+        [HttpGet("nombre-usuario/{nombreUsuario}", Name = "SearchNombreUsuario")]
+        public IActionResult SearchNombreUsuario(string nombreUsuario)
+        {
+            //Busca la entidad de acuerdo al key {Id, Codigo}
+            var entidad = servicio.BuscarPorNombreUsuario(nombreUsuario);
+
+            //Si es nula "not found", Si no es nula regresa entidad
+            if (entidad == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(entidad);
+            }
+        }
+
+        [HttpGet("id/{id}", Name = "SearchById")]
+        public IActionResult SearchById(string id)
+        {
+            //Busca la entidad de acuerdo al key {Id, Codigo}
+            var entidad = servicio.BuscarPorId(id);
+
+            //Si es nula "not found", Si no es nula regresa entidad
+            if (entidad == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(entidad);
+            }
+        }
+
+
+
         [HttpPost("autenticar", Name = "Autenticar")]
         public IActionResult Autenticar(Credenciales credenciales)
         {

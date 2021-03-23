@@ -33,7 +33,8 @@ namespace Datos
 
         public void Eliminar(string Codigo)
         {
-            Eliminar<Perfil>(nameof(Perfil), (u) => u.Codigo == Codigo);
+            var filter = Builders<Perfil>.Filter.Eq(x => x.Codigo, Codigo);
+            Eliminar<Perfil>(nameof(Perfil), filter);
         }
 
         public Perfil Buscar(string Codigo)
