@@ -4,7 +4,7 @@
     ViewData["Title"] = "Lista";
 }
 
-<h1>Tipos de Aeronave</h1>
+<h1>Catalogo Aeronave Consulta</h1>
 
 <p>
     <a asp-action="Editar">Crear nuevo tipo de aeronave</a>
@@ -38,7 +38,7 @@
             </td>
             <td>
                 @Html.ActionLink("Editar", "Editar", new { codigo = item.Codigo }) |
-                @Html.ActionLink("Editar", "Editar", new { codigo = item.Codigo }) |
+                @Html.ActionLink("Eliminar", "Eliminar", new { codigo = item.Codigo })
             </td>
         </tr>
 }

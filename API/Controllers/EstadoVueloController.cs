@@ -73,6 +73,11 @@ namespace API.Controllers
             return NoContent();
         }
 
+        #endregion
+
+
+
+
         [HttpGet("{codigo}", Name = "SearchEstadoVuelo")]
         public IActionResult Search(string codigo)
         {
@@ -90,6 +95,24 @@ namespace API.Controllers
             }
         }
 
-        #endregion
+        //arreglar esto
+        //[HttpGet("estadovuelo/{descripcion}", Name = "SearchEstadoVuelo")]
+        //public IActionResult SearchByTipoAeronave(string Descripcion)
+        //{
+        //    //Busca la entidad de acuerdo al key {Id, Codigo}
+        //    var entidad = servicio.BuscarEstadoVuelo(Descripcion);
+
+        //    //Si es nula "not found", Si no es nula regresa entidad
+        //    if (entidad == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    else
+        //    {
+        //        return Ok(entidad);
+        //    }
+        //}
+
+
     }
 }

@@ -47,5 +47,9 @@ namespace Datos
             return Buscar<Usuario>(nameof(Usuario), (u) => u.NombreUsuario == nombreUsuario && u.Contrasena == contrasenna).FirstOrDefault();
         }
 
+        public Usuario BuscarEstadoUsuario (string estadoUsuario)
+        {
+            return Buscar<Usuario>(nameof(Usuario), (u) => u.Estado  ).FirstOrDefault();
+        }
     }
 }

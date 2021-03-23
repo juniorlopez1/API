@@ -46,6 +46,10 @@ namespace Negocios
         {
             accesoDatos.Eliminar(Codigo);
         }
+
+        #endregion
+
+
         public Usuario Buscar(string Codigo)
         {
             return accesoDatos.Buscar(Codigo);
@@ -54,8 +58,13 @@ namespace Negocios
         public Usuario BuscarPonombreUsuarioContrasena(string nombreUsuario, string contrasenna)
         {
             return accesoDatos.BuscarPorNombreUsuarioContrasena(nombreUsuario, contrasenna);
-        } 
-        #endregion
+        }
+
+        public Usuario BuscarEstadoUsuario(string estadoUsuario)
+        {
+            return accesoDatos.BuscarEstadoUsuario(estadoUsuario);
+        }
+
     }
 
 

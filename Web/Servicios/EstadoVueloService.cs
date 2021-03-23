@@ -58,6 +58,11 @@ namespace Web.Servicios
         {
             return await GetAsync<EstadoVueloViewModel>($"estadovuelo/{codigo}").ConfigureAwait(false);
         }
-        
+
+        public async Task<EstadoVueloViewModel> BuscarEstadoVuelo (string descripcion)
+        {
+            return await GetAsync<EstadoVueloViewModel>($"estadovuelo/{descripcion}").ConfigureAwait(false);
+        }
+
     }
 }

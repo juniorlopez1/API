@@ -41,5 +41,10 @@ namespace Datos
             return Buscar<EstadoVuelo>(nameof(EstadoVuelo), (u) => u.Codigo == Codigo).FirstOrDefault();
         }
 
+        public EstadoVuelo BuscarEstadoVuelo (string Descripcion)
+        {
+            return Buscar<EstadoVuelo>(nameof(EstadoVuelo), (u) => u.Descripcion == Descripcion).FirstOrDefault();
+        }
+
     }
 }

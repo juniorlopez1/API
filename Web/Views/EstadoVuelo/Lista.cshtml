@@ -4,7 +4,7 @@
     ViewData["Title"] = "Lista";
 }
 
-<h1>Lista</h1>
+<h1>Estado Vuelo Consulta</h1>
 
 <p>
     <a asp-action="Editar">Crear estado de vuelo</a>
@@ -32,7 +32,7 @@
             </td>
             <td>
                 @Html.ActionLink("Editar", "Editar", new { codigo = item.Codigo }) |
-                @Html.ActionLink("Editar", "Editar", new { codigo = item.Codigo }) |
+                @Html.ActionLink("Eliminar", "Eliminar", new { codigo = item.Codigo })
             </td>
         </tr>
 }

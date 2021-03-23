@@ -73,8 +73,15 @@ namespace Web.Controllers
             return View(perfil);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> BuscarEstadoVuelo(string Descripcion)
+        {
+            var view = await servicio.Buscar(Descripcion);
+            return View(view);
+        }
 
 
-        
+
+
     }
 }

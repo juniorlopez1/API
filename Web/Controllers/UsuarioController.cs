@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,6 +66,38 @@ namespace Web.Controllers
             return View(perfil);
         }
 
+        public async Task<IActionResult> Filtrar()
+        {
+
+            var listaUsuario = new List<SelectListItem>();
+            listaUsuario.Add(new SelectListItem() { Text = "Todos", Selected = true, Value = "" });
+
+            (await servicio.Listar()).ForEach(p => listaUsuario.Add(new SelectListItem()
+            {
+                Text = p.Estado.ToString(),
+                Value = p.Codigo.ToString()
+            }));
+
+            ViewBag.ListaEstadoUsuario = listaUsuario;
+
+            return View();
+        }
+
+        public async Task<IActionResult> Reporte(string codigo)
+        {
+            List<UsuarioViewModel> resultado = null;
+
+            if (string.IsNullOrEmpty(codigo))
+            {
+                resultado = await servicio.Listar();
+            }
+            else
+            {
+                resultado = await servicio.BuscarEstadoUsuario(codigo);
+            }
+
+            return View(resultado);
+        }
 
         #region Gestion de contrasena
         [HttpGet]

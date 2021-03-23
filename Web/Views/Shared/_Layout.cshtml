@@ -17,23 +17,31 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
+
+                        @*main navbar*@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Acerca de</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Aeronave" asp-action="Lista">Aeronave</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Perfil" asp-action="Lista">Perfil</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Registro" asp-action="Lista">Registro</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Lista">Usuario</a>
+
+                        @*drop down consultas *@
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Consultas
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Aeronave" asp-action="Lista">Aeronave</a>
+                                <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Perfil" asp-action="Lista">Perfil</a>
+                                <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Usuario" asp-action="Lista">Usuarios</a>
+                            </div>
                         </li>
+
+                        @*drop down mantenimiento*@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Mantenimiento
@@ -44,12 +52,17 @@
                                 <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Observacion" asp-action="Lista">Observacion</a>
                             </div>
                         </li>
+
+                        @*drop down reportes*@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Reportes
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Aeronave" asp-action="Filtrar">Aeronave</a>
+                                <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Aeronave" asp-action="Filtrar">Aeronaves Catalogo</a>
+                                <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Usuario" asp-action="Filtrar">Usuario Estados</a>
+                                <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="EstadoVuelo" asp-action="Filtrar">Vuelos</a>
+                                <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Observacion" asp-action="Filtrar">Observaciones</a>
                             </div>
                         </li>
 
