@@ -9,7 +9,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Editar">
+        <form asp-action="Guardar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
@@ -28,6 +28,15 @@
                 <label asp-for="Contrasena" class="control-label"></label>
                 <input asp-for="Contrasena" class="form-control" />
                 <span asp-validation-for="Contrasena" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Perfil, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="form-group">
+                    <div class="checkbox">
+                        @Html.DropDownListFor(m => m.Perfil.Codigo, (IEnumerable<SelectListItem>)ViewBag.ListaPerfil, new { @class = "form-control" })
+                    </div>
+                </div>
             </div>
 
             <div class="form-group form-check">

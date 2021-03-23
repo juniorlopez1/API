@@ -12,10 +12,12 @@ namespace Web.Controllers
     public class UsuarioController : Controller
     {
         private readonly IUsuarioService servicio;
+        private readonly IPerfilService perfilServicio;
 
-        public UsuarioController(IUsuarioService servicio)
+        public UsuarioController(IUsuarioService servicio, IPerfilService perfilServicio)
         {
             this.servicio = servicio;
+            this.perfilServicio = perfilServicio;
         }
 
 
@@ -24,6 +26,12 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Editar(string codigo)
         {
+            ViewBag.ListaPerfil = (await perfilServicio.Listar()).Select(p => new SelectListItem()
+            {
+                Text = p.Tipo,
+                Value = p.Codigo
+            }).ToList();
+
             if (string.IsNullOrEmpty(codigo))
             {
                 return View(new UsuarioViewModel());
