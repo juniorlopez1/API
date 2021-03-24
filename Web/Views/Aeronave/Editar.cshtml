@@ -22,11 +22,29 @@
                 <input asp-for="Capacidad" class="form-control" />
                 <span asp-validation-for="Capacidad" class="text-danger"></span>
             </div>
+
+            @*observacio prioritaria*@
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Observacion" /> @Html.DisplayNameFor(model => model.Observacion)
+                </label>
+            </div>
+
+            @*desperfecto*@
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Desperfecto" /> @Html.DisplayNameFor(model => model.Desperfecto)
+                </label>
+            </div>
+
+            @*estado*@
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Estado" /> @Html.DisplayNameFor(model => model.Estado)
                 </label>
             </div>
+
+            @* aeronave tipo view bag *@
             <div class="form-group">
                 @Html.LabelFor(model => model.AeronaveTipo.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="form-group">
@@ -35,6 +53,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

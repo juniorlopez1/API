@@ -60,11 +60,11 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Aeronave" asp-action="Filtrar">Aeronaves Catalogo</a>
-                                <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Usuario" asp-action="Filtrar">Usuario Estados</a>
-                                <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="EstadoVuelo" asp-action="Filtrar">Vuelos</a>
-                                <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Observacion" asp-action="Filtrar">Observaciones</a>
+                                @*<a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="EstadoVuelo" asp-action="Filtrar">Vuelos</a>*@
+                                @*<a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Observacion" asp-action="Filtrar">Observaciones</a>*@
                                 <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Aeronave" asp-action="ReporteDesperfecto">Aeronaves con desperfecto</a>
                                 <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Aeronave" asp-action="ReporteObservacionPrioritaria">Aeronaves con observacion prioritaria</a>
+                                <a class="nav-link text-dark dropdown-item" asp-area="" asp-controller="Usuario" asp-action="Filtrar">Usuario Estados</a>
                             </div>
                         </li>
 
@@ -81,7 +81,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2021 - Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Acerca de</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

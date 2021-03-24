@@ -22,31 +22,44 @@
                 @Html.DisplayNameFor(model => model.Estado)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Observacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Desperfecto)
+            </th>
+            <th>
                 Tipo Aeronave
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Codigo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Capacidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AeronaveTipo.Descripcion)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Editar", new { codigo = item.Codigo }) |
-                @Html.ActionLink("Eliminar", "Eliminar", new { codigo = item.Codigo }) |
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Capacidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Observacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Desperfecto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AeronaveTipo.Descripcion)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Editar", new { codigo = item.Codigo }) |
+                    @Html.ActionLink("Eliminar", "Eliminar", new { codigo = item.Codigo }) 
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
